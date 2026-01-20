@@ -57,8 +57,19 @@ fi
 # API 서버 백그라운드 실행 (포트를 환경변수로 전달)
 echo "🚀 API 서버 시작 중... (포트: $PORT)"
 export API_PORT=$PORT
-nohup python3 main.py > "$LOG_FILE" 2>&1 &
+
+# nohup과 setsid를 사용하여 완전히 분리된 백그라운드 프로세스로 실행
+# 터미널을 닫아도 계속 실행됨
+nohup setsid python3 main.py > "$LOG_FILE" 2>&1 < /dev/null &
 API_PID=$!
+
+# 프로세스가 제대로 시작되었는지 확인
+sleep 1
+if ! ps -p $API_PID > /dev/null 2>&1; then
+    echo "❌ 서버 프로세스 시작 실패"
+    echo "📝 로그 확인: tail -20 $LOG_FILE"
+    exit 1
+fi
 
 # PID 저장
 echo $API_PID > "$PID_FILE"

@@ -1,0 +1,18 @@
+[Unit]
+Description=Ansible API Server (UI_sunmin branch - Port 8001)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=sth0824
+WorkingDirectory=/home/sth0824/ansible/api_server
+Environment="API_PORT=8001"
+Environment="PATH=/home/sth0824/ansible/api_server/venv/bin:/usr/local/bin:/usr/bin:/bin"
+ExecStart=/home/sth0824/ansible/api_server/venv/bin/python3 /home/sth0824/ansible/api_server/main.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/home/sth0824/ansible/api_server.log
+StandardError=append:/home/sth0824/ansible/api_server.log
+
+[Install]
+WantedBy=multi-user.target
