@@ -1,12 +1,29 @@
 #!/bin/bash
 # 결과 페이지를 브라우저에서 여는 스크립트
+# 현재 브랜치에 따라 포트 자동 선택
 
-API_URL="http://192.168.0.18:8000/api/report"
+SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
+# 현재 브랜치 확인
+CURRENT_BRANCH=$(git -C "$SCRIPT_DIR" branch --show-current 2>/dev/null || echo "develop")
+
+# 브랜치별 포트 설정
+if [ "$CURRENT_BRANCH" = "UI_sunmin" ]; then
+    PORT=8001
+elif [ "$CURRENT_BRANCH" = "develop" ]; then
+    PORT=8000
+else
+    PORT=8000
+fi
+
+API_URL="http://192.168.0.18:$PORT/api/report"
+
+echo "🌿 현재 브랜치: $CURRENT_BRANCH"
+echo "🔌 사용 포트: $PORT"
 echo "🔍 API 서버 상태 확인 중..."
 
 # 서버 상태 확인
-if curl -s http://192.168.0.18:8000/api/health > /dev/null 2>&1; then
+if curl -s http://192.168.0.18:$PORT/api/health > /dev/null 2>&1; then
     echo "✅ API 서버가 실행 중입니다"
     echo "🌐 브라우저에서 리포트 페이지 열기: $API_URL"
     

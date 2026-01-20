@@ -1775,10 +1775,11 @@ async def get_was_checks_data(limit: int = 1000):
 
 if __name__ == "__main__":
     # 개발 서버 실행
+    from config import HOST, PORT
     uvicorn.run(
         "main:app",
-        host="0.0.0.0",
-        port=8000,
+        host=HOST,
+        port=PORT,
         reload=True  # 개발 모드: 코드 변경 시 자동 재시작
     )
 
