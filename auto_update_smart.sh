@@ -12,6 +12,13 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
 }
 
+# 현재 브랜치 확인 - UI_sunmin 브랜치에서는 자동 업데이트 비활성화
+CURRENT_BRANCH=$(git branch --show-current 2>/dev/null)
+if [ "$CURRENT_BRANCH" = "UI_sunmin" ]; then
+    log "⚠️  UI_sunmin 브랜치에서는 자동 업데이트가 비활성화되어 있습니다."
+    exit 0
+fi
+
 log "🔄 코드 업데이트 체크 시작..."
 
 # 1. 원격 저장소 정보 가져오기 (충돌 방지)
