@@ -12,30 +12,25 @@
         }
 
         :root {
-            /* NeoGlass Dark */
-            --bg: #0b1020;
-            --panel: rgba(17, 25, 40, 0.62);
-            --border: rgba(148, 163, 184, 0.18);
-            --text: #e5e7eb;
-            --muted: rgba(203, 213, 225, 0.72);
-            --primary: #5eead4;
-            --primary-2: #38bdf8;
-            --success: #34d399;
-            --warning: #fbbf24;
-            --danger: #fb7185;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-            --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.45);
-            --radius: 16px;
-            --table-head: rgba(15, 23, 42, 0.90);
-            --glass-blur: 18px;
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --border: #e5e7eb;
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #1e3a8a;
+            --primary-2: #3b82f6;
+            --success: #16a34a;
+            --shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+            --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.08);
+            --radius: 14px;
+            --table-head: #0b1220;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             background:
-                radial-gradient(900px circle at 12% 0%, rgba(94, 234, 212, 0.18), transparent 55%),
-                radial-gradient(900px circle at 86% 10%, rgba(56, 189, 248, 0.16), transparent 55%),
-                radial-gradient(700px circle at 50% 110%, rgba(251, 113, 133, 0.10), transparent 60%),
+                radial-gradient(1100px circle at 12% 0%, rgba(30, 58, 138, 0.10), transparent 55%),
+                radial-gradient(900px circle at 88% 20%, rgba(59, 130, 246, 0.10), transparent 55%),
                 var(--bg);
             min-height: 100vh;
             padding: 20px;
@@ -44,137 +39,21 @@
             -moz-osx-font-smoothing: grayscale;
         }
         
-        .app-shell {
-            max-width: 1600px;
+        .dashboard-container {
+            max-width: 100%;
             margin: 0 auto;
-            display: grid;
-            grid-template-columns: 260px 1fr;
-            gap: 16px;
-            align-items: start;
-        }
-
-        .sidebar {
-            position: sticky;
-            top: 20px;
-            align-self: start;
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            box-shadow: var(--shadow);
-            backdrop-filter: blur(var(--glass-blur));
-            padding: 16px;
-        }
-
-        .sidebar .brand {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            padding: 6px 6px 14px;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 14px;
-        }
-
-        .brand .title {
-            font-size: 16px;
-            font-weight: 800;
-            letter-spacing: 0.06em;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.92);
-        }
-
-        .brand .subtitle {
-            font-size: 12px;
-            color: var(--muted);
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-        }
-
-        .nav {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-
-        .nav-button {
-            width: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-            padding: 12px 12px;
-            border-radius: 14px;
-            border: 1px solid var(--border);
-            background: rgba(2, 6, 23, 0.22);
-            color: rgba(226, 232, 240, 0.86);
-            font-weight: 800;
-            font-size: 13px;
-            cursor: pointer;
-            backdrop-filter: blur(var(--glass-blur));
-            transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
-            text-align: left;
-        }
-
-        .nav-button:hover {
-            background: rgba(2, 6, 23, 0.35);
-            color: rgba(255, 255, 255, 0.92);
-        }
-
-        .nav-button.active {
-            border-color: rgba(94, 234, 212, 0.45);
-            background: rgba(2, 6, 23, 0.40);
-            color: rgba(255, 255, 255, 0.95);
-        }
-
-        .nav-meta {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 12px;
-            color: rgba(226, 232, 240, 0.70);
-            font-weight: 800;
-        }
-
-        .nav-meta .chip {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            min-width: 22px;
-            height: 22px;
-            padding: 0 8px;
-            border-radius: 999px;
-            border: 1px solid rgba(148, 163, 184, 0.18);
-            background: rgba(2, 6, 23, 0.28);
-            color: rgba(226, 232, 240, 0.92);
-        }
-
-        .nav-meta .chip-critical {
-            border-color: rgba(251, 113, 133, 0.55);
-            background: rgba(251, 113, 133, 0.12);
-            color: rgba(254, 226, 226, 0.95);
-        }
-
-        .main {
-            min-width: 0;
         }
         
         .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 16px;
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
             border-radius: 12px;
-            padding: 22px 26px;
-            margin-bottom: 16px;
+            padding: 25px 30px;
+            margin-bottom: 20px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(255, 255, 255, 0.18);
         }
         
-        .header-left {
-            min-width: 0;
-        }
-
         .header h1 {
             color: #2d3748;
             font-size: 28px;
@@ -183,53 +62,6 @@
             align-items: center;
             gap: 12px;
             margin-bottom: 8px;
-        }
-
-        .brand-kicker {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 8px;
-            font-size: 12px;
-            letter-spacing: 0.22em;
-            text-transform: uppercase;
-            color: var(--muted);
-        }
-
-        .header-right {
-            display: flex;
-            align-items: center;
-            justify-content: flex-end;
-            gap: 10px;
-            flex-wrap: wrap;
-            padding-top: 2px;
-        }
-
-        .pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 999px;
-            border: 1px solid var(--border);
-            background: rgba(2, 6, 23, 0.30);
-            backdrop-filter: blur(var(--glass-blur));
-            color: var(--text);
-            font-size: 13px;
-            font-weight: 700;
-            letter-spacing: 0.02em;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .pill-critical {
-            border-color: rgba(251, 113, 133, 0.55);
-            background: rgba(251, 113, 133, 0.12);
-            color: rgba(254, 226, 226, 0.95);
-        }
-
-        .pill-critical strong {
-            font-size: 15px;
-            letter-spacing: 0;
         }
         
         .header-info {
@@ -271,53 +103,47 @@
             overflow: hidden;
         }
         
-        /* 기존 탭 헤더는 사이드바로 이동 */
         .tabs-header {
-            display: none;
+            display: flex;
+            background: #f7fafc;
+            border-bottom: 2px solid #e2e8f0;
         }
         
         .tab-button {
             flex: 1;
-            padding: 14px 16px;
-            background: rgba(2, 6, 23, 0.22);
-            border: 1px solid var(--border);
-            border-radius: 14px;
+            padding: 20px 30px;
+            background: transparent;
+            border: none;
             cursor: pointer;
-            font-size: 14px;
-            font-weight: 700;
-            color: rgba(226, 232, 240, 0.70);
+            font-size: 16px;
+            font-weight: 600;
+            color: #718096;
             transition: all 0.3s ease;
             position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
-            backdrop-filter: blur(var(--glass-blur));
         }
         
         .tab-button.active {
-            color: rgba(255, 255, 255, 0.95);
-            background: rgba(2, 6, 23, 0.40);
-            border-color: rgba(94, 234, 212, 0.45);
+            color: #1e3a8a;
+            background: white;
         }
         
         .tab-button.active::after {
             content: '';
             position: absolute;
-            inset: -1px;
-            border-radius: 14px;
-            padding: 1px;
-            background: linear-gradient(135deg, rgba(94, 234, 212, 0.85), rgba(56, 189, 248, 0.85));
-            -webkit-mask:
-                linear-gradient(#000 0 0) content-box,
-                linear-gradient(#000 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
         }
         
         .tab-button:hover {
-            background: rgba(2, 6, 23, 0.35);
-            color: rgba(255, 255, 255, 0.92);
+            background: rgba(30, 58, 138, 0.1);
+            color: #1e3a8a;
         }
         
         .tab-content {
@@ -334,7 +160,7 @@
             height: calc(100vh - 250px);
             min-height: 600px;
             border: none;
-            background: transparent;
+            background: white;
             display: block;
         }
         
@@ -373,7 +199,7 @@
         }
 
         /* ==========================
-           NeoGlass Dark overrides
+           Chic theme overrides
            - 기존 기능/레이아웃 유지
            ========================== */
         .header,
@@ -382,7 +208,7 @@
             border: 1px solid var(--border) !important;
             box-shadow: var(--shadow) !important;
             border-radius: var(--radius) !important;
-            backdrop-filter: blur(var(--glass-blur)) !important;
+            backdrop-filter: none !important;
         }
 
         .header h1 {
@@ -397,29 +223,29 @@
         .status-indicator {
             background: var(--success) !important;
             animation: none !important;
-            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
         }
 
         .tabs-header {
-            background: transparent !important;
-            border-bottom: 0 !important;
+            background: #f1f5f9 !important;
+            border-bottom: 1px solid var(--border) !important;
         }
 
         .tab-button {
-            color: rgba(226, 232, 240, 0.72) !important;
+            color: var(--muted) !important;
         }
 
         .tab-button.active {
-            color: rgba(255, 255, 255, 0.95) !important;
+            color: var(--text) !important;
         }
 
         .tab-button.active::after {
-            background: linear-gradient(135deg, rgba(94, 234, 212, 0.85), rgba(56, 189, 248, 0.85)) !important;
+            background: var(--primary) !important;
         }
 
         .tab-button:hover {
-            background: rgba(2, 6, 23, 0.35) !important;
-            color: rgba(255, 255, 255, 0.92) !important;
+            background: rgba(30, 58, 138, 0.06) !important;
+            color: var(--primary) !important;
         }
 
         .tab-content iframe {
@@ -429,90 +255,46 @@
     </style>
 </head>
 <body>
-    <div class="app-shell">
-        <aside class="sidebar">
-            <div class="brand">
-                <div class="title">ANSIBLE REPORT</div>
-                <div class="subtitle">Biological Monitoring Dashboard</div>
-            </div>
-            <nav class="nav">
-                <button class="nav-button active" onclick="switchTab('db')" id="nav-db-btn">
-                    <span>DB 점검 결과</span>
-                    <span class="nav-meta">
-                        <span class="chip chip-critical" id="nav-db-critical">-</span>
-                    </span>
-                </button>
-                <button class="nav-button" onclick="switchTab('os')" id="nav-os-btn">
-                    <span>OS 점검 결과</span>
-                    <span class="nav-meta">
-                        <span class="chip chip-critical" id="nav-os-critical">-</span>
-                    </span>
-                </button>
-                <button class="nav-button" onclick="switchTab('was')" id="nav-was-btn">
-                    <span>WAS 점검 결과</span>
-                    <span class="nav-meta">
-                        <span class="chip chip-critical" id="nav-was-critical">-</span>
-                    </span>
-                </button>
-            </nav>
-        </aside>
-
-        <main class="main">
-            <div class="header">
-                <div class="header-left">
-                    <div class="brand-kicker">ANSIBLE CHECK REPORT</div>
-                    <h1>통합 점검 결과 모니터링 대시보드</h1>
-                    <div class="header-info" id="headerInfo">
-                        <span><span class="status-indicator"></span> 실시간 모니터링</span>
-                        <span>DB / OS / WAS 통합 리포트</span>
-                        <span id="updateTime">업데이트: -</span>
-                    </div>
-                </div>
-                <div class="header-right">
-                    <div class="pill pill-critical" id="criticalPill">CRITICAL: <strong id="criticalCount">-</strong></div>
+    <div class="dashboard-container">
+        <div class="header">
+            <div class="header-left">
+                <h1>통합 점검 결과 모니터링 대시보드</h1>
+                <div class="header-info" id="headerInfo">
+                    <span><span class="status-indicator"></span> 실시간 모니터링</span>
+                    <span>DB / OS / WAS 통합 리포트</span>
+                    <span id="updateTime">업데이트: -</span>
                 </div>
             </div>
-
-            <div class="tabs-container">
-                <div class="tab-content active" id="tab-db">
-                    <iframe id="db-frame" src="/api/db-checks/report" frameborder="0"></iframe>
-                </div>
-                
-                <div class="tab-content" id="tab-os">
-                    <iframe id="os-frame" src="/api/os-checks/report?t=" frameborder="0"></iframe>
-                </div>
-                
-                <div class="tab-content" id="tab-was">
-                    <iframe id="was-frame" src="/api/was-checks/report" frameborder="0"></iframe>
-                </div>
+        </div>
+        
+        <div class="tabs-container">
+            <div class="tabs-header">
+                <button class="tab-button active" onclick="switchTab('db')" id="tab-db-btn">DB 점검 결과</button>
+                <button class="tab-button" onclick="switchTab('os')" id="tab-os-btn">OS 점검 결과</button>
+                <button class="tab-button" onclick="switchTab('was')" id="tab-was-btn">WAS 점검 결과</button>
             </div>
-        </main>
+            
+            <div class="tab-content active" id="tab-db">
+                <iframe id="db-frame" src="/api/db-checks/report" frameborder="0" style="width: 100%; height: calc(100vh - 250px); min-height: 600px; border: none; background: white;"></iframe>
+            </div>
+            
+            <div class="tab-content" id="tab-os">
+                <iframe id="os-frame" src="/api/os-checks/report?t=" frameborder="0" style="width: 100%; height: calc(100vh - 250px); min-height: 600px; border: none; background: white;"></iframe>
+            </div>
+            
+            <div class="tab-content" id="tab-was">
+                <iframe id="was-frame" src="/api/was-checks/report" frameborder="0" style="width: 100%; height: calc(100vh - 250px); min-height: 600px; border: none; background: white;"></iframe>
+            </div>
+        </div>
     </div>
     
     <script>
         const REPORT_MESSAGE = { type: 'tab_activated' };
-        const statsByTab = { db: null, os: null, was: null };
-
-        function updateCriticalBadge() {
-            const totalCritical =
-                (statsByTab.db?.critical || 0) +
-                (statsByTab.os?.critical || 0) +
-                (statsByTab.was?.critical || 0);
-            const el = document.getElementById('criticalCount');
-            if (el) el.textContent = String(totalCritical);
-
-            const dbEl = document.getElementById('nav-db-critical');
-            const osEl = document.getElementById('nav-os-critical');
-            const wasEl = document.getElementById('nav-was-critical');
-            if (dbEl) dbEl.textContent = String(statsByTab.db?.critical ?? '-');
-            if (osEl) osEl.textContent = String(statsByTab.os?.critical ?? '-');
-            if (wasEl) wasEl.textContent = String(statsByTab.was?.critical ?? '-');
-        }
 
         // 탭 전환 함수
         function switchTab(tabName) {
-            // 모든 네비 버튼 비활성화
-            document.querySelectorAll('.nav-button').forEach(btn => {
+            // 모든 탭 버튼 비활성화
+            document.querySelectorAll('.tab-button').forEach(btn => {
                 btn.classList.remove('active');
             });
             
@@ -522,7 +304,7 @@
             });
             
             // 선택한 탭 활성화
-            const tabButton = document.getElementById(`nav-${tabName}-btn`);
+            const tabButton = document.getElementById(`tab-${tabName}-btn`);
             const tabContent = document.getElementById(`tab-${tabName}`);
             const tabFrame = document.getElementById(`${tabName}-frame`);
             
@@ -574,22 +356,9 @@
         
         // iframe 로드 완료 시 처리
         window.addEventListener('message', function(event) {
-            // 동일 출처만 허용
-            try {
-                if (event.origin !== window.location.origin) return;
-            } catch (e) {
-                return;
-            }
-
-            const data = event.data;
-            if (!data || typeof data !== 'object') return;
-
-            if (data.type === 'report_stats' && data.source && statsByTab[data.source] !== undefined) {
-                statsByTab[data.source] = data;
-                updateCriticalBadge();
-            }
+            // iframe에서 메시지를 받을 수 있도록 준비
+            console.log('Message received from iframe:', event.data);
         });
     </script>
 </body>
 </html>
-

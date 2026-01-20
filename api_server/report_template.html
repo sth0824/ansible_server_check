@@ -13,72 +13,31 @@
         }
 
         :root {
-            /* NeoGlass Dark */
-            --bg: #0b1020;
-            --panel: rgba(17, 25, 40, 0.62);
-            --border: rgba(148, 163, 184, 0.18);
-            --text: #e5e7eb;
-            --muted: rgba(203, 213, 225, 0.72);
-            --primary: #5eead4;
-            --primary-2: #38bdf8;
-            --success: #34d399;
-            --warning: #fbbf24;
-            --danger: #fb7185;
-            --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
-            --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.45);
-            --radius: 16px;
-            --table-head: rgba(15, 23, 42, 0.90);
-            --glass-blur: 18px;
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --border: #e5e7eb;
+            --text: #0f172a;
+            --muted: #64748b;
+            --primary: #1e3a8a;
+            --primary-2: #3b82f6;
+            --success: #16a34a;
+            --shadow: 0 14px 40px rgba(15, 23, 42, 0.10);
+            --shadow-sm: 0 6px 18px rgba(15, 23, 42, 0.08);
+            --radius: 14px;
+            --table-head: #0b1220;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             background:
-                radial-gradient(900px circle at 12% 0%, rgba(94, 234, 212, 0.18), transparent 55%),
-                radial-gradient(900px circle at 86% 10%, rgba(56, 189, 248, 0.16), transparent 55%),
-                radial-gradient(700px circle at 50% 110%, rgba(251, 113, 133, 0.10), transparent 60%),
+                radial-gradient(1100px circle at 12% 0%, rgba(30, 58, 138, 0.10), transparent 55%),
+                radial-gradient(900px circle at 88% 20%, rgba(59, 130, 246, 0.10), transparent 55%),
                 var(--bg);
             min-height: 100vh;
             padding: 20px;
             color: var(--text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* 커스텀 스크롤바 - 다크 테마 */
-        * {
-            scrollbar-width: thin;
-            scrollbar-color: rgba(94, 234, 212, 0.4) rgba(15, 23, 42, 0.3);
-        }
-
-        *::-webkit-scrollbar {
-            width: 12px;
-            height: 12px;
-        }
-
-        *::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.3);
-            border-radius: 10px;
-        }
-
-        *::-webkit-scrollbar-thumb {
-            background: linear-gradient(180deg, rgba(94, 234, 212, 0.5), rgba(56, 189, 248, 0.5));
-            border-radius: 10px;
-            border: 2px solid rgba(15, 23, 42, 0.3);
-            transition: all 0.3s ease;
-        }
-
-        *::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(180deg, rgba(94, 234, 212, 0.7), rgba(56, 189, 248, 0.7));
-            border-color: rgba(15, 23, 42, 0.5);
-        }
-
-        *::-webkit-scrollbar-thumb:active {
-            background: linear-gradient(180deg, var(--primary), var(--primary-2));
-        }
-
-        *::-webkit-scrollbar-corner {
-            background: rgba(15, 23, 42, 0.3);
         }
         
         .dashboard-container {
@@ -178,473 +137,72 @@
             background: #cbd5e0;
         }
         
-        /* Hero Section */
-        .hero-section {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08));
-            border: 2px solid rgba(239, 68, 68, 0.3);
-            border-radius: 20px;
-            padding: 28px 32px;
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            backdrop-filter: blur(10px);
-            animation: heroSlideIn 0.5s ease-out;
-        }
-
-        @keyframes heroSlideIn {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-icon {
-            font-size: 48px;
-            animation: heroPulse 2s infinite;
-        }
-
-        @keyframes heroPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-
-        .hero-content {
-            flex: 1;
-        }
-
-        .hero-content h2 {
-            color: #991b1b;
-            font-size: 20px;
-            font-weight: 800;
-            margin-bottom: 6px;
-        }
-
-        .hero-content p {
-            color: #dc2626;
-            font-size: 14px;
-            font-weight: 600;
-        }
-
-        .hero-action {
-            background: #dc2626;
-            color: white;
-            border: none;
-            padding: 12px 28px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            white-space: nowrap;
-        }
-
-        .hero-action:hover {
-            background: #b91c1c;
-            transform: translateX(4px);
-        }
-
-        /* Updated Header */
-        .header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--panel);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 20px;
-            padding: 24px 32px;
-            margin-bottom: 24px;
-            box-shadow: var(--shadow);
-            border: 1px solid var(--border);
-        }
-
-        .header h1 {
-            color: var(--text);
-            font-size: 32px;
-            font-weight: 800;
-            letter-spacing: -0.03em;
-            margin-bottom: 8px;
-        }
-
-        .header-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 13px;
-            color: var(--muted);
-        }
-
-        .live-badge {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(16, 185, 129, 0.15);
-            padding: 6px 14px;
-            border-radius: 20px;
-            font-weight: 700;
-            color: #10b981;
-        }
-
-        .live-dot {
-            width: 8px;
-            height: 8px;
-            background: #10b981;
-            border-radius: 50%;
-            animation: livePulse 2s infinite;
-        }
-
-        @keyframes livePulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
-        }
-
-        .header-actions {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .quick-stats {
-            display: flex;
-            gap: 20px;
-            padding: 12px 20px;
-            background: rgba(15, 23, 42, 0.35);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .quick-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 4px;
-        }
-
-        .quick-stat-value {
-            font-size: 24px;
-            font-weight: 800;
-            line-height: 1;
-        }
-
-        .quick-stat-label {
-            font-size: 10px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            opacity: 0.7;
-        }
-
-        .quick-stat.success .quick-stat-value {
-            color: var(--success);
-        }
-
-        .quick-stat.warning .quick-stat-value {
-            color: var(--warning);
-        }
-
-        .quick-stat.error .quick-stat-value {
-            color: var(--danger);
-        }
-
-        .btn-refresh {
-            background: var(--primary);
-            color: #0a0e1a;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 12px;
-            font-size: 14px;
-            font-weight: 700;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            transition: all 0.2s ease;
-        }
-
-        .btn-refresh:hover {
-            background: #2dd4bf;
-            transform: scale(1.05);
-        }
-
-        /* Smart Search Section */
-        .search-section {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 24px;
-            margin-bottom: 24px;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
-        }
-
-        .search-bar {
-            position: relative;
-            margin-bottom: 20px;
-        }
-
-        .search-icon {
-            position: absolute;
-            left: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-            font-size: 18px;
-            opacity: 0.5;
-        }
-
-        .search-bar input {
-            width: 100%;
-            padding: 16px 20px 16px 56px;
-            background: rgba(15, 23, 42, 0.4);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            font-size: 15px;
-            color: var(--text);
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .search-bar input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(15, 23, 42, 0.6);
-        }
-
-        .search-bar input::placeholder {
-            color: var(--muted);
-        }
-
-        .clear-search {
-            position: absolute;
-            right: 16px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: rgba(148, 163, 184, 0.2);
-            border: none;
-            border-radius: 50%;
-            width: 28px;
-            height: 28px;
-            cursor: pointer;
-            color: var(--muted);
-            font-size: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s ease;
-        }
-
-        .clear-search:hover {
-            background: rgba(148, 163, 184, 0.3);
-            color: var(--text);
-        }
-
-        .filter-chips {
-            display: flex;
-            gap: 12px;
-            margin-bottom: 16px;
-            flex-wrap: wrap;
-        }
-
-        .filter-chip {
-            padding: 10px 20px;
-            background: rgba(15, 23, 42, 0.3);
-            border: 2px solid transparent;
-            border-radius: 24px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .filter-chip:hover {
-            background: rgba(15, 23, 42, 0.5);
-            color: var(--text);
-        }
-
-        .filter-chip.active {
-            background: rgba(94, 234, 212, 0.15);
-            border-color: var(--primary);
-            color: var(--primary);
-        }
-
-        .chip-dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-        }
-
-        .chip-dot.success {
-            background: var(--success);
-        }
-
-        .chip-dot.error {
-            background: var(--danger);
-        }
-
-        .chip-dot.warning {
-            background: var(--warning);
-        }
-
-        .db-type-tabs {
-            display: flex;
-            gap: 8px;
-            background: rgba(15, 23, 42, 0.3);
-            padding: 6px;
-            border-radius: 16px;
-        }
-
-        .db-tab {
-            flex: 1;
-            padding: 12px 20px;
-            background: transparent;
-            border: none;
-            border-radius: 12px;
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--muted);
-            cursor: pointer;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .db-tab:hover {
-            color: var(--text);
-        }
-
-        .db-tab.active {
-            background: rgba(94, 234, 212, 0.15);
-            color: var(--primary);
-        }
-
-        .tab-count {
-            background: rgba(15, 23, 42, 0.5);
-            padding: 4px 10px;
-            border-radius: 12px;
-            font-size: 11px;
-        }
-
-        .db-tab.active .tab-count {
-            background: rgba(94, 234, 212, 0.25);
-        }
-
-        /* Active Filters */
-        .active-filters {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 16px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
-        }
-
-        .active-filters-label {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-2);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .active-filters-list {
-            display: flex;
-            gap: 8px;
-            flex: 1;
-            flex-wrap: wrap;
-        }
-
-        .active-filter-tag {
-            background: rgba(56, 189, 248, 0.2);
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 600;
-            color: var(--primary-2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .active-filter-tag button {
-            background: none;
-            border: none;
-            color: var(--primary-2);
-            cursor: pointer;
-            font-size: 14px;
-            padding: 0;
-            display: flex;
-            align-items: center;
-        }
-
-        .clear-all-filters {
-            background: rgba(56, 189, 248, 0.2);
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--primary-2);
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .clear-all-filters:hover {
-            background: rgba(56, 189, 248, 0.3);
-        }
-
-        /* Mini Charts */
-        .mini-charts {
+        .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
-            margin-bottom: 24px;
+            margin-bottom: 20px;
         }
-
-        .mini-chart {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
-            display: flex;
-            flex-direction: column;
+        
+        .stat-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            transition: transform 0.3s ease;
         }
-
-        .mini-chart-header {
-            margin-bottom: 16px;
+        
+        .stat-card:hover {
+            transform: translateY(-5px);
         }
-
-        .mini-chart-header h4 {
-            color: var(--text);
+        
+        .stat-card h3 {
+            color: #718096;
             font-size: 14px;
-            font-weight: 700;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
-            margin: 0;
+            margin-bottom: 10px;
         }
-
-        .mini-chart-canvas-wrapper {
-            position: relative;
-            height: 250px;
-            width: 100%;
+        
+        .stat-card .value {
+            color: #2d3748;
+            font-size: 32px;
+            font-weight: 700;
+            margin-bottom: 5px;
         }
-
-        .mini-chart canvas {
-            max-height: 250px;
-            width: 100% !important;
-            height: 250px !important;
+        
+        .stat-card .change {
+            font-size: 12px;
+            color: #48bb78;
+        }
+        
+        .charts-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .chart-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+        }
+        
+        .chart-card h3 {
+            color: #2d3748;
+            font-size: 18px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
         
         .filter-section {
@@ -878,314 +436,6 @@
             font-weight: bold;
         }
         
-        /* Modern Timeline-style Cards */
-        .results-grid {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-        
-        .result-card {
-            background: var(--panel);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            cursor: pointer;
-            position: relative;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 20px;
-            align-items: center;
-        }
-        
-        .result-card::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, var(--primary), var(--primary-2));
-            border-radius: 16px 0 0 16px;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-        
-        .result-card:hover::before {
-            opacity: 1;
-        }
-        
-        .result-card:hover {
-            transform: translateX(4px);
-            box-shadow: var(--shadow);
-            border-color: rgba(94, 234, 212, 0.35);
-        }
-        
-        .result-card.error-card {
-            border-color: rgba(251, 113, 133, 0.45);
-            background: linear-gradient(135deg, rgba(251, 113, 133, 0.08), var(--panel));
-        }
-        
-        .result-card.error-card::before {
-            background: linear-gradient(180deg, #dc2626, #ef4444);
-            opacity: 1;
-        }
-        
-        .result-card.error-card:hover {
-            box-shadow: 0 16px 40px rgba(239, 68, 68, 0.25);
-        }
-        
-        .result-card.success-card {
-            border-color: rgba(52, 211, 153, 0.35);
-            background: linear-gradient(135deg, rgba(52, 211, 153, 0.05), var(--panel));
-        }
-        
-        .result-card.success-card::before {
-            background: linear-gradient(180deg, #059669, #10b981);
-        }
-
-        /* Card Left: Status Indicator */
-        .card-status-indicator {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .status-icon {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 24px;
-            position: relative;
-        }
-
-        .status-icon.success {
-            background: rgba(16, 185, 129, 0.15);
-        }
-
-        .status-icon.error {
-            background: rgba(239, 68, 68, 0.15);
-            animation: errorShake 3s infinite;
-        }
-
-        @keyframes errorShake {
-            0%, 96%, 100% { transform: translateX(0); }
-            97%, 99% { transform: translateX(-2px); }
-            98% { transform: translateX(2px); }
-        }
-
-        .status-icon.warning {
-            background: rgba(251, 191, 36, 0.15);
-        }
-
-        .status-badge-small {
-            font-size: 9px;
-            font-weight: 800;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            padding: 4px 8px;
-            border-radius: 12px;
-        }
-
-        .status-badge-small.success {
-            background: rgba(16, 185, 129, 0.2);
-            color: var(--success);
-        }
-
-        .status-badge-small.error {
-            background: rgba(239, 68, 68, 0.2);
-            color: var(--danger);
-        }
-
-        .status-badge-small.warning {
-            background: rgba(251, 191, 36, 0.2);
-            color: var(--warning);
-        }
-
-        /* Card Center: Main Info */
-        .card-main-info {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            min-width: 0;
-        }
-
-        .card-title-row {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-        
-        .card-type-badge {
-            font-size: 10px;
-            font-weight: 800;
-            padding: 5px 12px;
-            border-radius: 6px;
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-        }
-        
-        .card-hostname {
-            font-size: 18px;
-            font-weight: 800;
-            color: var(--text);
-            letter-spacing: -0.02em;
-        }
-
-        .card-details-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
-        }
-        
-        .card-detail-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .card-detail-icon {
-            font-size: 14px;
-            opacity: 0.6;
-        }
-
-        .card-detail-content {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-            min-width: 0;
-        }
-
-        .card-detail-label {
-            font-size: 10px;
-            font-weight: 700;
-            color: var(--muted);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .card-detail-value {
-            font-size: 13px;
-            font-weight: 600;
-            color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        /* Card Right: Quick Actions & Meta */
-        .card-actions {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 12px;
-        }
-
-        .card-time-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(15, 23, 42, 0.3);
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 600;
-            color: var(--muted);
-            white-space: nowrap;
-        }
-
-        .card-checker-badge {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
-            background: rgba(94, 234, 212, 0.15);
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--primary);
-        }
-
-        .card-expand-btn {
-            background: rgba(15, 23, 42, 0.3);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            width: 36px;
-            height: 36px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            color: var(--muted);
-            transition: all 0.2s ease;
-            font-size: 18px;
-        }
-
-        .card-expand-btn:hover {
-            background: rgba(94, 234, 212, 0.15);
-            color: var(--primary);
-            transform: scale(1.1);
-        }
-        
-        /* 뷰 전환 버튼 */
-        .view-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-        
-        .view-toggle {
-            display: flex;
-            gap: 8px;
-            background: #f1f5f9;
-            padding: 4px;
-            border-radius: 12px;
-        }
-        
-        .view-btn {
-            padding: 10px 20px;
-            border: none;
-            background: transparent;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 13px;
-            font-weight: 700;
-            color: #64748b;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .view-btn:hover {
-            color: #334155;
-        }
-        
-        .view-btn.active {
-            background: white;
-            color: #1e3a8a;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-        }
-        
-        .results-info {
-            font-size: 14px;
-            color: #64748b;
-            font-weight: 600;
-        }
-        
-        .results-info strong {
-            color: #1e293b;
-        }
-        
         .loading {
             text-align: center;
             padding: 60px;
@@ -1369,7 +619,7 @@
         }
 
         /* ==========================
-           NeoGlass Dark overrides
+           Chic theme overrides
            - 기존 기능/레이아웃 유지
            ========================== */
         .header,
@@ -1381,7 +631,7 @@
             border: 1px solid var(--border) !important;
             box-shadow: var(--shadow) !important;
             border-radius: var(--radius) !important;
-            backdrop-filter: blur(var(--glass-blur)) !important;
+            backdrop-filter: none !important;
         }
 
         .header h1 {
@@ -1397,7 +647,7 @@
         .status-indicator {
             background: var(--success) !important;
             animation: none !important;
-            box-shadow: 0 0 0 3px rgba(52, 211, 153, 0.16);
+            box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.14);
         }
 
         .btn {
@@ -1408,132 +658,23 @@
 
         .btn-primary {
             background: var(--primary) !important;
-            color: rgba(2, 6, 23, 0.92) !important;
+            color: #fff !important;
         }
 
         .btn-primary:hover {
             transform: none !important;
             box-shadow: none !important;
-            background: #2dd4bf !important;
+            background: #163075 !important;
         }
 
         .btn-secondary {
-            background: rgba(2, 6, 23, 0.30) !important;
-            color: rgba(255, 255, 255, 0.92) !important;
+            background: #f1f5f9 !important;
+            color: var(--text) !important;
         }
 
         .btn-secondary:hover {
-            background: rgba(2, 6, 23, 0.45) !important;
+            background: #e2e8f0 !important;
         }
-
-        /* 카드 다크 테마 */
-        .result-card {
-            background: var(--panel) !important;
-            border-color: var(--border) !important;
-            box-shadow: var(--shadow-sm) !important;
-            backdrop-filter: blur(var(--glass-blur)) !important;
-        }
-
-        .result-card:hover {
-            border-color: rgba(94, 234, 212, 0.45) !important;
-            box-shadow: var(--shadow) !important;
-        }
-
-        .result-card.error-card {
-            border-color: rgba(251, 113, 133, 0.55) !important;
-            background: rgba(251, 113, 133, 0.08) !important;
-        }
-
-        .result-card.success-card {
-            border-color: rgba(52, 211, 153, 0.55) !important;
-            background: rgba(52, 211, 153, 0.08) !important;
-        }
-
-        .card-header {
-            border-bottom-color: var(--border) !important;
-        }
-
-        .card-hostname,
-        .card-field-value {
-            color: var(--text) !important;
-        }
-
-        .card-field-label {
-            color: var(--muted) !important;
-        }
-
-        .card-field-value.path {
-            background: rgba(2, 6, 23, 0.35) !important;
-            border-color: var(--border) !important;
-            color: rgba(226, 232, 240, 0.86) !important;
-        }
-
-        .card-footer {
-            border-top-color: var(--border) !important;
-            color: var(--muted) !important;
-        }
-
-        .card-checker {
-            color: rgba(226, 232, 240, 0.92) !important;
-        }
-
-        .card-status.status-success {
-            background: rgba(52, 211, 153, 0.18) !important;
-            color: rgba(209, 250, 229, 0.95) !important;
-        }
-
-        .card-status.status-error {
-            background: rgba(251, 113, 133, 0.18) !important;
-            color: rgba(254, 226, 226, 0.95) !important;
-        }
-
-        .card-status.status-warning {
-            background: rgba(251, 191, 36, 0.18) !important;
-            color: rgba(254, 243, 199, 0.95) !important;
-        }
-
-        /* 뷰 토글 다크 테마 */
-        .view-toggle {
-            background: rgba(2, 6, 23, 0.35) !important;
-        }
-
-        .view-btn {
-            color: var(--muted) !important;
-        }
-
-        .view-btn.active {
-            background: rgba(94, 234, 212, 0.18) !important;
-            color: var(--primary) !important;
-            box-shadow: 0 0 0 1px rgba(94, 234, 212, 0.35) !important;
-        }
-
-        .results-info {
-            color: var(--muted) !important;
-        }
-
-        .results-info strong {
-            color: var(--text) !important;
-        }
-
-        .table-section h3, .view-controls h3 {
-            color: var(--text) !important;
-        }
-
-        /* Hero 섹션 다크 테마 */
-        .hero-section {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.10));
-            border-color: rgba(239, 68, 68, 0.4);
-        }
-
-        .hero-content h2 {
-            color: var(--danger);
-        }
-
-        .hero-content p {
-            color: rgba(254, 226, 226, 0.9);
-        }
-
-        /* 검색 섹션 다크 테마는 이미 적용됨 */
 
         thead {
             background: var(--table-head) !important;
@@ -1544,231 +685,106 @@
             letter-spacing: 0 !important;
             font-size: 12px;
         }
-
-        /* Table + modal dark tuning */
-        table {
-            background: transparent !important;
-        }
-
-        tbody tr {
-            border-bottom: 1px solid var(--border) !important;
-        }
-
-        tbody tr:nth-child(even) {
-            background-color: rgba(2, 6, 23, 0.18) !important;
-        }
-
-        tbody tr:hover {
-            background-color: rgba(94, 234, 212, 0.08) !important;
-        }
-
-        tbody tr.error-row:hover {
-            background-color: rgba(251, 113, 133, 0.12) !important;
-            box-shadow: none !important;
-        }
-
-        td {
-            border-right: 1px solid var(--border) !important;
-            color: rgba(226, 232, 240, 0.92);
-        }
-
-        .table-scrollbar-top {
-            background: rgba(2, 6, 23, 0.22) !important;
-            border: 1px solid var(--border);
-        }
-
-        .table-scrollbar-top::-webkit-scrollbar {
-            height: 10px;
-        }
-
-        .table-scrollbar-top::-webkit-scrollbar-track {
-            background: rgba(15, 23, 42, 0.35);
-            border-radius: 8px;
-        }
-
-        .table-scrollbar-top::-webkit-scrollbar-thumb {
-            background: linear-gradient(90deg, rgba(94, 234, 212, 0.5), rgba(56, 189, 248, 0.5));
-            border-radius: 8px;
-            border: 2px solid rgba(15, 23, 42, 0.35);
-        }
-
-        .table-scrollbar-top::-webkit-scrollbar-thumb:hover {
-            background: linear-gradient(90deg, rgba(94, 234, 212, 0.7), rgba(56, 189, 248, 0.7));
-        }
-
-        .modal-content {
-            background: rgba(17, 25, 40, 0.92) !important;
-            border: 1px solid rgba(148, 163, 184, 0.22) !important;
-            color: rgba(226, 232, 240, 0.92) !important;
-            backdrop-filter: blur(var(--glass-blur)) !important;
-        }
-
-        .modal-header {
-            border-bottom: 1px solid var(--border) !important;
-        }
-
-        .modal-header h2,
-        .detail-section h3,
-        .detail-item-label {
-            color: rgba(255, 255, 255, 0.92) !important;
-        }
-
-        .detail-item {
-            background: rgba(2, 6, 23, 0.35) !important;
-            border-left-color: rgba(94, 234, 212, 0.60) !important;
-        }
-
-        .detail-item-value {
-            background: rgba(2, 6, 23, 0.28) !important;
-            border: 1px solid var(--border) !important;
-            color: rgba(226, 232, 240, 0.92) !important;
-        }
-
-        .modal-close:hover {
-            background: rgba(2, 6, 23, 0.35) !important;
-            color: rgba(255, 255, 255, 0.92) !important;
-        }
     </style>
 </head>
 <body>
     <div class="dashboard-container">
-        <!-- Hero Section: Critical 알림 -->
-        <div class="hero-section" id="heroSection" style="display: none;">
-            <div class="hero-icon">⚠️</div>
-            <div class="hero-content">
-                <h2>주의가 필요한 시스템이 있습니다</h2>
-                <p id="heroMessage">0개의 Critical 이슈 발견</p>
-            </div>
-            <button class="hero-action" onclick="filterCritical()">
-                자세히 보기 →
-            </button>
-        </div>
-
-        <!-- Header with Real-time Stats -->
         <div class="header">
             <div class="header-left">
-                <h1>DB 점검 모니터링</h1>
-                <div class="header-meta">
-                    <div class="live-badge">
-                        <span class="live-dot"></span>
-                        <span>Live</span>
-                    </div>
-                    <span id="updateTime">업데이트: -</span>
+                <h1>DB 점검 결과 모니터링 대시보드</h1>
+                <div class="header-info" id="headerInfo">
+                    <span><span class="status-indicator"></span> 실시간 모니터링</span>
+                    <span>총 0건</span>
+                    <span>최신순 정렬</span>
+                    <span>업데이트: -</span>
                 </div>
             </div>
-            <div class="header-actions">
-                <div class="quick-stats" id="headerQuickStats">
-                    <div class="quick-stat success">
-                        <span class="quick-stat-value" id="quickSuccess">0</span>
-                        <span class="quick-stat-label">Success</span>
-                    </div>
-                    <div class="quick-stat warning">
-                        <span class="quick-stat-value" id="quickWarning">0</span>
-                        <span class="quick-stat-label">Warning</span>
-                    </div>
-                    <div class="quick-stat error">
-                        <span class="quick-stat-value" id="quickError">0</span>
-                        <span class="quick-stat-label">Error</span>
-                    </div>
-                </div>
-                <button class="btn btn-refresh" onclick="loadData()">
-                    <span>🔄</span> 새로고침
-                </button>
-            </div>
-        </div>
-
-        <!-- Smart Search & Filter Bar -->
-        <div class="search-section">
-            <div class="search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="quickSearch" placeholder="호스트명, 담당자, 경로 검색..." onkeyup="quickSearch()">
-                <button class="clear-search" onclick="clearSearch()" style="display: none;">✕</button>
-            </div>
-            <div class="filter-chips" id="filterChips">
-                <button class="filter-chip" data-filter="all" onclick="filterByStatus('all')">
-                    전체
-                </button>
-                <button class="filter-chip" data-filter="success" onclick="filterByStatus('success')">
-                    <span class="chip-dot success"></span> Success
-                </button>
-                <button class="filter-chip" data-filter="error" onclick="filterByStatus('error')">
-                    <span class="chip-dot error"></span> Error
-                </button>
-                <button class="filter-chip" data-filter="warning" onclick="filterByStatus('warning')">
-                    <span class="chip-dot warning"></span> Warning
-                </button>
-            </div>
-            <div class="db-type-tabs" id="dbTypeTabs">
-                <button class="db-tab active" data-type="all" onclick="filterByType('all')">
-                    전체 <span class="tab-count" id="countAll">0</span>
-                </button>
-                <button class="db-tab" data-type="MARIADB" onclick="filterByType('MARIADB')">
-                    MariaDB <span class="tab-count" id="countMariaDB">0</span>
-                </button>
-                <button class="db-tab" data-type="POSTGRESQL" onclick="filterByType('POSTGRESQL')">
-                    PostgreSQL <span class="tab-count" id="countPostgreSQL">0</span>
-                </button>
-                <button class="db-tab" data-type="CUBRID" onclick="filterByType('CUBRID')">
-                    CUBRID <span class="tab-count" id="countCUBRID">0</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Compact Chart Section -->
-        <div class="mini-charts" id="miniCharts">
-            <div class="mini-chart">
-                <div class="mini-chart-header">
-                    <h4>상태별 분포</h4>
-                </div>
-                <div class="mini-chart-canvas-wrapper">
-                    <canvas id="statusChart"></canvas>
-                </div>
-            </div>
-            <div class="mini-chart">
-                <div class="mini-chart-header">
-                    <h4>일별 점검 추이</h4>
-                </div>
-                <div class="mini-chart-canvas-wrapper">
-                    <canvas id="trendChart"></canvas>
-                </div>
+            <div class="controls">
+                <button class="btn btn-primary" onclick="loadData()">새로고침</button>
             </div>
         </div>
         
-        <!-- Active Filters Display -->
-        <div class="active-filters" id="activeFilters" style="display: none;">
-            <span class="active-filters-label">활성 필터:</span>
-            <div class="active-filters-list" id="activeFiltersList"></div>
-            <button class="clear-all-filters" onclick="clearAllFilters()">모두 지우기</button>
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <h3>전체 점검</h3>
+                <div class="value" id="statTotal">0</div>
+                <div class="change">모든 DB 유형</div>
+            </div>
+            <div class="stat-card">
+                <h3>MariaDB</h3>
+                <div class="value" id="statMariaDB">0</div>
+                <div class="change" id="statMariaDBChange">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>PostgreSQL</h3>
+                <div class="value" id="statPostgreSQL">0</div>
+                <div class="change" id="statPostgreSQLChange">-</div>
+            </div>
+            <div class="stat-card">
+                <h3>CUBRID</h3>
+                <div class="value" id="statCUBRID">0</div>
+                <div class="change" id="statCUBRIDChange">-</div>
+            </div>
+        </div>
+        
+        <div class="charts-section">
+            <div class="chart-card">
+                <h3>점검 유형별 분포</h3>
+                <canvas id="typeChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>상태별 분포</h3>
+                <canvas id="statusChart"></canvas>
+            </div>
+            <div class="chart-card">
+                <h3>일별 점검 추이</h3>
+                <canvas id="trendChart"></canvas>
+            </div>
+        </div>
+        
+        <div class="filter-section">
+            <h3>필터</h3>
+            <div class="filter-row">
+                <div class="filter-group">
+                    <label>점검 유형</label>
+                    <select id="filterType" onchange="applyFilters()">
+                        <option value="">전체</option>
+                        <option value="MARIADB">MariaDB</option>
+                        <option value="POSTGRESQL">PostgreSQL</option>
+                        <option value="CUBRID">CUBRID</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>호스트명</label>
+                    <input type="text" id="filterHostname" placeholder="호스트명 검색" onkeyup="applyFilters()">
+                </div>
+                
+                <div class="filter-group">
+                    <label>담당자</label>
+                    <input type="text" id="filterChecker" placeholder="담당자 검색" onkeyup="applyFilters()">
+                </div>
+                
+                <div class="filter-group">
+                    <label>상태</label>
+                    <select id="filterStatus" onchange="applyFilters()">
+                        <option value="">전체</option>
+                        <option value="success">성공</option>
+                        <option value="warning">경고</option>
+                        <option value="error">오류</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label>&nbsp;</label>
+                    <button class="btn btn-secondary" onclick="clearFilters()">필터 초기화</button>
+                </div>
+            </div>
         </div>
         
         <div class="table-section">
-            <div class="view-controls">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <h3>점검 결과</h3>
-                    <div class="results-info" id="resultsInfo">
-                        <strong>0</strong>건 표시 중
-                    </div>
-                </div>
-                <div class="view-toggle">
-                    <button class="view-btn active" onclick="switchView('card')" id="cardViewBtn">
-                        <span>📋</span> 타임라인
-                    </button>
-                    <button class="view-btn" onclick="switchView('table')" id="tableViewBtn">
-                        <span>📊</span> 테이블
-                    </button>
-                    <button class="view-btn" onclick="toggleCharts()">
-                        <span>📈</span> 차트
-                    </button>
-                </div>
-            </div>
-            
-            <!-- 카드 그리드 뷰 -->
-            <div class="results-grid" id="resultsGrid">
-                <div class="loading">데이터 로딩 중</div>
-            </div>
-            
-            <!-- 테이블 뷰 -->
-            <div class="table-scroll-container" id="tableScrollContainer" style="display: none;">
+            <h3>상세 점검 결과</h3>
+            <div class="table-scroll-container">
                 <div class="table-scrollbar-top" id="topScrollbar">
                     <div class="table-scrollbar-top-content" id="topScrollbarContent"></div>
                 </div>
@@ -1799,159 +815,88 @@
         let typeChart = null;
         let statusChart = null;
         let trendChart = null;
-        let lastPostedStatsKey = '';
-
-        function computeStatusCounts(data) {
-            const success = data.filter(r => String(r.상태 || '').toLowerCase().includes('success') && !String(r.상태 || '').toLowerCase().includes('x')).length;
-            const warning = data.filter(r => String(r.상태 || '').toLowerCase().includes('warning')).length;
-            const error = data.filter(r => String(r.상태 || '').toLowerCase().includes('error') || String(r.상태 || '').toLowerCase().includes('success x')).length;
-            return { success, warning, critical: error, total: data.length };
-        }
-
-        function postStatsToParent(stats) {
-            try {
-                if (!window.parent || window.parent === window) return;
-                const payload = { type: 'report_stats', source: 'db', ...stats };
-                const key = JSON.stringify(payload);
-                if (key === lastPostedStatsKey) return;
-                lastPostedStatsKey = key;
-                window.parent.postMessage(payload, window.location.origin);
-            } catch (e) {}
-        }
         
         // 차트 초기화
         function initCharts() {
-            // Dark theme defaults
-            Chart.defaults.color = 'rgba(226, 232, 240, 0.86)';
-            Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.18)';
-
-            // Status Chart (상태별 분포)
-            const statusCtx = document.getElementById('statusChart');
-            if (statusCtx) {
-                statusChart = new Chart(statusCtx.getContext('2d'), {
-                    type: 'doughnut',
-                    data: {
-                        labels: ['성공', '경고', '오류'],
-                        datasets: [{
-                            data: [0, 0, 0],
-                            backgroundColor: [
-                                'rgba(16, 185, 129, 0.8)',
-                                'rgba(251, 191, 36, 0.8)',
-                                'rgba(239, 68, 68, 0.8)'
-                            ],
-                            borderColor: [
-                                'rgba(16, 185, 129, 1)',
-                                'rgba(251, 191, 36, 1)',
-                                'rgba(239, 68, 68, 1)'
-                            ],
-                            borderWidth: 2
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        plugins: {
-                            legend: {
-                                position: 'bottom',
-                                labels: {
-                                    padding: 15,
-                                    font: {
-                                        size: 12,
-                                        weight: '600'
-                                    },
-                                    color: 'rgba(226, 232, 240, 0.86)'
-                                }
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                padding: 12,
-                                titleFont: {
-                                    size: 13,
-                                    weight: '700'
-                                },
-                                bodyFont: {
-                                    size: 12
-                                },
-                                borderColor: 'rgba(148, 163, 184, 0.3)',
-                                borderWidth: 1
-                            }
+            const typeCtx = document.getElementById('typeChart').getContext('2d');
+            typeChart = new Chart(typeCtx, {
+                type: 'doughnut',
+                data: {
+                    labels: ['MariaDB', 'PostgreSQL', 'CUBRID'],
+                    datasets: [{
+                        data: [0, 0, 0],
+                        backgroundColor: ['#38b2ac', '#4299e1', '#ed8936'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            position: 'bottom'
                         }
                     }
-                });
-            }
+                }
+            });
             
-            // Trend Chart (일별 추이)
-            const trendCtx = document.getElementById('trendChart');
-            if (trendCtx) {
-                trendChart = new Chart(trendCtx.getContext('2d'), {
-                    type: 'line',
-                    data: {
-                        labels: [],
-                        datasets: [{
-                            label: '점검 수',
-                            data: [],
-                            borderColor: 'rgba(94, 234, 212, 0.9)',
-                            backgroundColor: 'rgba(94, 234, 212, 0.1)',
-                            tension: 0.4,
-                            fill: true,
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
-                            pointBackgroundColor: 'rgba(94, 234, 212, 1)',
-                            pointBorderColor: 'rgba(15, 23, 42, 0.8)',
-                            pointBorderWidth: 2
-                        }]
+            const statusCtx = document.getElementById('statusChart').getContext('2d');
+            statusChart = new Chart(statusCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['성공', '경고', '오류'],
+                    datasets: [{
+                        label: '점검 상태',
+                        data: [0, 0, 0],
+                        backgroundColor: ['#48bb78', '#ed8936', '#f56565'],
+                        borderRadius: 8
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
                     },
-                    options: {
-                        responsive: true,
-                        maintainAspectRatio: true,
-                        plugins: {
-                            legend: {
-                                display: false
-                            },
-                            tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                padding: 12,
-                                titleFont: {
-                                    size: 13,
-                                    weight: '700'
-                                },
-                                bodyFont: {
-                                    size: 12
-                                },
-                                borderColor: 'rgba(148, 163, 184, 0.3)',
-                                borderWidth: 1
-                            }
-                        },
-                        scales: {
-                            x: {
-                                grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)',
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: 'rgba(226, 232, 240, 0.7)',
-                                    font: {
-                                        size: 11
-                                    }
-                                }
-                            },
-                            y: {
-                                beginAtZero: true,
-                                grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)',
-                                    drawBorder: false
-                                },
-                                ticks: {
-                                    color: 'rgba(226, 232, 240, 0.7)',
-                                    font: {
-                                        size: 11
-                                    }
-                                }
-                            }
+                    scales: {
+                        y: {
+                            beginAtZero: true
                         }
                     }
-                });
-            }
+                }
+            });
+            
+            const trendCtx = document.getElementById('trendChart').getContext('2d');
+            trendChart = new Chart(trendCtx, {
+                type: 'line',
+                data: {
+                    labels: [],
+                    datasets: [{
+                        label: '점검 수',
+                        data: [],
+                        borderColor: '#1e3a8a',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        tension: 0.4,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: true,
+                    plugins: {
+                        legend: {
+                            display: false
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
         }
         
         // 데이터 로드
@@ -1982,19 +927,18 @@
                         console.warn('원본 데이터 로드 실패 (상세 정보는 포맷된 데이터로 표시됩니다):', err);
                     }
                     
-                    applyAllFilters();
+                    applyFilters();
+                    updateStats(allData);
                     updateCharts(allData);
                 } else {
                     console.error('❌ 데이터 로드 실패:', data);
-                    const errorMsg = '<div class="no-data">데이터를 불러올 수 없습니다.</div>';
-                    document.getElementById('resultsGrid').innerHTML = errorMsg;
-                    document.getElementById('tableWrapper').innerHTML = errorMsg;
+                    document.getElementById('tableWrapper').innerHTML = 
+                        '<div class="no-data">데이터를 불러올 수 없습니다.</div>';
                 }
             } catch (error) {
                 console.error('❌ 데이터 로딩 중 오류:', error);
-                const errorMsg = '<div class="no-data">데이터 로딩 중 오류가 발생했습니다: ' + error.message + '</div>';
-                document.getElementById('resultsGrid').innerHTML = errorMsg;
-                document.getElementById('tableWrapper').innerHTML = errorMsg;
+                document.getElementById('tableWrapper').innerHTML = 
+                    '<div class="no-data">데이터 로딩 중 오류가 발생했습니다: ' + error.message + '</div>';
             }
         }
         
@@ -2042,230 +986,19 @@
             });
             
             currentFilteredData = filtered;
-            
-            // 현재 뷰 모드에 따라 렌더링
-            if (currentView === 'card') {
-                renderCards(filtered);
-            } else {
-                renderTable(filtered);
-            }
-            
+            renderTable(filtered);
             updateHeaderInfo(filtered.length);
             updateStats(filtered);
             updateCharts(filtered);
         }
         
-        // 새로운 필터 함수들
-        function quickSearch() {
-            const query = document.getElementById('quickSearch').value.toLowerCase();
-            currentSearchQuery = query;
-            
-            const clearBtn = document.querySelector('.clear-search');
-            if (query) {
-                clearBtn.style.display = 'flex';
-            } else {
-                clearBtn.style.display = 'none';
-            }
-            
-            applyAllFilters();
-        }
-
-        function clearSearch() {
-            document.getElementById('quickSearch').value = '';
-            currentSearchQuery = '';
-            document.querySelector('.clear-search').style.display = 'none';
-            applyAllFilters();
-        }
-
-        function filterByType(type) {
-            currentTypeFilter = type;
-            
-            // UI 업데이트
-            document.querySelectorAll('.db-tab').forEach(tab => {
-                tab.classList.remove('active');
-            });
-            document.querySelector(`[data-type="${type}"]`).classList.add('active');
-            
-            applyAllFilters();
-        }
-
-        function filterByStatus(status) {
-            currentStatusFilter = status;
-            
-            // UI 업데이트
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.classList.remove('active');
-            });
-            document.querySelector(`[data-filter="${status}"]`).classList.add('active');
-            
-            applyAllFilters();
-        }
-
-        function filterCritical() {
-            filterByStatus('error');
-        }
-
-        function applyAllFilters() {
-            let filtered = allData;
-            
-            // 타입 필터
-            if (currentTypeFilter !== 'all') {
-                filtered = filtered.filter(row => {
-                    const rowType = String(row.점검유형 || '').toUpperCase();
-                    return rowType === currentTypeFilter.toUpperCase();
-                });
-            }
-            
-            // 상태 필터
-            if (currentStatusFilter !== 'all') {
-                filtered = filtered.filter(row => {
-                    const status = String(row.상태 || '').toLowerCase();
-                    if (currentStatusFilter === 'error') {
-                        return status.includes('error') || status.includes('x');
-                    } else if (currentStatusFilter === 'success') {
-                        return status.includes('success') && !status.includes('x');
-                    } else if (currentStatusFilter === 'warning') {
-                        return status.includes('warning');
-                    }
-                    return true;
-                });
-            }
-            
-            // 검색 쿼리
-            if (currentSearchQuery) {
-                filtered = filtered.filter(row => {
-                    const hostname = String(row.호스트명 || '').toLowerCase();
-                    const checker = String(row.담당자 || '').toLowerCase();
-                    const path1 = String(row.설치경로 || '').toLowerCase();
-                    const path2 = String(row.conf경로 || '').toLowerCase();
-                    const path3 = String(row.설정경로 || '').toLowerCase();
-                    
-                    return hostname.includes(currentSearchQuery) ||
-                           checker.includes(currentSearchQuery) ||
-                           path1.includes(currentSearchQuery) ||
-                           path2.includes(currentSearchQuery) ||
-                           path3.includes(currentSearchQuery);
-                });
-            }
-            
-            currentFilteredData = filtered;
-            
-            // 렌더링
-            if (currentView === 'card') {
-                renderCards(filtered);
-            } else {
-                renderTable(filtered);
-            }
-            
-            updateHeaderStats(filtered);
-            updateTypeCounts(allData);
-            updateActiveFilters();
-        }
-
-        function updateHeaderStats(data) {
-            const success = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('success') && !status.includes('x');
-            }).length;
-            
-            const warning = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('warning');
-            }).length;
-            
-            const error = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('error') || status.includes('x');
-            }).length;
-            
-            document.getElementById('quickSuccess').textContent = success;
-            document.getElementById('quickWarning').textContent = warning;
-            document.getElementById('quickError').textContent = error;
-            
-            // Hero 섹션 업데이트
-            const heroSection = document.getElementById('heroSection');
-            const heroMessage = document.getElementById('heroMessage');
-            
-            if (error > 0) {
-                heroSection.style.display = 'flex';
-                heroMessage.textContent = `${error}개의 오류 발견`;
-            } else {
-                heroSection.style.display = 'none';
-            }
-        }
-
-        function updateTypeCounts(data) {
-            const mariadb = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'MARIADB').length;
-            const postgresql = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'POSTGRESQL').length;
-            const cubrid = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'CUBRID').length;
-            
-            document.getElementById('countAll').textContent = data.length;
-            document.getElementById('countMariaDB').textContent = mariadb;
-            document.getElementById('countPostgreSQL').textContent = postgresql;
-            document.getElementById('countCUBRID').textContent = cubrid;
-        }
-
-        function updateActiveFilters() {
-            const activeFiltersDiv = document.getElementById('activeFilters');
-            const activeFiltersList = document.getElementById('activeFiltersList');
-            
-            const filters = [];
-            
-            if (currentTypeFilter !== 'all') {
-                filters.push({ type: 'DB 타입', value: currentTypeFilter, key: 'type' });
-            }
-            
-            if (currentStatusFilter !== 'all') {
-                filters.push({ type: '상태', value: currentStatusFilter, key: 'status' });
-            }
-            
-            if (currentSearchQuery) {
-                filters.push({ type: '검색', value: currentSearchQuery, key: 'search' });
-            }
-            
-            if (filters.length > 0) {
-                activeFiltersDiv.style.display = 'flex';
-                activeFiltersList.innerHTML = filters.map(f => `
-                    <div class="active-filter-tag">
-                        ${f.type}: ${f.value}
-                        <button onclick="removeFilter('${f.key}')">✕</button>
-                    </div>
-                `).join('');
-            } else {
-                activeFiltersDiv.style.display = 'none';
-            }
-        }
-
-        function removeFilter(key) {
-            if (key === 'type') {
-                filterByType('all');
-            } else if (key === 'status') {
-                filterByStatus('all');
-            } else if (key === 'search') {
-                clearSearch();
-            }
-        }
-
-        function clearAllFilters() {
-            currentTypeFilter = 'all';
-            currentStatusFilter = 'all';
-            currentSearchQuery = '';
-            
-            document.getElementById('quickSearch').value = '';
-            document.querySelector('.clear-search').style.display = 'none';
-            
-            document.querySelectorAll('.db-tab').forEach(tab => tab.classList.remove('active'));
-            document.querySelector('[data-type="all"]').classList.add('active');
-            
-            document.querySelectorAll('.filter-chip').forEach(chip => chip.classList.remove('active'));
-            document.querySelector('[data-filter="all"]').classList.add('active');
-            
-            applyAllFilters();
-        }
-        
-        // 필터 초기화 (레거시)
+        // 필터 초기화
         function clearFilters() {
-            clearAllFilters();
+            document.getElementById('filterType').value = '';
+            document.getElementById('filterHostname').value = '';
+            document.getElementById('filterChecker').value = '';
+            document.getElementById('filterStatus').value = '';
+            applyFilters();
         }
         
         // 통계 업데이트
@@ -2279,33 +1012,25 @@
             document.getElementById('statMariaDB').textContent = mariadb;
             document.getElementById('statPostgreSQL').textContent = postgresql;
             document.getElementById('statCUBRID').textContent = cubrid;
-
-            // 통합 리포트(iframe) 상단 배지 갱신용
-            postStatsToParent(computeStatusCounts(data));
         }
         
         // 차트 업데이트
         function updateCharts(data) {
-            // 상태별 분포 (Status Chart)
-            const success = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('success') && !status.includes('x');
-            }).length;
+            // 점검 유형별 분포
+            const mariadb = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'MARIADB').length;
+            const postgresql = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'POSTGRESQL').length;
+            const cubrid = data.filter(r => String(r.점검유형 || '').toUpperCase() === 'CUBRID').length;
             
-            const warning = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('warning');
-            }).length;
+            typeChart.data.datasets[0].data = [mariadb, postgresql, cubrid];
+            typeChart.update();
             
-            const error = data.filter(r => {
-                const status = String(r.상태 || '').toLowerCase();
-                return status.includes('error') || status.includes('x');
-            }).length;
+            // 상태별 분포
+            const success = data.filter(r => String(r.상태 || '').toLowerCase().includes('success') && !String(r.상태 || '').toLowerCase().includes('x')).length;
+            const warning = data.filter(r => String(r.상태 || '').toLowerCase().includes('warning')).length;
+            const error = data.filter(r => String(r.상태 || '').toLowerCase().includes('error') || String(r.상태 || '').toLowerCase().includes('success x')).length;
             
-            if (statusChart) {
-                statusChart.data.datasets[0].data = [success, warning, error];
-                statusChart.update('none');
-            }
+            statusChart.data.datasets[0].data = [success, warning, error];
+            statusChart.update();
             
             // 일별 추이
             const dateMap = {};
@@ -2358,12 +1083,9 @@
                 }
             }
             
-            // 일별 추이 (Trend Chart)
-            if (trendChart) {
-                trendChart.data.labels = dates;
-                trendChart.data.datasets[0].data = counts;
-                trendChart.update('none'); // 애니메이션 없이 업데이트
-            }
+            trendChart.data.labels = dates;
+            trendChart.data.datasets[0].data = counts;
+            trendChart.update('none'); // 애니메이션 없이 업데이트
         }
         
         // 헤더 정보 업데이트
@@ -2442,195 +1164,16 @@
             return cols;
         }
 
-        // 현재 뷰 모드
-        let currentView = 'card'; // 'card' or 'table'
-        let currentTypeFilter = 'all';
-        let currentStatusFilter = 'all';
-        let currentSearchQuery = '';
-        
-        // 뷰 전환 함수
-        function switchView(view) {
-            currentView = view;
-            const cardViewBtn = document.getElementById('cardViewBtn');
-            const tableViewBtn = document.getElementById('tableViewBtn');
-            const resultsGrid = document.getElementById('resultsGrid');
-            const tableScrollContainer = document.getElementById('tableScrollContainer');
-            
-            if (view === 'card') {
-                cardViewBtn.classList.add('active');
-                tableViewBtn.classList.remove('active');
-                resultsGrid.style.display = 'flex';
-                tableScrollContainer.style.display = 'none';
-            } else {
-                cardViewBtn.classList.remove('active');
-                tableViewBtn.classList.add('active');
-                resultsGrid.style.display = 'none';
-                tableScrollContainer.style.display = 'block';
-            }
-            
-            // 현재 필터된 데이터로 재렌더링
-            if (currentFilteredData.length > 0) {
-                if (view === 'card') {
-                    renderCards(currentFilteredData);
-                } else {
-                    renderTable(currentFilteredData);
-                }
-            }
-        }
-
-        function toggleCharts() {
-            const miniCharts = document.getElementById('miniCharts');
-            const chartBtn = document.querySelector('[onclick="toggleCharts()"]');
-            
-            if (miniCharts.style.display === 'none') {
-                miniCharts.style.display = 'grid';
-                if (chartBtn) chartBtn.classList.add('active');
-            } else {
-                miniCharts.style.display = 'none';
-                if (chartBtn) chartBtn.classList.remove('active');
-            }
-        }
-        
-        // 카드 렌더링
-        function renderCards(results) {
-            console.log(`📇 카드 렌더링 시작: ${results.length}개 결과`);
-            const resultsGrid = document.getElementById('resultsGrid');
-            const resultsInfo = document.getElementById('resultsInfo');
-            
-            if (results.length === 0) {
-                resultsGrid.innerHTML = '<div class="no-data">표시할 데이터가 없습니다.</div>';
-                resultsInfo.innerHTML = '<strong>0</strong>건 표시 중';
-                return;
-            }
-            
-            resultsInfo.innerHTML = `<strong>${results.length}</strong>건 표시 중`;
-            
-            let html = '';
-            results.forEach((row, index) => {
-                const status = String(row.상태 || '').toLowerCase();
-                const hasNA = CRITICAL_COLUMNS_FOR_NA.some(col => {
-                    const value = row[col];
-                    return value === null || value === undefined || value === 'N/A' || value === '';
-                });
-                const isError = status.includes('error') || status.includes('x') || hasNA;
-                const isSuccess = status.includes('success') && !status.includes('x');
-                
-                const cardClass = isError ? 'error-card' : (isSuccess ? 'success-card' : '');
-                const statusClass = isError ? 'status-error' : (isSuccess ? 'status-success' : 'status-warning');
-                const statusText = isError ? 'Error' : (isSuccess ? 'Success' : 'Warning');
-                
-                const dbType = String(row.점검유형 || 'N/A').toUpperCase();
-                const badgeClass = dbType === 'MARIADB' ? 'badge-mariadb' : 
-                                  (dbType === 'POSTGRESQL' ? 'badge-postgresql' : 'badge-cubrid');
-                
-                const hostname = row.호스트명 || 'N/A';
-                const checker = row.담당자 || 'N/A';
-                const checkTime = formatDateTime(row.점검시간);
-                const installPath = row.설치경로 || row.conf경로 || 'N/A';
-                const servicePath = row.설정경로 || row.서비스경로 || 'N/A';
-                const serviceStatus = row.서비스상태 || 'N/A';
-                const listening = row['리스닝(MariaDB)'] || row.리스닝 || 'N/A';
-                
-                const statusIcon = isError ? '❌' : (isSuccess ? '✅' : '⚠️');
-                const statusBadgeClass = isError ? 'error' : (isSuccess ? 'success' : 'warning');
-                const statusBadgeText = isError ? 'Error' : (isSuccess ? 'OK' : 'Warning');
-                
-                html += `
-                    <div class="result-card ${cardClass}" onclick="showErrorDetails(${index})">
-                        <!-- Left: Status Indicator -->
-                        <div class="card-status-indicator">
-                            <div class="status-icon ${statusBadgeClass}">
-                                ${statusIcon}
-                            </div>
-                            <div class="status-badge-small ${statusBadgeClass}">
-                                ${statusBadgeText}
-                            </div>
-                        </div>
-
-                        <!-- Center: Main Info -->
-                        <div class="card-main-info">
-                            <div class="card-title-row">
-                                <span class="badge card-type-badge ${badgeClass}">${dbType}</span>
-                                <div class="card-hostname">${hostname}</div>
-                            </div>
-                            <div class="card-details-grid">
-                                <div class="card-detail-item">
-                                    <span class="card-detail-icon">🔧</span>
-                                    <div class="card-detail-content">
-                                        <div class="card-detail-label">서비스</div>
-                                        <div class="card-detail-value">${serviceStatus}</div>
-                                    </div>
-                                </div>
-                                <div class="card-detail-item">
-                                    <span class="card-detail-icon">🌐</span>
-                                    <div class="card-detail-content">
-                                        <div class="card-detail-label">리스닝</div>
-                                        <div class="card-detail-value">${listening}</div>
-                                    </div>
-                                </div>
-                                <div class="card-detail-item" style="grid-column: 1 / -1;">
-                                    <span class="card-detail-icon">📁</span>
-                                    <div class="card-detail-content">
-                                        <div class="card-detail-label">설치 경로</div>
-                                        <div class="card-detail-value" title="${installPath}">${installPath}</div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Right: Actions & Meta -->
-                        <div class="card-actions">
-                            <div class="card-time-badge">
-                                🕐 ${checkTime}
-                            </div>
-                            <div class="card-checker-badge">
-                                👤 ${checker}
-                            </div>
-                            <button class="card-expand-btn" onclick="event.stopPropagation(); showErrorDetails(${index})">
-                                ⋯
-                            </button>
-                        </div>
-                    </div>
-                `;
-            });
-            
-            resultsGrid.innerHTML = html;
-        }
-        
-        // 날짜 포맷팅 헬퍼
-        function formatDateTime(value) {
-            if (!value) return 'N/A';
-            try {
-                const date = new Date(value);
-                if (!isNaN(date.getTime())) {
-                    return date.toLocaleString('ko-KR', {
-                        month: '2-digit',
-                        day: '2-digit',
-                        hour: '2-digit',
-                        minute: '2-digit'
-                    });
-                }
-            } catch (e) {
-                return String(value);
-            }
-            return String(value);
-        }
-        
         // 테이블 렌더링
         function renderTable(results) {
             console.log(`📊 테이블 렌더링 시작: ${results.length}개 결과`);
-            const resultsInfo = document.getElementById('resultsInfo');
-            
             if (results.length === 0) {
                 console.warn('⚠️ 렌더링할 데이터가 없습니다');
                 document.getElementById('tableWrapper').innerHTML = 
                     '<div class="no-data">표시할 데이터가 없습니다.</div>';
                 document.getElementById('topScrollbarContent').style.width = '0px';
-                resultsInfo.innerHTML = '<strong>0</strong>건 표시 중';
                 return;
             }
-            
-            resultsInfo.innerHTML = `<strong>${results.length}</strong>건 표시 중`;
             
             const columns = getUnifiedColumns(results);
             
