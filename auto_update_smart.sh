@@ -12,21 +12,32 @@ log() {
     echo "[$(date '+%Y-%m-%d %H:%M:%S')] $1" | tee -a "$LOG_FILE"
 }
 
-# 현재 브랜치 확인 - UI_sunmin 브랜치에서는 자동 업데이트 비활성화
+# 현재 브랜치 확인
 CURRENT_BRANCH=$(git branch --show-current 2>/dev/null)
+
+# UI_sunmin 브랜치에서는 자동 업데이트 비활성화
 if [ "$CURRENT_BRANCH" = "UI_sunmin" ]; then
     log "⚠️  UI_sunmin 브랜치에서는 자동 업데이트가 비활성화되어 있습니다."
     exit 0
 fi
 
-log "🔄 코드 업데이트 체크 시작..."
+log "🔄 코드 업데이트 체크 시작... (현재 브랜치: $CURRENT_BRANCH)"
 
-# 1. 원격 저장소 정보 가져오기 (충돌 방지)
-git fetch origin develop > /dev/null 2>&1
-
-# 2. 로컬과 원격의 차이 확인
-LOCAL=$(git rev-parse HEAD)
-REMOTE=$(git rev-parse origin/develop)
+# 1. 현재 브랜치에 해당하는 원격 브랜치 fetch (develop 브랜치가 아닌 현재 브랜치 기준)
+# 현재 브랜치가 develop이 아니면 develop을 fetch하지 않음
+if [ "$CURRENT_BRANCH" = "develop" ]; then
+    # develop 브랜치인 경우에만 develop을 fetch
+    log "📥 원격 develop 브랜치 정보 가져오기..."
+    git fetch origin develop > /dev/null 2>&1
+    
+    # 2. 로컬과 원격의 차이 확인
+    LOCAL=$(git rev-parse HEAD)
+    REMOTE=$(git rev-parse origin/develop)
+else
+    # 다른 브랜치에서는 develop을 fetch하지 않음
+    log "⚠️  develop 브랜치가 아니므로 자동 업데이트를 건너뜁니다. (현재: $CURRENT_BRANCH)"
+    exit 0
+fi
 
 if [ "$LOCAL" = "$REMOTE" ]; then
     log "✅ 최신 코드입니다. 업데이트 불필요."

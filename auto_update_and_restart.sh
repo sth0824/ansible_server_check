@@ -5,6 +5,21 @@
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 cd "$SCRIPT_DIR"
 
+# 현재 브랜치 확인
+CURRENT_BRANCH=$(git branch --show-current 2>/dev/null)
+
+# UI_sunmin 브랜치에서는 자동 업데이트 비활성화
+if [ "$CURRENT_BRANCH" = "UI_sunmin" ]; then
+    echo "⚠️  UI_sunmin 브랜치에서는 자동 업데이트가 비활성화되어 있습니다."
+    exit 0
+fi
+
+# develop 브랜치가 아니면 실행하지 않음
+if [ "$CURRENT_BRANCH" != "develop" ]; then
+    echo "⚠️  develop 브랜치가 아니므로 자동 업데이트를 건너뜁니다. (현재: $CURRENT_BRANCH)"
+    exit 0
+fi
+
 echo "🔄 코드 업데이트 및 서버 재시작 중..."
 echo ""
 
