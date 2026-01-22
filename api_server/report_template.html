@@ -1957,19 +1957,55 @@
         // 데이터 로드
         let originalDataMap = new Map(); // ID를 키로 하는 원본 데이터 맵
         
+        // URL 파라미터에서 필터 값 가져오기
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            return {
+                hostname: params.get('hostname'),
+                id: params.get('id'),
+                checker: params.get('checker')
+            };
+        }
+
         async function loadData() {
             try {
+                const urlParams = getUrlParams();
+                let url = '/api/db-checks/data?limit=1000';
+                
+                // URL 파라미터가 있으면 필터 적용
+                if (urlParams.hostname) {
+                    url += `&hostname=${encodeURIComponent(urlParams.hostname)}`;
+                }
+                if (urlParams.id) {
+                    // ID로 직접 조회
+                    url = `/api/checks?id=${urlParams.id}`;
+                }
+                
                 // 포맷된 데이터 가져오기 (테이블 표시용)
-                const response = await fetch('/api/db-checks/data?limit=1000');
+                const response = await fetch(url);
                 const data = await response.json();
                 
                 if (data.success && data.results) {
                     allData = data.results;
                     console.log(`✅ DB 점검 데이터 로드 완료: ${allData.length}개`);
                     
+                    // ID로 조회한 경우 특정 레코드만 표시
+                    if (urlParams.id && allData.length > 0) {
+                        // ID에 해당하는 레코드만 필터링
+                        allData = allData.filter(item => item.id == urlParams.id);
+                        console.log(`✅ ID ${urlParams.id} 필터링: ${allData.length}개`);
+                    }
+                    
                     // 원본 데이터도 함께 가져오기 (상세 정보 표시용)
                     try {
-                        const originalResponse = await fetch('/api/checks?limit=1000');
+                        let originalUrl = '/api/checks?limit=1000';
+                        if (urlParams.hostname) {
+                            originalUrl += `&hostname=${encodeURIComponent(urlParams.hostname)}`;
+                        }
+                        if (urlParams.id) {
+                            originalUrl = `/api/checks?id=${urlParams.id}`;
+                        }
+                        const originalResponse = await fetch(originalUrl);
                         const originalData = await originalResponse.json();
                         if (originalData.success && originalData.results) {
                             originalDataMap.clear();

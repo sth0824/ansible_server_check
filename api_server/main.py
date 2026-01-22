@@ -80,12 +80,15 @@ async def root():
         "message": "Ansible 점검 결과 수집 API 서버",
         "version": "1.0.0",
         "endpoints": {
+            "GET /api/dashboard": "Dashboard (기획서 기반)",
             "POST /api/checks": "점검 결과 저장",
             "GET /api/checks": "점검 결과 조회",
             "GET /api/health": "서버 상태 확인",
+            "GET /api/dashboard/stats": "Dashboard 통계 데이터",
             "GET /api/db-checks/report": "DB 점검 결과 리포트 (HTML)",
             "GET /api/os-checks/report": "OS 점검 결과 리포트 (HTML)",
-            "GET /api/was-checks/report": "WAS 점검 결과 리포트 (HTML)"
+            "GET /api/was-checks/report": "WAS 점검 결과 리포트 (HTML)",
+            "GET /api/report": "통합 리포트 (HTML)"
         }
     }
 
@@ -1654,6 +1657,39 @@ async def was_checks_report():
         return HTMLResponse(content=error_html, status_code=500)
 
 
+@app.get("/api/dashboard", response_class=HTMLResponse)
+async def dashboard():
+    """
+    Dashboard - 기획서에 따른 대시보드 구성
+    
+    Returns:
+        HTML 형식의 Dashboard
+    """
+    try:
+        import os
+        template_path = os.path.join(os.path.dirname(__file__), "dashboard_template.html")
+        with open(template_path, "r", encoding="utf-8") as f:
+            html = f.read()
+        
+        return HTMLResponse(content=html)
+        
+    except Exception as e:
+        error_html = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <title>오류</title>
+        </head>
+        <body>
+            <h1>오류 발생</h1>
+            <p>{str(e)}</p>
+        </body>
+        </html>
+        """
+        return HTMLResponse(content=error_html, status_code=500)
+
+
 @app.get("/api/report", response_class=HTMLResponse)
 async def unified_report():
     """
@@ -1702,14 +1738,14 @@ async def websocket_endpoint(websocket: WebSocket):
 
 
 @app.get("/api/db-checks/data")
-async def get_db_checks_data(limit: int = 100):
+async def get_db_checks_data(limit: int = 100, hostname: Optional[str] = None):
     """DB 점검 결과를 JSON 형식으로 반환 (차트/필터링용)"""
     try:
         db_types = ["mariadb", "postgresql", "cubrid"]
         all_results = []
         
         for db_type in db_types:
-            results = get_check_results(check_type=db_type, limit=limit)
+            results = get_check_results(check_type=db_type, hostname=hostname, limit=limit)
             all_results.extend(results)
         
         all_results.sort(key=lambda x: x.get("created_at", ""), reverse=True)
@@ -1725,10 +1761,10 @@ async def get_db_checks_data(limit: int = 100):
 
 
 @app.get("/api/os-checks/data")
-async def get_os_checks_data(limit: int = 100):
+async def get_os_checks_data(limit: int = 100, hostname: Optional[str] = None):
     """OS 점검 결과를 JSON 형식으로 반환 (DB/OS 공통 테이블용)"""
     try:
-        results = get_check_results(check_type="os", limit=limit)
+        results = get_check_results(check_type="os", hostname=hostname, limit=limit)
         results.sort(key=lambda x: x.get("created_at", ""), reverse=True)
         formatted_results = [format_db_result(result) for result in results[:limit]]
 
@@ -1742,12 +1778,12 @@ async def get_os_checks_data(limit: int = 100):
 
 
 @app.get("/api/was-checks/data")
-async def get_was_checks_data(limit: int = 1000):
+async def get_was_checks_data(limit: int = 1000, hostname: Optional[str] = None):
     """WAS 점검 결과를 JSON 형식으로 반환 (DB/OS 공통 테이블용)"""
     try:
         # "was"와 "tomcat" 둘 다 조회 (플레이북에서 "was"로 저장하지만 이전에는 "tomcat"일 수 있음)
-        results_was = get_check_results(check_type="was", limit=limit)
-        results_tomcat = get_check_results(check_type="tomcat", limit=limit)
+        results_was = get_check_results(check_type="was", hostname=hostname, limit=limit)
+        results_tomcat = get_check_results(check_type="tomcat", hostname=hostname, limit=limit)
         
         # 두 결과 합치기
         all_results = list(results_was) + list(results_tomcat)
@@ -1771,6 +1807,145 @@ async def get_was_checks_data(limit: int = 1000):
         }
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.get("/api/dashboard/stats")
+async def get_dashboard_stats():
+    """대시보드용 통계 데이터"""
+    try:
+        from database import SessionLocal
+        from models import CheckResult
+        from sqlalchemy import func, text
+        
+        db = SessionLocal()
+        try:
+            # 전체 통계
+            total_count = db.query(func.count(CheckResult.id)).scalar() or 0
+            
+            # 점검 유형별 통계
+            type_stats = db.query(
+                CheckResult.check_type,
+                func.count(CheckResult.id).label('count')
+            ).group_by(CheckResult.check_type).all()
+            
+            # 호스트명별 통계 (프로젝트 목록 대신)
+            hostname_stats = db.query(
+                CheckResult.hostname,
+                func.count(CheckResult.id).label('count'),
+                func.max(CheckResult.created_at).label('last_check')
+            ).group_by(CheckResult.hostname).order_by(func.max(CheckResult.created_at).desc()).limit(10).all()
+            
+            # 상태별 통계
+            status_stats = db.query(
+                CheckResult.status,
+                func.count(CheckResult.id).label('count')
+            ).group_by(CheckResult.status).all()
+            
+            # 최근 실행 작업 (최근 10개)
+            recent_checks = db.query(CheckResult).order_by(
+                CheckResult.created_at.desc()
+            ).limit(10).all()
+            
+            return {
+                "success": True,
+                "summary": {
+                    "total": total_count,
+                    "by_type": {stat[0]: stat[1] for stat in type_stats},
+                    "by_status": {stat[0]: stat[1] for stat in status_stats}
+                },
+                "projects": [
+                    {
+                        "hostname": stat[0],
+                        "count": stat[1],
+                        "last_check": stat[2].isoformat() if stat[2] else None
+                    }
+                    for stat in hostname_stats
+                ],
+                "recent_checks": [
+                    {
+                        "id": r.id,
+                        "check_type": r.check_type,
+                        "hostname": r.hostname,
+                        "checker": r.checker,
+                        "status": r.status,
+                        "check_time": r.check_time,
+                        "created_at": r.created_at.isoformat() if r.created_at else None
+                    }
+                    for r in recent_checks
+                ]
+            }
+        finally:
+            db.close()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/tasks/run")
+async def run_task(check_type: str, hostname: Optional[str] = None):
+    """
+    점검 작업 실행 요청
+    
+    Args:
+        check_type: 점검 유형 (os, mariadb, postgresql, was, cubrid)
+        hostname: 특정 호스트만 점검 (선택)
+    """
+    import subprocess
+    import os
+    
+    # 점검 유형에 따른 플레이북 경로 매핑
+    playbook_map = {
+        'os': 'redhat_check/redhat_check.yml',
+        'mariadb': 'mariadb_check/mariadb_check.yml',
+        'postgresql': 'postgresql_check/postgresql_check.yml',
+        'was': 'tomcat_check/tomcat_check.yml',
+        'tomcat': 'tomcat_check/tomcat_check.yml',
+        'cubrid': 'cubrid_check/cubrid_check.yml'
+    }
+    
+    if check_type not in playbook_map:
+        raise HTTPException(status_code=400, detail=f"지원하지 않는 점검 유형: {check_type}")
+    
+    playbook_path = playbook_map[check_type]
+    project_root = os.path.dirname(os.path.dirname(__file__))
+    playbook_full_path = os.path.join(project_root, playbook_path)
+    
+    if not os.path.exists(playbook_full_path):
+        raise HTTPException(status_code=404, detail=f"플레이북을 찾을 수 없습니다: {playbook_path}")
+    
+    # 인벤토리 파일 경로
+    inventory_path = os.path.join(project_root, 'hosts.ini')
+    
+    try:
+        # Ansible 플레이북 실행 명령어 구성
+        cmd = ['ansible-playbook', '-i', inventory_path, playbook_full_path]
+        
+        if hostname:
+            cmd.extend(['--limit', hostname])
+        
+        # 백그라운드에서 실행 (비동기)
+        process = subprocess.Popen(
+            cmd,
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+            cwd=project_root,
+            text=True
+        )
+        
+        return {
+            "success": True,
+            "message": f"{check_type.upper()} 점검이 시작되었습니다",
+            "task_id": process.pid,
+            "check_type": check_type,
+            "hostname": hostname,
+            "command": " ".join(cmd)
+        }
+    except FileNotFoundError:
+        raise HTTPException(
+            status_code=500,
+            detail="Ansible이 설치되어 있지 않거나 PATH에 없습니다. 서버에서 직접 실행해주세요."
+        )
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"작업 실행 중 오류 발생: {str(e)}")
 
 
 if __name__ == "__main__":

@@ -1,0 +1,22 @@
+[Unit]
+Description=Ansible Monitoring API Server
+After=network.target postgresql.service
+Requires=postgresql.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/opt/ansible-monitoring/api_server
+Environment="PATH=/opt/ansible-monitoring/api_server/venv/bin"
+ExecStart=/opt/ansible-monitoring/api_server/venv/bin/python3 /opt/ansible-monitoring/api_server/main.py
+Restart=always
+RestartSec=10
+StandardOutput=journal
+StandardError=journal
+SyslogIdentifier=ansible-api-server
+
+# 환경 변수 로드
+EnvironmentFile=/opt/ansible-monitoring/api_server/.env
+
+[Install]
+WantedBy=multi-user.target
