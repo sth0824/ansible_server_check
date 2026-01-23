@@ -36,7 +36,10 @@ if "postgresql" in DATABASE_URL or "postgres" in DATABASE_URL:
         pool_pre_ping=True,  # 연결 유효성 사전 확인
         pool_recycle=3600,   # 1시간마다 연결 재생성
         pool_size=5,         # 연결 풀 크기
-        max_overflow=10      # 추가 연결 허용
+        max_overflow=10,     # 추가 연결 허용
+        connect_args={
+            "client_encoding": "UTF8"  # UTF8 인코딩 설정
+        }
     )
 else:
     engine = create_engine(
