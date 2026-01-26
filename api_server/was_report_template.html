@@ -2023,6 +2023,11 @@
         <!-- Header with Real-time Stats -->
         <div class="header">
             <div class="header-left">
+                <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 8px;">
+                    <a href="/api/dashboard" style="color: var(--primary); text-decoration: none; font-size: 14px; font-weight: 600; display: inline-flex; align-items: center; gap: 6px;">
+                        ← 대시보드
+                    </a>
+                </div>
                 <h1>WAS 점검 모니터링</h1>
                 <div class="header-meta">
                     <div class="live-badge">
@@ -2344,12 +2349,93 @@
             return {
                 hostname: params.get('hostname'),
                 id: params.get('id'),
-                checker: params.get('checker')
+                checker: params.get('checker'),
+                search: params.get('search') || '',
+                status: params.get('status') || 'all',
+                startDate: params.get('startDate') || '',
+                endDate: params.get('endDate') || '',
+                view: params.get('view') || 'card',
+                page: params.get('page') || '1',
+                itemsPerPage: params.get('itemsPerPage') || '5'
             };
+        }
+        
+        // URL 파라미터 업데이트 (필터 상태 저장)
+        function updateUrlParams() {
+            const params = new URLSearchParams();
+            
+            // 기존 파라미터 유지
+            const urlParams = getUrlParams();
+            if (urlParams.hostname) params.set('hostname', urlParams.hostname);
+            if (urlParams.id) params.set('id', urlParams.id);
+            if (urlParams.checker) params.set('checker', urlParams.checker);
+            
+            // 필터 상태 추가
+            if (currentSearchQuery) params.set('search', currentSearchQuery);
+            if (currentStatusFilter !== 'all') params.set('status', currentStatusFilter);
+            if (dateFilterStart) params.set('startDate', dateFilterStart);
+            if (dateFilterEnd) params.set('endDate', dateFilterEnd);
+            if (currentView !== 'card') params.set('view', currentView);
+            if (currentPage > 1) params.set('page', currentPage.toString());
+            if (itemsPerPage !== 5) params.set('itemsPerPage', itemsPerPage.toString());
+            
+            // URL 업데이트 (히스토리 추가하지 않음)
+            const newUrl = window.location.pathname + (params.toString() ? '?' + params.toString() : '');
+            window.history.replaceState({}, '', newUrl);
+        }
+        
+        // URL 파라미터에서 필터 상태 복원
+        function restoreFiltersFromUrl() {
+            const urlParams = getUrlParams();
+            
+            if (urlParams.search) {
+                document.getElementById('quickSearch').value = urlParams.search;
+                currentSearchQuery = urlParams.search;
+                const clearBtn = document.querySelector('.clear-search');
+                if (clearBtn) clearBtn.style.display = 'flex';
+            }
+            
+            if (urlParams.status && urlParams.status !== 'all') {
+                currentStatusFilter = urlParams.status;
+                document.querySelectorAll('.filter-chip').forEach(chip => {
+                    chip.classList.remove('active');
+                });
+                const statusChip = document.querySelector(`[data-filter="${urlParams.status}"]`);
+                if (statusChip) statusChip.classList.add('active');
+            }
+            
+            if (urlParams.startDate) {
+                document.getElementById('startDate').value = urlParams.startDate;
+                dateFilterStart = urlParams.startDate;
+            }
+            
+            if (urlParams.endDate) {
+                document.getElementById('endDate').value = urlParams.endDate;
+                dateFilterEnd = urlParams.endDate;
+            }
+            
+            if (urlParams.view && urlParams.view !== 'card') {
+                switchView(urlParams.view);
+            }
+            
+            if (urlParams.page) {
+                currentPage = parseInt(urlParams.page) || 1;
+            }
+            
+            if (urlParams.itemsPerPage) {
+                itemsPerPage = parseInt(urlParams.itemsPerPage) || 5;
+                const select = document.getElementById('itemsPerPageSelect');
+                if (select) {
+                    select.value = itemsPerPage.toString();
+                }
+            }
         }
 
         async function loadData() {
             try {
+                // URL에서 필터 상태 복원
+                restoreFiltersFromUrl();
+                
                 const urlParams = getUrlParams();
                 let url = '/api/was-checks/data?limit=1000';
                 
@@ -2401,6 +2487,8 @@
                     
                     applyAllFilters();
                     updateCharts(allData);
+                    // URL 파라미터 업데이트 (초기 로드 후)
+                    updateUrlParams();
                 } else {
                     console.error('❌ 데이터 로드 실패:', data);
                     const errorMsg = '<div class="no-data">데이터를 불러올 수 없습니다.</div>';
@@ -2409,9 +2497,26 @@
                 }
             } catch (error) {
                 console.error('❌ 데이터 로딩 중 오류:', error);
-                const errorMsg = '<div class="no-data">데이터 로딩 중 오류가 발생했습니다: ' + error.message + '</div>';
-                document.getElementById('resultsGrid').innerHTML = errorMsg;
-                document.getElementById('tableWrapper').innerHTML = errorMsg;
+                let userFriendlyMessage = '데이터를 불러오는 중 문제가 발생했습니다.';
+                if (error.message && error.message.includes('null')) {
+                    userFriendlyMessage = '데이터를 불러오는 중 문제가 발생했습니다. 페이지를 새로고침해주세요.';
+                } else if (error.message && error.message.includes('fetch')) {
+                    userFriendlyMessage = '서버에 연결할 수 없습니다. 네트워크 연결을 확인해주세요.';
+                }
+                const errorMsg = `
+                    <div class="no-data" style="text-align: center; padding: 60px 20px;">
+                        <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
+                        <div style="font-size: 18px; font-weight: 600; margin-bottom: 8px; color: var(--text);">${userFriendlyMessage}</div>
+                        <div style="font-size: 14px; color: var(--muted); margin-bottom: 24px;">잠시 후 다시 시도해주세요.</div>
+                        <button onclick="location.reload()" class="action-button" style="padding: 12px 24px; font-size: 14px;">
+                            새로고침
+                        </button>
+                    </div>
+                `;
+                const resultsGrid = document.getElementById('resultsGrid');
+                const tableWrapper = document.getElementById('tableWrapper');
+                if (resultsGrid) resultsGrid.innerHTML = errorMsg;
+                if (tableWrapper) tableWrapper.innerHTML = errorMsg;
             }
         }
         
@@ -2476,7 +2581,9 @@
                 clearBtn.style.display = 'none';
             }
             
+            currentPage = 1; // 검색 시 첫 페이지로
             applyAllFilters();
+            updateUrlParams();
         }
 
         function clearSearch() {
@@ -2484,6 +2591,7 @@
             currentSearchQuery = '';
             document.querySelector('.clear-search').style.display = 'none';
             applyAllFilters();
+            updateUrlParams();
         }
 
         // WAS 리포트에는 DB 타입 필터 불필요
@@ -2497,7 +2605,9 @@
             });
             document.querySelector(`[data-filter="${status}"]`).classList.add('active');
             
+            currentPage = 1; // 필터 변경 시 첫 페이지로
             applyAllFilters();
+            updateUrlParams();
         }
 
         function filterCritical() {
@@ -2633,7 +2743,15 @@
             const allFilter = document.querySelector('[data-filter="all"]');
             if (allFilter) allFilter.classList.add('active');
             
+            // 날짜 필터도 초기화
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            dateFilterStart = null;
+            dateFilterEnd = null;
+            
+            currentPage = 1;
             applyAllFilters();
+            updateUrlParams();
         }
         
         // 필터 초기화 (레거시)
@@ -2825,6 +2943,7 @@
         // 뷰 전환 함수
         function switchView(view) {
             currentView = view;
+            updateUrlParams();
             const cardViewBtn = document.getElementById('cardViewBtn');
             const tableViewBtn = document.getElementById('tableViewBtn');
             const resultsGrid = document.getElementById('resultsGrid');
@@ -2956,6 +3075,7 @@
                 currentPage = page;
             }
             applyPagination(currentFilteredData);
+            updateUrlParams();
             // 페이지 상단으로 스크롤
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
@@ -2978,6 +3098,7 @@
             itemsPerPage = parseInt(select.value) || 0;
             currentPage = 1;
             applyPagination(currentFilteredData);
+            updateUrlParams();
         }
         
         // 카드 렌더링
@@ -2987,7 +3108,16 @@
             const resultsInfo = document.getElementById('resultsInfo');
             
             if (results.length === 0) {
-                resultsGrid.innerHTML = '<div class="no-data">표시할 데이터가 없습니다.</div>';
+                resultsGrid.innerHTML = `
+                    <div class="no-data" style="text-align: center; padding: 80px 20px;">
+                        <div style="font-size: 64px; margin-bottom: 24px; opacity: 0.5;">📭</div>
+                        <div style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text);">표시할 데이터가 없습니다</div>
+                        <div style="font-size: 14px; color: var(--muted); margin-bottom: 32px;">필터 조건을 변경하거나 다른 검색어를 시도해보세요.</div>
+                        <button onclick="clearAllFilters()" class="action-button" style="padding: 12px 24px; font-size: 14px;">
+                            필터 초기화
+                        </button>
+                    </div>
+                `;
                 resultsInfo.innerHTML = '<strong>0</strong>건 표시 중';
                 return;
             }
@@ -3112,8 +3242,16 @@
             
             if (results.length === 0) {
                 console.warn('⚠️ 렌더링할 데이터가 없습니다');
-                document.getElementById('tableWrapper').innerHTML = 
-                    '<div class="no-data">표시할 데이터가 없습니다.</div>';
+                document.getElementById('tableWrapper').innerHTML = `
+                    <div class="no-data" style="text-align: center; padding: 80px 20px;">
+                        <div style="font-size: 64px; margin-bottom: 24px; opacity: 0.5;">📭</div>
+                        <div style="font-size: 20px; font-weight: 600; margin-bottom: 12px; color: var(--text);">표시할 데이터가 없습니다</div>
+                        <div style="font-size: 14px; color: var(--muted); margin-bottom: 32px;">필터 조건을 변경하거나 다른 검색어를 시도해보세요.</div>
+                        <button onclick="clearAllFilters()" class="action-button" style="padding: 12px 24px; font-size: 14px;">
+                            필터 초기화
+                        </button>
+                    </div>
+                `;
                 document.getElementById('topScrollbarContent').style.width = '0px';
                 resultsInfo.innerHTML = '<strong>0</strong>건 표시 중';
                 return;

@@ -931,9 +931,31 @@
             summaryStats.innerHTML = '';
             
             const typeStats = data.summary.by_type || {};
+            const typeUrlMap = {
+                'os': '/api/os-checks/report',
+                'mariadb': '/api/db-checks/report?type=mariadb',
+                'postgresql': '/api/db-checks/report?type=postgresql',
+                'was': '/api/was-checks/report',
+                'tomcat': '/api/was-checks/report',
+                'cubrid': '/api/db-checks/report?type=cubrid'
+            };
+            
             for (const [type, count] of Object.entries(typeStats)) {
                 const statItem = document.createElement('div');
                 statItem.className = 'stat-item';
+                const typeLower = type.toLowerCase();
+                const reportUrl = typeUrlMap[typeLower] || '/api/report';
+                statItem.style.cursor = 'pointer';
+                statItem.style.transition = 'transform 0.2s ease';
+                statItem.onclick = () => {
+                    window.location.href = reportUrl;
+                };
+                statItem.onmouseenter = () => {
+                    statItem.style.transform = 'translateY(-2px)';
+                };
+                statItem.onmouseleave = () => {
+                    statItem.style.transform = 'translateY(0)';
+                };
                 statItem.innerHTML = `
                     <div class="stat-item-value">${count}</div>
                     <div class="stat-item-label">${type.toUpperCase()}</div>
@@ -967,6 +989,19 @@
                     });
                     projectList.appendChild(item);
                 });
+                
+                // "더 보기" 링크 추가
+                const viewAllProjects = document.createElement('div');
+                viewAllProjects.style.marginTop = '16px';
+                viewAllProjects.style.textAlign = 'center';
+                viewAllProjects.style.paddingTop = '12px';
+                viewAllProjects.style.borderTop = '1px solid var(--border)';
+                viewAllProjects.innerHTML = `
+                    <a href="/api/report" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                        전체 결과 보기 →
+                    </a>
+                `;
+                projectList.appendChild(viewAllProjects);
             } else {
                 projectList.innerHTML = '<div class="empty-state">프로젝트가 없습니다</div>';
             }
@@ -1003,6 +1038,19 @@
                     });
                     recentJobs.appendChild(item);
                 });
+                
+                // "더 보기" 링크 추가
+                const viewAllJobs = document.createElement('div');
+                viewAllJobs.style.marginTop = '16px';
+                viewAllJobs.style.textAlign = 'center';
+                viewAllJobs.style.paddingTop = '12px';
+                viewAllJobs.style.borderTop = '1px solid var(--border)';
+                viewAllJobs.innerHTML = `
+                    <a href="/api/report" style="color: var(--primary); text-decoration: none; font-weight: 600; font-size: 14px; display: inline-flex; align-items: center; gap: 6px;">
+                        전체 결과 보기 →
+                    </a>
+                `;
+                recentJobs.appendChild(viewAllJobs);
             } else {
                 recentJobs.innerHTML = '<div class="empty-state">최근 실행 작업이 없습니다</div>';
             }
