@@ -13,36 +13,137 @@
         }
 
         :root {
-            /* NeoGlass Dark */
+            /* NeoGlass Dark - Enhanced */
             --bg: #0b1020;
-            --panel: rgba(17, 25, 40, 0.62);
-            --border: rgba(148, 163, 184, 0.18);
+            --panel: rgba(17, 25, 40, 0.70);
+            --panel-strong: rgba(17, 25, 40, 0.85);
+            --border: rgba(148, 163, 184, 0.22);
+            --border-bright: rgba(94, 234, 212, 0.35);
             --text: #e5e7eb;
             --muted: rgba(203, 213, 225, 0.72);
             --primary: #5eead4;
             --primary-2: #38bdf8;
+            --primary-glow: rgba(94, 234, 212, 0.4);
             --success: #34d399;
             --warning: #fbbf24;
             --danger: #fb7185;
+            
+            /* Enhanced Shadows */
             --shadow: 0 20px 60px rgba(0, 0, 0, 0.55);
             --shadow-sm: 0 10px 30px rgba(0, 0, 0, 0.45);
+            --shadow-multi: 0 8px 32px rgba(0, 0, 0, 0.4), 
+                           0 2px 8px rgba(0, 0, 0, 0.2),
+                           inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            --shadow-glow: 0 0 20px rgba(94, 234, 212, 0.3);
+            --shadow-glow-strong: 0 0 40px rgba(94, 234, 212, 0.5);
+            
             --radius: 16px;
+            --radius-sm: 12px;
+            --radius-lg: 24px;
             --table-head: rgba(15, 23, 42, 0.90);
-            --glass-blur: 18px;
+            
+            /* Enhanced Glass Effects */
+            --glass-blur: 28px;
+            --glass-blur-strong: 40px;
+            --border-glow: 0 0 20px rgba(94, 234, 212, 0.3);
+            
+            /* Spacing System */
+            --spacing-xs: 4px;
+            --spacing-sm: 8px;
+            --spacing-md: 16px;
+            --spacing-lg: 24px;
+            --spacing-xl: 32px;
         }
         
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
             background:
-                radial-gradient(900px circle at 12% 0%, rgba(94, 234, 212, 0.18), transparent 55%),
-                radial-gradient(900px circle at 86% 10%, rgba(56, 189, 248, 0.16), transparent 55%),
-                radial-gradient(700px circle at 50% 110%, rgba(251, 113, 133, 0.10), transparent 60%),
+                radial-gradient(1200px circle at 10% 0%, rgba(94, 234, 212, 0.25), transparent 50%),
+                radial-gradient(1200px circle at 90% 10%, rgba(56, 189, 248, 0.22), transparent 50%),
+                radial-gradient(1000px circle at 50% 100%, rgba(251, 113, 133, 0.15), transparent 55%),
+                radial-gradient(800px circle at 30% 50%, rgba(139, 92, 246, 0.12), transparent 50%),
                 var(--bg);
             min-height: 100vh;
             padding: 20px;
             color: var(--text);
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
+            background-attachment: fixed;
+            font-size: 14px;
+            line-height: 1.6;
+            letter-spacing: -0.01em;
+        }
+        
+        /* Typography System */
+        h1, .h1 {
+            font-size: 32px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        h2, .h2 {
+            font-size: 24px;
+            font-weight: 800;
+            line-height: 1.3;
+            letter-spacing: -0.02em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        h3, .h3 {
+            font-size: 18px;
+            font-weight: 700;
+            line-height: 1.4;
+            letter-spacing: -0.01em;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        h4, .h4 {
+            font-size: 14px;
+            font-weight: 700;
+            line-height: 1.5;
+            letter-spacing: 0.01em;
+            margin-bottom: var(--spacing-xs);
+        }
+        
+        p, .p {
+            font-size: 14px;
+            font-weight: 500;
+            line-height: 1.6;
+            letter-spacing: 0;
+        }
+        
+        .text-sm {
+            font-size: 12px;
+            line-height: 1.5;
+        }
+        
+        .text-xs {
+            font-size: 11px;
+            line-height: 1.4;
+        }
+        
+        .text-lg {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .text-xl {
+            font-size: 20px;
+            line-height: 1.5;
+        }
+        
+        .font-bold {
+            font-weight: 700;
+        }
+        
+        .font-semibold {
+            font-weight: 600;
+        }
+        
+        .font-medium {
+            font-weight: 500;
         }
 
         /* 커스텀 스크롤바 - 다크 테마 */
@@ -147,70 +248,238 @@
         }
         
         .btn {
-            padding: 10px 20px;
+            padding: 12px 24px;
             border: none;
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
+            font-weight: 700;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 8px;
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
+            color: #0a0e1a;
+            box-shadow: var(--shadow-glow), var(--shadow-sm);
+            border: 1px solid rgba(94, 234, 212, 0.3);
         }
         
         .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: var(--shadow-glow-strong), var(--shadow);
+            border-color: rgba(94, 234, 212, 0.5);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0) scale(0.98);
         }
         
         .btn-secondary {
-            background: #e2e8f0;
-            color: #4a5568;
+            background: rgba(15, 23, 42, 0.4);
+            color: var(--text);
+            border: 1px solid var(--border);
+            backdrop-filter: blur(var(--glass-blur));
         }
         
         .btn-secondary:hover {
-            background: #cbd5e0;
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+            box-shadow: var(--shadow-sm);
+            transform: translateY(-1px);
         }
         
         /* Hero Section */
         .hero-section {
-            background: linear-gradient(135deg, rgba(239, 68, 68, 0.12), rgba(220, 38, 38, 0.08));
-            border: 2px solid rgba(239, 68, 68, 0.3);
-            border-radius: 20px;
+            background: linear-gradient(135deg, rgba(239, 68, 68, 0.15), rgba(220, 38, 38, 0.10));
+            border: 2px solid rgba(239, 68, 68, 0.4);
+            border-radius: var(--radius-lg);
             padding: 28px 32px;
             margin-bottom: 24px;
             display: flex;
             align-items: center;
             gap: 24px;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            box-shadow: var(--shadow-multi), 0 0 30px rgba(239, 68, 68, 0.2);
+            position: relative;
+            overflow: hidden;
             animation: heroSlideIn 0.5s ease-out;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(239, 68, 68, 0.1) 0%, transparent 70%);
+            animation: heroShimmer 3s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        @keyframes heroShimmer {
+            0%, 100% { transform: translate(-50%, -50%) rotate(0deg); opacity: 0.3; }
+            50% { transform: translate(-50%, -50%) rotate(180deg); opacity: 0.6; }
         }
 
         @keyframes heroSlideIn {
             from {
                 opacity: 0;
-                transform: translateY(-20px);
+                transform: translateY(-20px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        .hero-icon {
+            font-size: 48px;
+            animation: heroPulse 2s ease-in-out infinite;
+            filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
+        }
+
+        @keyframes heroPulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: drop-shadow(0 0 10px rgba(239, 68, 68, 0.5));
+            }
+            50% { 
+                transform: scale(1.15);
+                filter: drop-shadow(0 0 20px rgba(239, 68, 68, 0.8));
+            }
+        }
+        
+        /* Enhanced Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
             }
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
-
-        .hero-icon {
-            font-size: 48px;
-            animation: heroPulse 2s infinite;
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
         }
-
-        @keyframes heroPulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
+        
+        @keyframes slideInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+        
+        @keyframes scaleIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+        
+        @keyframes shimmer {
+            0% {
+                background-position: -1000px 0;
+            }
+            100% {
+                background-position: 1000px 0;
+            }
+        }
+        
+        /* Stagger Animation for Cards */
+        .result-card {
+            animation: fadeInUp 0.5s ease-out backwards;
+        }
+        
+        .result-card:nth-child(1) { animation-delay: 0.05s; }
+        .result-card:nth-child(2) { animation-delay: 0.1s; }
+        .result-card:nth-child(3) { animation-delay: 0.15s; }
+        .result-card:nth-child(4) { animation-delay: 0.2s; }
+        .result-card:nth-child(5) { animation-delay: 0.25s; }
+        .result-card:nth-child(n+6) { animation-delay: 0.3s; }
+        
+        /* Loading Skeleton Animation */
+        @keyframes skeleton {
+            0% {
+                background-position: -200px 0;
+            }
+            100% {
+                background-position: calc(200px + 100%) 0;
+            }
+        }
+        
+        .skeleton {
+            background: linear-gradient(
+                90deg,
+                rgba(15, 23, 42, 0.3) 0px,
+                rgba(15, 23, 42, 0.5) 40px,
+                rgba(15, 23, 42, 0.3) 80px
+            );
+            background-size: 200px 100%;
+            animation: skeleton 1.5s ease-in-out infinite;
+        }
+        
+        /* Smooth Transitions */
+        * {
+            transition-property: background-color, border-color, color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+        
+        /* Micro-interactions */
+        button:active,
+        .result-card:active {
+            transform: scale(0.98);
+        }
+        
+        input:focus,
+        select:focus {
+            transform: scale(1.01);
         }
 
         .hero-content {
@@ -221,31 +490,58 @@
             color: #991b1b;
             font-size: 20px;
             font-weight: 800;
-            margin-bottom: 6px;
+            margin-bottom: var(--spacing-xs);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
         }
 
         .hero-content p {
             color: #dc2626;
             font-size: 14px;
             font-weight: 600;
+            line-height: 1.5;
         }
 
         .hero-action {
-            background: #dc2626;
+            background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
             color: white;
-            border: none;
+            border: 1px solid rgba(239, 68, 68, 0.4);
             padding: 12px 28px;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             white-space: nowrap;
+            box-shadow: 0 0 20px rgba(239, 68, 68, 0.3), var(--shadow-sm);
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-action::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .hero-action:hover::before {
+            left: 100%;
         }
 
         .hero-action:hover {
-            background: #b91c1c;
-            transform: translateX(4px);
+            transform: translateX(4px) scale(1.02);
+            box-shadow: 0 0 30px rgba(239, 68, 68, 0.5), var(--shadow);
+            border-color: rgba(239, 68, 68, 0.6);
+        }
+        
+        .hero-action:active {
+            transform: translateX(2px) scale(0.98);
         }
 
         /* Updated Header */
@@ -253,13 +549,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: var(--panel);
-            backdrop-filter: blur(var(--glass-blur));
-            border-radius: 20px;
+            background: var(--panel-strong);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            border-radius: var(--radius-lg);
             padding: 24px 32px;
             margin-bottom: 24px;
-            box-shadow: var(--shadow);
+            box-shadow: var(--shadow-multi);
             border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+            pointer-events: none;
+        }
+        
+        .header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(94, 234, 212, 0.5), transparent);
         }
 
         .header h1 {
@@ -267,7 +583,8 @@
             font-size: 32px;
             font-weight: 800;
             letter-spacing: -0.03em;
-            margin-bottom: 8px;
+            margin-bottom: var(--spacing-sm);
+            line-height: 1.2;
         }
 
         .header-meta {
@@ -298,8 +615,37 @@
         }
 
         @keyframes livePulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
-            50% { opacity: 0.8; box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+            0%, 100% { 
+                opacity: 1; 
+                box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7);
+                transform: scale(1);
+            }
+            50% { 
+                opacity: 0.9; 
+                box-shadow: 0 0 0 8px rgba(16, 185, 129, 0);
+                transform: scale(1.1);
+            }
+        }
+        
+        /* Smooth Page Load Animation */
+        .dashboard-container {
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        .header {
+            animation: slideInRight 0.5s ease-out 0.1s backwards;
+        }
+        
+        .search-section {
+            animation: fadeInUp 0.5s ease-out 0.2s backwards;
+        }
+        
+        .mini-charts {
+            animation: fadeInUp 0.5s ease-out 0.3s backwards;
+        }
+        
+        .table-section {
+            animation: fadeInUp 0.5s ease-out 0.4s backwards;
         }
 
         .header-actions {
@@ -312,9 +658,21 @@
             display: flex;
             gap: 20px;
             padding: 12px 20px;
-            background: rgba(15, 23, 42, 0.35);
-            border-radius: 16px;
+            background: var(--panel);
+            border-radius: var(--radius);
             border: 1px solid var(--border);
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quick-stats::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+            pointer-events: none;
         }
 
         .quick-stat {
@@ -351,34 +709,68 @@
         }
 
         .btn-refresh {
-            background: var(--primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-2) 100%);
             color: #0a0e1a;
-            border: none;
+            border: 1px solid rgba(94, 234, 212, 0.3);
             padding: 12px 24px;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
             font-size: 14px;
             font-weight: 700;
             cursor: pointer;
             display: flex;
             align-items: center;
             gap: 8px;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-glow), var(--shadow-sm);
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-refresh::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .btn-refresh:hover::before {
+            left: 100%;
         }
 
         .btn-refresh:hover {
-            background: #2dd4bf;
-            transform: scale(1.05);
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-glow-strong), var(--shadow);
+            border-color: rgba(94, 234, 212, 0.5);
+        }
+        
+        .btn-refresh:active {
+            transform: translateY(0) scale(1);
         }
 
         /* Smart Search Section */
         .search-section {
-            background: var(--panel);
+            background: var(--panel-strong);
             border: 1px solid var(--border);
-            border-radius: 20px;
+            border-radius: var(--radius-lg);
             padding: 24px;
             margin-bottom: 24px;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            box-shadow: var(--shadow-multi);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .search-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.03) 0%, rgba(56, 189, 248, 0.03) 100%);
+            pointer-events: none;
         }
 
         .search-bar {
@@ -398,19 +790,22 @@
         .search-bar input {
             width: 100%;
             padding: 16px 20px 16px 56px;
-            background: rgba(15, 23, 42, 0.4);
+            background: rgba(15, 23, 42, 0.5);
             border: 2px solid var(--border);
-            border-radius: 16px;
+            border-radius: var(--radius);
             font-size: 15px;
             color: var(--text);
             font-weight: 500;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .search-bar input:focus {
             outline: none;
             border-color: var(--primary);
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.7);
+            box-shadow: var(--border-glow), inset 0 2px 4px rgba(0, 0, 0, 0.1);
         }
 
         .search-bar input::placeholder {
@@ -422,8 +817,8 @@
             right: 16px;
             top: 50%;
             transform: translateY(-50%);
-            background: rgba(148, 163, 184, 0.2);
-            border: none;
+            background: rgba(148, 163, 184, 0.25);
+            border: 1px solid var(--border);
             border-radius: 50%;
             width: 28px;
             height: 28px;
@@ -433,12 +828,16 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
         }
 
         .clear-search:hover {
-            background: rgba(148, 163, 184, 0.3);
-            color: var(--text);
+            background: rgba(251, 113, 133, 0.2);
+            border-color: var(--danger);
+            color: var(--danger);
+            transform: translateY(-50%) scale(1.1) rotate(90deg);
+            box-shadow: var(--shadow-sm);
         }
 
         .filter-chips {
@@ -450,28 +849,54 @@
 
         .filter-chip {
             padding: 10px 20px;
-            background: rgba(15, 23, 42, 0.3);
+            background: rgba(15, 23, 42, 0.4);
             border: 2px solid transparent;
             border-radius: 24px;
             font-size: 13px;
             font-weight: 700;
             color: var(--muted);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 8px;
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .filter-chip::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.1), rgba(56, 189, 248, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .filter-chip:hover {
-            background: rgba(15, 23, 42, 0.5);
+            background: rgba(15, 23, 42, 0.6);
             color: var(--text);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .filter-chip:hover::before {
+            opacity: 1;
         }
 
         .filter-chip.active {
-            background: rgba(94, 234, 212, 0.15);
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.2), rgba(56, 189, 248, 0.15));
             border-color: var(--primary);
             color: var(--primary);
+            box-shadow: var(--border-glow), var(--shadow-sm);
+        }
+        
+        .filter-chip.active::before {
+            opacity: 1;
         }
 
         .chip-dot {
@@ -495,9 +920,22 @@
         .db-type-tabs {
             display: flex;
             gap: 8px;
-            background: rgba(15, 23, 42, 0.3);
+            background: var(--panel);
             padding: 6px;
-            border-radius: 16px;
+            border-radius: var(--radius);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .db-type-tabs::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.05) 0%, rgba(56, 189, 248, 0.05) 100%);
+            pointer-events: none;
         }
 
         .db-tab {
@@ -510,20 +948,42 @@
             font-weight: 700;
             color: var(--muted);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 8px;
+            position: relative;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .db-tab::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.15), rgba(56, 189, 248, 0.1));
+            border-radius: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .db-tab:hover {
             color: var(--text);
+            transform: translateY(-1px);
+        }
+        
+        .db-tab:hover::before {
+            opacity: 0.5;
         }
 
         .db-tab.active {
-            background: rgba(94, 234, 212, 0.15);
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(56, 189, 248, 0.2));
             color: var(--primary);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .db-tab.active::before {
+            opacity: 1;
         }
 
         .tab-count {
@@ -542,11 +1002,23 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(56, 189, 248, 0.1);
-            border: 1px solid rgba(56, 189, 248, 0.3);
-            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(94, 234, 212, 0.1));
+            border: 1px solid rgba(56, 189, 248, 0.4);
+            border-radius: var(--radius);
             padding: 12px 20px;
             margin-bottom: 20px;
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: var(--shadow-sm), 0 0 20px rgba(56, 189, 248, 0.15);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .active-filters::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1) 0%, transparent 50%);
+            pointer-events: none;
         }
 
         .active-filters-label {
@@ -565,15 +1037,24 @@
         }
 
         .active-filter-tag {
-            background: rgba(56, 189, 248, 0.2);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(94, 234, 212, 0.2));
             padding: 6px 12px;
             border-radius: 20px;
             font-size: 12px;
-            font-weight: 600;
+            font-weight: 700;
             color: var(--primary-2);
             display: flex;
             align-items: center;
             gap: 6px;
+            border: 1px solid rgba(56, 189, 248, 0.3);
+            backdrop-filter: blur(var(--glass-blur));
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .active-filter-tag:hover {
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm), 0 0 10px rgba(56, 189, 248, 0.3);
         }
 
         .active-filter-tag button {
@@ -588,19 +1069,40 @@
         }
 
         .clear-all-filters {
-            background: rgba(56, 189, 248, 0.2);
-            border: none;
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.2), rgba(94, 234, 212, 0.15));
+            border: 1px solid rgba(56, 189, 248, 0.3);
             padding: 6px 16px;
             border-radius: 20px;
             font-size: 12px;
             font-weight: 700;
             color: var(--primary-2);
             cursor: pointer;
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clear-all-filters::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+        
+        .clear-all-filters:hover::before {
+            left: 100%;
         }
 
         .clear-all-filters:hover {
-            background: rgba(56, 189, 248, 0.3);
+            background: linear-gradient(135deg, rgba(56, 189, 248, 0.35), rgba(94, 234, 212, 0.25));
+            border-color: rgba(56, 189, 248, 0.5);
+            transform: translateY(-1px);
+            box-shadow: var(--shadow-sm);
         }
 
         /* Mini Charts */
@@ -612,14 +1114,31 @@
         }
 
         .mini-chart {
-            background: var(--panel);
+            background: var(--panel-strong);
             border: 1px solid var(--border);
-            border-radius: 16px;
+            border-radius: var(--radius);
             padding: 24px;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            box-shadow: var(--shadow-multi);
             display: flex;
             flex-direction: column;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .mini-chart::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.03) 0%, rgba(56, 189, 248, 0.03) 100%);
+            pointer-events: none;
+        }
+        
+        .mini-chart:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-multi), var(--shadow-glow);
+            border-color: var(--border-bright);
         }
 
         .mini-chart-header {
@@ -704,12 +1223,22 @@
         }
         
         .table-section {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.18);
+            background: var(--panel-strong);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: var(--shadow-multi);
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .table-section::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.03) 0%, rgba(56, 189, 248, 0.03) 100%);
+            pointer-events: none;
         }
         
         .table-section h3 {
@@ -782,49 +1311,91 @@
         }
         
         thead {
-            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
-            color: white;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.25) 0%, rgba(56, 189, 248, 0.25) 100%);
+            backdrop-filter: blur(var(--glass-blur));
+            color: var(--text);
             position: sticky;
             top: 0;
             z-index: 10;
+            border-bottom: 2px solid var(--border-bright);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        thead::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.1) 0%, rgba(56, 189, 248, 0.1) 100%);
+            pointer-events: none;
         }
         
         th {
-            padding: 15px 12px;
+            padding: 16px 14px;
             text-align: left;
-            font-weight: 600;
+            font-weight: 700;
             white-space: nowrap;
             font-size: 12px;
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
+            position: relative;
+            color: var(--text);
         }
         
         tbody tr {
-            border-bottom: 1px solid #e2e8f0;
-            transition: background-color 0.2s ease;
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        
+        tbody tr::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--primary), var(--primary-2));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         tbody tr:nth-child(even) {
-            background-color: #f7fafc;
+            background-color: rgba(15, 23, 42, 0.2);
         }
         
         tbody tr:hover {
-            background-color: #edf2f7;
+            background-color: rgba(94, 234, 212, 0.08);
+            transform: translateX(2px);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        tbody tr:hover::before {
+            opacity: 1;
         }
         
         tbody tr.error-row {
             cursor: pointer;
         }
         
+        tbody tr.error-row::before {
+            background: linear-gradient(180deg, #dc2626, #ef4444);
+        }
+        
         tbody tr.error-row:hover {
-            background-color: #fed7d7;
-            box-shadow: 0 2px 4px rgba(245, 101, 101, 0.2);
+            background-color: rgba(251, 113, 133, 0.12);
+            box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+        }
+        
+        tbody tr.error-row:hover::before {
+            opacity: 1;
         }
         
         td {
-            padding: 12px;
-            border-right: 1px solid #e2e8f0;
+            padding: 14px;
+            border-right: 1px solid var(--border);
             white-space: nowrap;
+            color: var(--text);
+            position: relative;
         }
         
         .status-success {
@@ -882,23 +1453,291 @@
         .results-grid {
             display: flex;
             flex-direction: column;
-            gap: 16px;
+            gap: 20px;
         }
         
         .result-card {
-            background: var(--panel);
+            background: var(--panel-strong);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 20px 24px;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: var(--radius);
+            padding: 24px 32px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
             position: relative;
-            backdrop-filter: blur(var(--glass-blur));
-            box-shadow: var(--shadow-sm);
+            backdrop-filter: blur(var(--glass-blur-strong));
+            box-shadow: var(--shadow-multi);
             display: grid;
             grid-template-columns: auto 1fr auto;
-            gap: 20px;
+            gap: 28px;
             align-items: center;
+            overflow: hidden;
+        }
+        
+        .result-card.selected {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-multi), var(--shadow-glow);
+        }
+        
+        .card-checkbox {
+            position: absolute;
+            top: 16px;
+            left: 16px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            z-index: 10;
+            accent-color: var(--primary);
+        }
+        
+        .card-checkbox:checked {
+            filter: drop-shadow(0 0 4px var(--primary));
+        }
+        
+        .bulk-actions-bar {
+            display: none;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 20px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .bulk-actions-bar.active {
+            display: flex;
+        }
+        
+        .bulk-actions-info {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text);
+            margin-right: auto;
+        }
+        
+        .bulk-action-btn {
+            padding: 8px 16px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .bulk-action-btn:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+            transform: translateY(-1px);
+        }
+        
+        .select-all-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            cursor: pointer;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .select-all-checkbox:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+        }
+        
+        .select-all-checkbox input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            accent-color: var(--primary);
+        }
+        
+        .pagination {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 24px;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .pagination-info {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            margin-right: 16px;
+        }
+        
+        .pagination-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .pagination-btn {
+            padding: 8px 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            min-width: 36px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .pagination-btn:hover:not(:disabled) {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+            transform: translateY(-1px);
+        }
+        
+        .pagination-btn:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+        
+        .pagination-btn.active {
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(56, 189, 248, 0.2));
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--border-glow);
+        }
+        
+        .pagination-select {
+            padding: 8px 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .pagination-select:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+        }
+        
+        .pagination-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--border-glow);
+        }
+        
+        .advanced-filters {
+            display: none;
+            padding: 16px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            margin-bottom: 16px;
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .advanced-filters.active {
+            display: block;
+        }
+        
+        .advanced-filters-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
+        }
+        
+        .advanced-filters-title {
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text);
+        }
+        
+        .advanced-filters-content {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            align-items: flex-end;
+        }
+        
+        .date-filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        
+        .date-filter-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--muted);
+        }
+        
+        .date-filter-input {
+            padding: 10px 16px;
+            background: rgba(15, 23, 42, 0.6);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .date-filter-input:hover {
+            border-color: var(--border-bright);
+        }
+        
+        .date-filter-input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--border-glow);
+        }
+        
+        .toggle-advanced-filters {
+            padding: 8px 16px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+        }
+        
+        .toggle-advanced-filters:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+        }
+        
+        .toggle-advanced-filters.active {
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(56, 189, 248, 0.2));
+            border-color: var(--primary);
+            color: var(--primary);
         }
         
         .result-card::before {
@@ -909,42 +1748,65 @@
             bottom: 0;
             width: 4px;
             background: linear-gradient(180deg, var(--primary), var(--primary-2));
-            border-radius: 16px 0 0 16px;
+            border-radius: var(--radius) 0 0 var(--radius);
             opacity: 0;
-            transition: opacity 0.3s ease;
+            transition: opacity 0.4s ease;
+            box-shadow: var(--border-glow);
+        }
+        
+        .result-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            pointer-events: none;
         }
         
         .result-card:hover::before {
             opacity: 1;
         }
         
+        .result-card:hover::after {
+            opacity: 1;
+        }
+        
         .result-card:hover {
-            transform: translateX(4px);
-            box-shadow: var(--shadow);
-            border-color: rgba(94, 234, 212, 0.35);
+            transform: translateX(6px) translateY(-2px);
+            box-shadow: var(--shadow-multi), var(--shadow-glow);
+            border-color: var(--border-bright);
         }
         
         .result-card.error-card {
-            border-color: rgba(251, 113, 133, 0.45);
-            background: linear-gradient(135deg, rgba(251, 113, 133, 0.08), var(--panel));
+            border-color: rgba(251, 113, 133, 0.5);
+            background: linear-gradient(135deg, rgba(251, 113, 133, 0.12), var(--panel-strong));
         }
         
         .result-card.error-card::before {
             background: linear-gradient(180deg, #dc2626, #ef4444);
             opacity: 1;
+            box-shadow: 0 0 15px rgba(239, 68, 68, 0.4);
         }
         
         .result-card.error-card:hover {
-            box-shadow: 0 16px 40px rgba(239, 68, 68, 0.25);
+            box-shadow: var(--shadow-multi), 0 0 30px rgba(239, 68, 68, 0.3);
+            border-color: rgba(251, 113, 133, 0.7);
         }
         
         .result-card.success-card {
-            border-color: rgba(52, 211, 153, 0.35);
-            background: linear-gradient(135deg, rgba(52, 211, 153, 0.05), var(--panel));
+            border-color: rgba(52, 211, 153, 0.4);
+            background: linear-gradient(135deg, rgba(52, 211, 153, 0.08), var(--panel-strong));
         }
         
         .result-card.success-card::before {
             background: linear-gradient(180deg, #059669, #10b981);
+            box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+        }
+        
+        .result-card.success-card:hover {
+            box-shadow: var(--shadow-multi), 0 0 25px rgba(16, 185, 129, 0.2);
+            border-color: rgba(52, 211, 153, 0.6);
         }
 
         /* Card Left: Status Indicator */
@@ -1013,28 +1875,28 @@
         .card-main-info {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 16px;
             min-width: 0;
         }
 
         .card-title-row {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 16px;
             flex-wrap: wrap;
         }
         
         .card-type-badge {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 800;
-            padding: 5px 12px;
+            padding: 6px 14px;
             border-radius: 6px;
             text-transform: uppercase;
             letter-spacing: 0.8px;
         }
         
         .card-hostname {
-            font-size: 18px;
+            font-size: 20px;
             font-weight: 800;
             color: var(--text);
             letter-spacing: -0.02em;
@@ -1042,30 +1904,30 @@
 
         .card-details-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 12px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 16px;
         }
         
         .card-detail-item {
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
         }
 
         .card-detail-icon {
-            font-size: 14px;
+            font-size: 16px;
             opacity: 0.6;
         }
 
         .card-detail-content {
             display: flex;
             flex-direction: column;
-            gap: 2px;
+            gap: 4px;
             min-width: 0;
         }
 
         .card-detail-label {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--muted);
             text-transform: uppercase;
@@ -1073,12 +1935,12 @@
         }
 
         .card-detail-value {
-            font-size: 13px;
+            font-size: 15px;
             font-weight: 600;
             color: var(--text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            word-break: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
 
         /* Card Right: Quick Actions & Meta */
@@ -1086,17 +1948,17 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 12px;
+            gap: 16px;
         }
 
         .card-time-badge {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
+            gap: 8px;
+            padding: 8px 14px;
             background: rgba(15, 23, 42, 0.3);
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 600;
             color: var(--muted);
             white-space: nowrap;
@@ -1105,19 +1967,19 @@
         .card-checker-badge {
             display: flex;
             align-items: center;
-            gap: 6px;
-            padding: 6px 12px;
+            gap: 8px;
+            padding: 8px 14px;
             background: rgba(94, 234, 212, 0.15);
             border-radius: 20px;
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 700;
             color: var(--primary);
         }
 
         .card-expand-btn {
-            background: rgba(15, 23, 42, 0.3);
+            background: rgba(15, 23, 42, 0.4);
             border: 1px solid var(--border);
-            border-radius: 8px;
+            border-radius: var(--radius-sm);
             width: 36px;
             height: 36px;
             display: flex;
@@ -1125,14 +1987,32 @@
             justify-content: center;
             cursor: pointer;
             color: var(--muted);
-            transition: all 0.2s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             font-size: 18px;
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-expand-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.2), rgba(56, 189, 248, 0.15));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
 
         .card-expand-btn:hover {
-            background: rgba(94, 234, 212, 0.15);
+            background: rgba(94, 234, 212, 0.2);
+            border-color: var(--primary);
             color: var(--primary);
-            transform: scale(1.1);
+            transform: scale(1.1) rotate(90deg);
+            box-shadow: var(--shadow-glow);
+        }
+        
+        .card-expand-btn:hover::before {
+            opacity: 1;
         }
         
         /* 뷰 전환 버튼 */
@@ -1141,39 +2021,135 @@
             justify-content: space-between;
             align-items: center;
             margin-bottom: 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        
+        .view-controls-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+        }
+        
+        .sort-controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        
+        .sort-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--muted);
+            white-space: nowrap;
+        }
+        
+        .sort-select {
+            padding: 10px 16px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--text);
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            min-width: 140px;
+        }
+        
+        .sort-select:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+        }
+        
+        .sort-select:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: var(--border-glow);
+        }
+        
+        .sort-direction-btn {
+            padding: 10px 12px;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-sm);
+            color: var(--muted);
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .sort-direction-btn:hover {
+            background: rgba(15, 23, 42, 0.6);
+            border-color: var(--border-bright);
+            color: var(--primary);
+        }
+        
+        .sort-direction-btn.active {
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.2), rgba(56, 189, 248, 0.15));
+            border-color: var(--primary);
+            color: var(--primary);
+            box-shadow: var(--border-glow);
         }
         
         .view-toggle {
             display: flex;
             gap: 8px;
-            background: #f1f5f9;
+            background: rgba(15, 23, 42, 0.4);
             padding: 4px;
-            border-radius: 12px;
+            border-radius: var(--radius-sm);
+            backdrop-filter: blur(var(--glass-blur));
+            border: 1px solid var(--border);
         }
         
         .view-btn {
             padding: 10px 20px;
             border: none;
             background: transparent;
-            border-radius: 10px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             font-size: 13px;
             font-weight: 700;
-            color: #64748b;
-            transition: all 0.2s ease;
+            color: var(--muted);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
             gap: 8px;
+            position: relative;
+        }
+        
+        .view-btn::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.15), rgba(56, 189, 248, 0.1));
+            border-radius: var(--radius-sm);
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .view-btn:hover {
-            color: #334155;
+            color: var(--text);
+        }
+        
+        .view-btn:hover::before {
+            opacity: 0.5;
         }
         
         .view-btn.active {
-            background: white;
-            color: #1e3a8a;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(135deg, rgba(94, 234, 212, 0.25), rgba(56, 189, 248, 0.2));
+            color: var(--primary);
+            box-shadow: var(--shadow-sm), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+        }
+        
+        .view-btn.active::before {
+            opacity: 1;
         }
         
         .results-info {
@@ -1294,24 +2270,43 @@
         }
         
         .modal-close {
-            background: none;
-            border: none;
-            font-size: 28px;
-            color: #a0aec0;
+            background: rgba(15, 23, 42, 0.4);
+            border: 1px solid var(--border);
+            font-size: 24px;
+            color: var(--muted);
             cursor: pointer;
             padding: 0;
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             display: flex;
             align-items: center;
             justify-content: center;
-            border-radius: 6px;
-            transition: all 0.2s;
+            border-radius: var(--radius-sm);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(var(--glass-blur));
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .modal-close::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(251, 113, 133, 0.2), rgba(239, 68, 68, 0.15));
+            opacity: 0;
+            transition: opacity 0.3s ease;
         }
         
         .modal-close:hover {
-            background: #edf2f7;
-            color: #2d3748;
+            background: rgba(251, 113, 133, 0.15);
+            border-color: var(--danger);
+            color: var(--danger);
+            transform: rotate(90deg) scale(1.1);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .modal-close:hover::before {
+            opacity: 1;
         }
         
         .modal-body {
@@ -1679,10 +2674,33 @@
 
         <!-- Smart Search & Filter Bar -->
         <div class="search-section">
-            <div class="search-bar">
-                <span class="search-icon">🔍</span>
-                <input type="text" id="quickSearch" placeholder="호스트명, 담당자, 경로 검색..." onkeyup="quickSearch()">
-                <button class="clear-search" onclick="clearSearch()" style="display: none;">✕</button>
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 12px;">
+                <div class="search-bar" style="flex: 1;">
+                    <span class="search-icon">🔍</span>
+                    <input type="text" id="quickSearch" placeholder="호스트명, 담당자, 경로 검색..." onkeyup="quickSearch()">
+                    <button class="clear-search" onclick="clearSearch()" style="display: none;">✕</button>
+                </div>
+                <button class="toggle-advanced-filters" id="toggleAdvancedFilters" onclick="toggleAdvancedFilters()">
+                    <span>⚙️</span> 고급 필터
+                </button>
+            </div>
+            
+            <!-- 고급 필터 패널 -->
+            <div class="advanced-filters" id="advancedFilters">
+                <div class="advanced-filters-header">
+                    <div class="advanced-filters-title">날짜 범위 필터</div>
+                    <button class="btn btn-secondary" onclick="clearDateFilters()" style="padding: 6px 12px; font-size: 12px;">초기화</button>
+                </div>
+                <div class="advanced-filters-content">
+                    <div class="date-filter-group">
+                        <label class="date-filter-label">시작일</label>
+                        <input type="date" class="date-filter-input" id="startDate" onchange="applyDateFilters()">
+                    </div>
+                    <div class="date-filter-group">
+                        <label class="date-filter-label">종료일</label>
+                        <input type="date" class="date-filter-input" id="endDate" onchange="applyDateFilters()">
+                    </div>
+                </div>
             </div>
             <div class="filter-chips" id="filterChips">
                 <button class="filter-chip" data-filter="all" onclick="filterByStatus('all')">
@@ -1743,23 +2761,64 @@
         
         <div class="table-section">
             <div class="view-controls">
-                <div style="display: flex; align-items: center; gap: 16px;">
-                    <h3>점검 결과</h3>
+                <div class="view-controls-left">
+                    <div style="display: flex; align-items: center; gap: 16px;">
+                        <h3>점검 결과</h3>
+                        <label class="select-all-checkbox">
+                            <input type="checkbox" id="selectAllCheckbox" onchange="toggleSelectAll()">
+                            <span>전체 선택</span>
+                        </label>
+                    </div>
                     <div class="results-info" id="resultsInfo">
                         <strong>0</strong>건 표시 중
                     </div>
                 </div>
-                <div class="view-toggle">
-                    <button class="view-btn active" onclick="switchView('card')" id="cardViewBtn">
-                        <span>📋</span> 타임라인
-                    </button>
-                    <button class="view-btn" onclick="switchView('table')" id="tableViewBtn">
-                        <span>📊</span> 테이블
-                    </button>
-                    <button class="view-btn" onclick="toggleCharts()">
-                        <span>📈</span> 차트
-                    </button>
+                <div style="display: flex; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    <div class="sort-controls">
+                        <span class="sort-label">정렬:</span>
+                        <select class="sort-select" id="sortSelect" onchange="applySorting()">
+                            <option value="newest">최신순</option>
+                            <option value="oldest">오래된순</option>
+                            <option value="hostname-asc">호스트명 가나다순</option>
+                            <option value="hostname-desc">호스트명 역순</option>
+                            <option value="status">상태별</option>
+                            <option value="checker">담당자별</option>
+                        </select>
+                        <button class="sort-direction-btn" id="sortDirectionBtn" onclick="toggleSortDirection()" title="정렬 방향 전환">
+                            <span id="sortDirectionIcon">↓</span>
+                        </button>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <button class="btn btn-secondary" onclick="exportData('csv')" title="CSV로 내보내기">
+                            <span>📥</span> CSV
+                        </button>
+                        <button class="btn btn-secondary" onclick="exportData('json')" title="JSON으로 내보내기">
+                            <span>📥</span> JSON
+                        </button>
+                        <div class="view-toggle">
+                            <button class="view-btn active" onclick="switchView('card')" id="cardViewBtn">
+                                <span>📋</span> 타임라인
+                            </button>
+                            <button class="view-btn" onclick="switchView('table')" id="tableViewBtn">
+                                <span>📊</span> 테이블
+                            </button>
+                            <button class="view-btn" onclick="toggleCharts()">
+                                <span>📈</span> 차트
+                            </button>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            
+            <!-- 일괄 작업 바 -->
+            <div class="bulk-actions-bar" id="bulkActionsBar">
+                <div class="bulk-actions-info">
+                    <span id="selectedCount">0</span>개 선택됨
+                </div>
+                <button class="bulk-action-btn" onclick="showSelectedOnly()">선택 항목만 보기</button>
+                <button class="bulk-action-btn" onclick="exportSelected('csv')">선택 항목 CSV 내보내기</button>
+                <button class="bulk-action-btn" onclick="exportSelected('json')">선택 항목 JSON 내보내기</button>
+                <button class="bulk-action-btn" onclick="clearSelection()">선택 해제</button>
             </div>
             
             <!-- 카드 그리드 뷰 -->
@@ -1775,6 +2834,24 @@
                 <div class="table-wrapper" id="tableWrapper">
                     <div class="loading">데이터 로딩 중</div>
                 </div>
+            </div>
+            
+            <!-- 페이지네이션 -->
+            <div class="pagination" id="pagination" style="display: none;">
+                <div class="pagination-info" id="paginationInfo"></div>
+                <div class="pagination-controls">
+                    <button class="pagination-btn" id="firstPageBtn" onclick="goToPage(1)" title="첫 페이지">«</button>
+                    <button class="pagination-btn" id="prevPageBtn" onclick="goToPreviousPage()" title="이전 페이지">‹</button>
+                    <div id="pageNumbers" style="display: flex; gap: 4px;"></div>
+                    <button class="pagination-btn" id="nextPageBtn" onclick="goToNextPage()" title="다음 페이지">›</button>
+                    <button class="pagination-btn" id="lastPageBtn" onclick="goToPage(-1)" title="마지막 페이지">»</button>
+                </div>
+                <select class="pagination-select" id="itemsPerPageSelect" onchange="changeItemsPerPage()">
+                    <option value="20">20개씩</option>
+                    <option value="50" selected>50개씩</option>
+                    <option value="100">100개씩</option>
+                    <option value="0">전체</option>
+                </select>
             </div>
         </div>
     </div>
@@ -1821,9 +2898,11 @@
         
         // 차트 초기화
         function initCharts() {
-            // Dark theme defaults
-            Chart.defaults.color = 'rgba(226, 232, 240, 0.86)';
-            Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.18)';
+            // Enhanced Dark theme defaults
+            Chart.defaults.color = 'rgba(226, 232, 240, 0.92)';
+            Chart.defaults.borderColor = 'rgba(148, 163, 184, 0.25)';
+            Chart.defaults.font.family = '-apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", sans-serif';
+            Chart.defaults.font.weight = '600';
 
             // Status Chart (상태별 분포)
             const statusCtx = document.getElementById('statusChart');
@@ -1835,46 +2914,67 @@
                         datasets: [{
                             data: [0, 0, 0],
                             backgroundColor: [
-                                'rgba(16, 185, 129, 0.8)',
-                                'rgba(251, 191, 36, 0.8)',
-                                'rgba(239, 68, 68, 0.8)'
+                                'rgba(16, 185, 129, 0.85)',
+                                'rgba(251, 191, 36, 0.85)',
+                                'rgba(239, 68, 68, 0.85)'
                             ],
                             borderColor: [
                                 'rgba(16, 185, 129, 1)',
                                 'rgba(251, 191, 36, 1)',
                                 'rgba(239, 68, 68, 1)'
                             ],
-                            borderWidth: 2
+                            borderWidth: 3,
+                            hoverBorderWidth: 4,
+                            hoverOffset: 8
                         }]
                     },
                     options: {
                         responsive: true,
                         maintainAspectRatio: true,
+                        cutout: '60%',
                         plugins: {
                             legend: {
                                 position: 'bottom',
                                 labels: {
-                                    padding: 15,
+                                    padding: 20,
                                     font: {
-                                        size: 12,
-                                        weight: '600'
+                                        size: 13,
+                                        weight: '700'
                                     },
-                                    color: 'rgba(226, 232, 240, 0.86)'
+                                    color: 'rgba(226, 232, 240, 0.92)',
+                                    usePointStyle: true,
+                                    pointStyle: 'circle'
                                 }
                             },
                             tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                padding: 12,
+                                backgroundColor: 'rgba(17, 25, 40, 0.95)',
+                                padding: 16,
                                 titleFont: {
-                                    size: 13,
-                                    weight: '700'
+                                    size: 14,
+                                    weight: '800'
                                 },
                                 bodyFont: {
-                                    size: 12
+                                    size: 13,
+                                    weight: '600'
                                 },
-                                borderColor: 'rgba(148, 163, 184, 0.3)',
-                                borderWidth: 1
+                                borderColor: 'rgba(94, 234, 212, 0.4)',
+                                borderWidth: 2,
+                                cornerRadius: 12,
+                                displayColors: true,
+                                boxPadding: 8,
+                                backdropFilter: 'blur(10px)',
+                                callbacks: {
+                                    label: function(context) {
+                                        return context.label + ': ' + context.parsed + '건';
+                                    }
+                                }
                             }
+                        },
+                        animation: {
+                            animateRotate: true,
+                            animateScale: true,
+                            duration: 1000,
+                            easing: 'easeOutQuart'
                         }
                     }
                 });
@@ -1890,15 +2990,23 @@
                         datasets: [{
                             label: '점검 수',
                             data: [],
-                            borderColor: 'rgba(94, 234, 212, 0.9)',
-                            backgroundColor: 'rgba(94, 234, 212, 0.1)',
-                            tension: 0.4,
+                            borderColor: 'rgba(94, 234, 212, 1)',
+                            backgroundColor: 'rgba(94, 234, 212, 0.15)',
+                            borderWidth: 3,
+                            tension: 0.5,
                             fill: true,
-                            pointRadius: 4,
-                            pointHoverRadius: 6,
+                            pointRadius: 5,
+                            pointHoverRadius: 8,
                             pointBackgroundColor: 'rgba(94, 234, 212, 1)',
-                            pointBorderColor: 'rgba(15, 23, 42, 0.8)',
-                            pointBorderWidth: 2
+                            pointBorderColor: 'rgba(15, 23, 42, 0.9)',
+                            pointBorderWidth: 3,
+                            pointHoverBackgroundColor: 'rgba(56, 189, 248, 1)',
+                            pointHoverBorderColor: 'rgba(255, 255, 255, 0.8)',
+                            pointHoverBorderWidth: 3,
+                            shadowOffsetX: 0,
+                            shadowOffsetY: 4,
+                            shadowBlur: 12,
+                            shadowColor: 'rgba(94, 234, 212, 0.3)'
                         }]
                     },
                     options: {
@@ -1909,45 +3017,68 @@
                                 display: false
                             },
                             tooltip: {
-                                backgroundColor: 'rgba(15, 23, 42, 0.95)',
-                                padding: 12,
+                                backgroundColor: 'rgba(17, 25, 40, 0.95)',
+                                padding: 16,
                                 titleFont: {
-                                    size: 13,
-                                    weight: '700'
+                                    size: 14,
+                                    weight: '800'
                                 },
                                 bodyFont: {
-                                    size: 12
+                                    size: 13,
+                                    weight: '600'
                                 },
-                                borderColor: 'rgba(148, 163, 184, 0.3)',
-                                borderWidth: 1
+                                borderColor: 'rgba(94, 234, 212, 0.4)',
+                                borderWidth: 2,
+                                cornerRadius: 12,
+                                displayColors: false,
+                                backdropFilter: 'blur(10px)',
+                                callbacks: {
+                                    label: function(context) {
+                                        return '점검 수: ' + context.parsed.y + '건';
+                                    }
+                                }
                             }
                         },
                         scales: {
                             x: {
                                 grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)',
-                                    drawBorder: false
+                                    color: 'rgba(148, 163, 184, 0.15)',
+                                    drawBorder: false,
+                                    lineWidth: 1
                                 },
                                 ticks: {
-                                    color: 'rgba(226, 232, 240, 0.7)',
+                                    color: 'rgba(226, 232, 240, 0.8)',
                                     font: {
-                                        size: 11
-                                    }
+                                        size: 12,
+                                        weight: '600'
+                                    },
+                                    padding: 8
                                 }
                             },
                             y: {
                                 beginAtZero: true,
                                 grid: {
-                                    color: 'rgba(148, 163, 184, 0.1)',
-                                    drawBorder: false
+                                    color: 'rgba(148, 163, 184, 0.15)',
+                                    drawBorder: false,
+                                    lineWidth: 1
                                 },
                                 ticks: {
-                                    color: 'rgba(226, 232, 240, 0.7)',
+                                    color: 'rgba(226, 232, 240, 0.8)',
                                     font: {
-                                        size: 11
-                                    }
+                                        size: 12,
+                                        weight: '600'
+                                    },
+                                    padding: 8
                                 }
                             }
+                        },
+                        animation: {
+                            duration: 1500,
+                            easing: 'easeOutQuart'
+                        },
+                        interaction: {
+                            intersect: false,
+                            mode: 'index'
                         }
                     }
                 });
@@ -2141,6 +3272,286 @@
             filterByStatus('error');
         }
 
+        function sortData(data) {
+            const sorted = [...data];
+            
+            sorted.sort((a, b) => {
+                let comparison = 0;
+                
+                switch (currentSortBy) {
+                    case 'newest':
+                    case 'oldest':
+                        const timeA = new Date(a.점검시간 || 0).getTime();
+                        const timeB = new Date(b.점검시간 || 0).getTime();
+                        comparison = timeA - timeB;
+                        break;
+                    
+                    case 'hostname-asc':
+                    case 'hostname-desc':
+                        const hostnameA = String(a.호스트명 || '').toLowerCase();
+                        const hostnameB = String(b.호스트명 || '').toLowerCase();
+                        comparison = hostnameA.localeCompare(hostnameB, 'ko');
+                        break;
+                    
+                    case 'status':
+                        const statusA = String(a.상태 || '').toLowerCase();
+                        const statusB = String(b.상태 || '').toLowerCase();
+                        const statusOrder = { 'error': 0, 'warning': 1, 'success': 2 };
+                        const statusAOrder = statusA.includes('error') || statusA.includes('x') ? 0 :
+                                            statusA.includes('warning') ? 1 : 2;
+                        const statusBOrder = statusB.includes('error') || statusB.includes('x') ? 0 :
+                                            statusB.includes('warning') ? 1 : 2;
+                        comparison = statusAOrder - statusBOrder;
+                        break;
+                    
+                    case 'checker':
+                        const checkerA = String(a.담당자 || '').toLowerCase();
+                        const checkerB = String(b.담당자 || '').toLowerCase();
+                        comparison = checkerA.localeCompare(checkerB, 'ko');
+                        break;
+                }
+                
+                // 정렬 방향 적용
+                if (currentSortDirection === 'desc') {
+                    return -comparison;
+                }
+                return comparison;
+            });
+            
+            return sorted;
+        }
+        
+        function applySorting() {
+            const sortSelect = document.getElementById('sortSelect');
+            currentSortBy = sortSelect.value;
+            
+            // 특정 정렬 옵션에 따라 기본 방향 설정
+            if (currentSortBy === 'newest' || currentSortBy === 'hostname-desc') {
+                currentSortDirection = 'desc';
+            } else {
+                currentSortDirection = 'asc';
+            }
+            
+            updateSortDirectionUI();
+            applyAllFilters();
+        }
+        
+        function toggleSortDirection() {
+            currentSortDirection = currentSortDirection === 'asc' ? 'desc' : 'asc';
+            updateSortDirectionUI();
+            applyAllFilters();
+        }
+        
+        function updateSortDirectionUI() {
+            const sortDirectionBtn = document.getElementById('sortDirectionBtn');
+            const sortDirectionIcon = document.getElementById('sortDirectionIcon');
+            
+            if (currentSortDirection === 'asc') {
+                sortDirectionIcon.textContent = '↑';
+                sortDirectionBtn.classList.add('active');
+            } else {
+                sortDirectionIcon.textContent = '↓';
+                sortDirectionBtn.classList.remove('active');
+            }
+        }
+        
+        function exportData(format) {
+            const dataToExport = currentFilteredData.length > 0 ? currentFilteredData : allData;
+            
+            if (dataToExport.length === 0) {
+                alert('내보낼 데이터가 없습니다.');
+                return;
+            }
+            
+            if (format === 'csv') {
+                exportToCSV(dataToExport);
+            } else if (format === 'json') {
+                exportToJSON(dataToExport);
+            }
+        }
+        
+        function exportToCSV(data) {
+            // 모든 컬럼 수집
+            const allColumns = new Set();
+            data.forEach(row => {
+                Object.keys(row).forEach(key => allColumns.add(key));
+            });
+            
+            const columns = Array.from(allColumns);
+            
+            // CSV 헤더 생성
+            const header = columns.map(col => `"${String(col).replace(/"/g, '""')}"`).join(',');
+            
+            // CSV 데이터 행 생성
+            const rows = data.map(row => {
+                return columns.map(col => {
+                    const value = row[col];
+                    if (value === null || value === undefined) {
+                        return '""';
+                    }
+                    // 문자열로 변환하고 따옴표 이스케이프
+                    const strValue = String(value).replace(/"/g, '""');
+                    // 줄바꿈과 쉼표 처리
+                    if (strValue.includes(',') || strValue.includes('\n') || strValue.includes('"')) {
+                        return `"${strValue}"`;
+                    }
+                    return strValue;
+                }).join(',');
+            });
+            
+            // BOM 추가 (한글 깨짐 방지)
+            const csvContent = '\uFEFF' + header + '\n' + rows.join('\n');
+            
+            // 파일 다운로드
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `db_checks_${new Date().toISOString().split('T')[0]}.csv`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        function exportToJSON(data) {
+            const jsonContent = JSON.stringify(data, null, 2);
+            const blob = new Blob([jsonContent], { type: 'application/json;charset=utf-8;' });
+            const url = URL.createObjectURL(blob);
+            const link = document.createElement('a');
+            link.href = url;
+            link.download = `db_checks_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            URL.revokeObjectURL(url);
+        }
+        
+        function toggleItemSelection(itemId) {
+            if (selectedItems.has(itemId)) {
+                selectedItems.delete(itemId);
+            } else {
+                selectedItems.add(itemId);
+            }
+            updateBulkActionsBar();
+            updateSelectAllCheckbox();
+        }
+        
+        function toggleSelectAll() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            const isChecked = selectAllCheckbox.checked;
+            
+            if (isChecked) {
+                // 현재 필터된 데이터의 모든 항목 선택
+                currentFilteredData.forEach((row, index) => {
+                    const itemId = row.id || index;
+                    selectedItems.add(itemId);
+                });
+            } else {
+                // 모든 선택 해제
+                selectedItems.clear();
+            }
+            
+            // 체크박스 상태 업데이트
+            document.querySelectorAll('.card-checkbox').forEach(checkbox => {
+                const itemId = checkbox.getAttribute('data-item-id');
+                checkbox.checked = isChecked && selectedItems.has(itemId);
+                
+                // 카드 선택 상태 업데이트
+                const card = checkbox.closest('.result-card');
+                if (card) {
+                    if (isChecked && selectedItems.has(itemId)) {
+                        card.classList.add('selected');
+                    } else {
+                        card.classList.remove('selected');
+                    }
+                }
+            });
+            
+            updateBulkActionsBar();
+        }
+        
+        function updateSelectAllCheckbox() {
+            const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+            if (!selectAllCheckbox) return;
+            
+            const allCheckboxes = document.querySelectorAll('.card-checkbox');
+            const checkedCount = Array.from(allCheckboxes).filter(cb => cb.checked).length;
+            
+            if (checkedCount === 0) {
+                selectAllCheckbox.checked = false;
+                selectAllCheckbox.indeterminate = false;
+            } else if (checkedCount === allCheckboxes.length) {
+                selectAllCheckbox.checked = true;
+                selectAllCheckbox.indeterminate = false;
+            } else {
+                selectAllCheckbox.checked = false;
+                selectAllCheckbox.indeterminate = true;
+            }
+        }
+        
+        function updateBulkActionsBar() {
+            const bulkActionsBar = document.getElementById('bulkActionsBar');
+            const selectedCount = document.getElementById('selectedCount');
+            
+            if (selectedItems.size > 0) {
+                bulkActionsBar.classList.add('active');
+                selectedCount.textContent = selectedItems.size;
+            } else {
+                bulkActionsBar.classList.remove('active');
+            }
+        }
+        
+        function showSelectedOnly() {
+            const selectedData = currentFilteredData.filter((row, index) => {
+                const itemId = row.id || index;
+                return selectedItems.has(itemId);
+            });
+            
+            if (selectedData.length === 0) {
+                alert('선택된 항목이 없습니다.');
+                return;
+            }
+            
+            // 선택된 항목만 표시
+            if (currentView === 'card') {
+                renderCards(selectedData);
+            } else {
+                renderTable(selectedData);
+            }
+        }
+        
+        function exportSelected(format) {
+            if (selectedItems.size === 0) {
+                alert('선택된 항목이 없습니다.');
+                return;
+            }
+            
+            const selectedData = currentFilteredData.filter((row, index) => {
+                const itemId = row.id || index;
+                return selectedItems.has(itemId);
+            });
+            
+            if (format === 'csv') {
+                exportToCSV(selectedData);
+            } else if (format === 'json') {
+                exportToJSON(selectedData);
+            }
+        }
+        
+        function clearSelection() {
+            selectedItems.clear();
+            document.querySelectorAll('.card-checkbox').forEach(checkbox => {
+                checkbox.checked = false;
+                const card = checkbox.closest('.result-card');
+                if (card) {
+                    card.classList.remove('selected');
+                }
+            });
+            updateBulkActionsBar();
+            updateSelectAllCheckbox();
+        }
+        
         function applyAllFilters() {
             let filtered = allData;
             
@@ -2184,18 +3595,197 @@
                 });
             }
             
+            // 날짜 범위 필터
+            if (dateFilterStart || dateFilterEnd) {
+                filtered = filtered.filter(row => {
+                    const checkTime = row.점검시간 || row.check_time;
+                    if (!checkTime) return false;
+                    
+                    try {
+                        const rowDate = new Date(checkTime);
+                        if (isNaN(rowDate.getTime())) return false;
+                        
+                        // 날짜만 비교 (시간 제외)
+                        const rowDateOnly = new Date(rowDate.getFullYear(), rowDate.getMonth(), rowDate.getDate());
+                        
+                        if (dateFilterStart) {
+                            const startDate = new Date(dateFilterStart);
+                            if (rowDateOnly < startDate) return false;
+                        }
+                        
+                        if (dateFilterEnd) {
+                            const endDate = new Date(dateFilterEnd);
+                            if (rowDateOnly > endDate) return false;
+                        }
+                        
+                        return true;
+                    } catch (e) {
+                        return false;
+                    }
+                });
+            }
+            
+            // 정렬 적용
+            filtered = sortData(filtered);
+            
             currentFilteredData = filtered;
+            
+            // 페이지네이션 적용
+            applyPagination(filtered);
+        }
+        
+        function applyPagination(data) {
+            if (itemsPerPage === 0) {
+                // 전체 표시
+                paginatedData = data;
+                currentPage = 1;
+            } else {
+                const totalPages = Math.ceil(data.length / itemsPerPage);
+                if (currentPage > totalPages && totalPages > 0) {
+                    currentPage = totalPages;
+                }
+                const startIndex = (currentPage - 1) * itemsPerPage;
+                const endIndex = startIndex + itemsPerPage;
+                paginatedData = data.slice(startIndex, endIndex);
+            }
             
             // 렌더링
             if (currentView === 'card') {
-                renderCards(filtered);
+                renderCards(paginatedData);
             } else {
-                renderTable(filtered);
+                renderTable(paginatedData);
             }
             
-            updateHeaderStats(filtered);
+            updatePagination(data.length);
+            updateHeaderStats(currentFilteredData);
             updateTypeCounts(allData);
             updateActiveFilters();
+        }
+        
+        function updatePagination(totalItems) {
+            const pagination = document.getElementById('pagination');
+            const paginationInfo = document.getElementById('paginationInfo');
+            
+            if (itemsPerPage === 0 || totalItems === 0) {
+                pagination.style.display = 'none';
+                return;
+            }
+            
+            pagination.style.display = 'flex';
+            
+            const totalPages = Math.ceil(totalItems / itemsPerPage);
+            const startItem = (currentPage - 1) * itemsPerPage + 1;
+            const endItem = Math.min(currentPage * itemsPerPage, totalItems);
+            
+            paginationInfo.textContent = `${startItem}-${endItem} / ${totalItems}건`;
+            
+            // 페이지 버튼 업데이트
+            const firstPageBtn = document.getElementById('firstPageBtn');
+            const prevPageBtn = document.getElementById('prevPageBtn');
+            const nextPageBtn = document.getElementById('nextPageBtn');
+            const lastPageBtn = document.getElementById('lastPageBtn');
+            const pageNumbers = document.getElementById('pageNumbers');
+            
+            firstPageBtn.disabled = currentPage === 1;
+            prevPageBtn.disabled = currentPage === 1;
+            nextPageBtn.disabled = currentPage === totalPages;
+            lastPageBtn.disabled = currentPage === totalPages;
+            
+            // 페이지 번호 생성
+            pageNumbers.innerHTML = '';
+            const maxVisiblePages = 5;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+            
+            if (endPage - startPage < maxVisiblePages - 1) {
+                startPage = Math.max(1, endPage - maxVisiblePages + 1);
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                const pageBtn = document.createElement('button');
+                pageBtn.className = 'pagination-btn';
+                if (i === currentPage) {
+                    pageBtn.classList.add('active');
+                }
+                pageBtn.textContent = i;
+                pageBtn.onclick = () => goToPage(i);
+                pageNumbers.appendChild(pageBtn);
+            }
+        }
+        
+        function goToPage(page) {
+            if (page === -1) {
+                // 마지막 페이지
+                const totalPages = Math.ceil(currentFilteredData.length / itemsPerPage);
+                currentPage = totalPages;
+            } else {
+                currentPage = page;
+            }
+            applyPagination(currentFilteredData);
+            // 페이지 상단으로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        function goToPreviousPage() {
+            if (currentPage > 1) {
+                goToPage(currentPage - 1);
+            }
+        }
+        
+        function goToNextPage() {
+            const totalPages = Math.ceil(currentFilteredData.length / itemsPerPage);
+            if (currentPage < totalPages) {
+                goToPage(currentPage + 1);
+            }
+        }
+        
+        function changeItemsPerPage() {
+            const select = document.getElementById('itemsPerPageSelect');
+            itemsPerPage = parseInt(select.value) || 0;
+            currentPage = 1;
+            applyPagination(currentFilteredData);
+        }
+        
+        function toggleAdvancedFilters() {
+            const advancedFilters = document.getElementById('advancedFilters');
+            const toggleBtn = document.getElementById('toggleAdvancedFilters');
+            
+            if (advancedFilters.classList.contains('active')) {
+                advancedFilters.classList.remove('active');
+                toggleBtn.classList.remove('active');
+            } else {
+                advancedFilters.classList.add('active');
+                toggleBtn.classList.add('active');
+            }
+        }
+        
+        function applyDateFilters() {
+            const startDateInput = document.getElementById('startDate');
+            const endDateInput = document.getElementById('endDate');
+            
+            dateFilterStart = startDateInput.value || null;
+            dateFilterEnd = endDateInput.value || null;
+            
+            // 종료일이 시작일보다 이전이면 교정
+            if (dateFilterStart && dateFilterEnd && dateFilterEnd < dateFilterStart) {
+                const temp = dateFilterStart;
+                dateFilterStart = dateFilterEnd;
+                dateFilterEnd = temp;
+                startDateInput.value = dateFilterStart;
+                endDateInput.value = dateFilterEnd;
+            }
+            
+            currentPage = 1; // 필터 변경 시 첫 페이지로
+            applyAllFilters();
+        }
+        
+        function clearDateFilters() {
+            document.getElementById('startDate').value = '';
+            document.getElementById('endDate').value = '';
+            dateFilterStart = null;
+            dateFilterEnd = null;
+            currentPage = 1;
+            applyAllFilters();
         }
 
         function updateHeaderStats(data) {
@@ -2483,6 +4073,14 @@
         let currentTypeFilter = 'all';
         let currentStatusFilter = 'all';
         let currentSearchQuery = '';
+        let currentSortBy = 'newest'; // 'newest', 'oldest', 'hostname-asc', 'hostname-desc', 'status', 'checker'
+        let currentSortDirection = 'desc'; // 'asc' or 'desc'
+        let selectedItems = new Set(); // 선택된 항목 ID 저장
+        let currentPage = 1;
+        let itemsPerPage = 50;
+        let paginatedData = [];
+        let dateFilterStart = null;
+        let dateFilterEnd = null;
         
         // 뷰 전환 함수
         function switchView(view) {
@@ -2571,8 +4169,14 @@
                 const statusBadgeClass = isError ? 'error' : (isSuccess ? 'success' : 'warning');
                 const statusBadgeText = isError ? 'Error' : (isSuccess ? 'OK' : 'Warning');
                 
+                const itemId = row.id || index;
+                const isSelected = selectedItems.has(itemId);
+                
                 html += `
-                    <div class="result-card ${cardClass}" onclick="showErrorDetails(${index})">
+                    <div class="result-card ${cardClass} ${isSelected ? 'selected' : ''}" onclick="showErrorDetails(${index})">
+                        <input type="checkbox" class="card-checkbox" data-item-id="${itemId}" 
+                               ${isSelected ? 'checked' : ''} 
+                               onclick="event.stopPropagation(); toggleItemSelection('${itemId}')">
                         <!-- Left: Status Indicator -->
                         <div class="card-status-indicator">
                             <div class="status-icon ${statusBadgeClass}">
@@ -2631,6 +4235,21 @@
             });
             
             resultsGrid.innerHTML = html;
+            
+            // 선택 상태 복원
+            document.querySelectorAll('.card-checkbox').forEach(checkbox => {
+                const itemId = checkbox.getAttribute('data-item-id');
+                if (selectedItems.has(itemId)) {
+                    checkbox.checked = true;
+                    const card = checkbox.closest('.result-card');
+                    if (card) {
+                        card.classList.add('selected');
+                    }
+                }
+            });
+            
+            updateSelectAllCheckbox();
+            updateBulkActionsBar();
         }
         
         // 날짜 포맷팅 헬퍼
@@ -2998,9 +4617,78 @@
             }
         });
         
+        // 키보드 단축키
+        function setupKeyboardShortcuts() {
+            document.addEventListener('keydown', (e) => {
+                // 입력 필드에 포커스가 있으면 단축키 무시
+                if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.tagName === 'SELECT') {
+                    // 특정 단축키는 입력 필드에서도 작동
+                    if (e.key === 'Escape') {
+                        if (e.target.id === 'quickSearch') {
+                            clearSearch();
+                            e.target.blur();
+                        } else if (e.target.classList.contains('date-filter-input')) {
+                            clearDateFilters();
+                        }
+                    }
+                    return;
+                }
+                
+                // / 키: 검색 포커스
+                if (e.key === '/' && !e.ctrlKey && !e.metaKey) {
+                    e.preventDefault();
+                    const searchInput = document.getElementById('quickSearch');
+                    if (searchInput) {
+                        searchInput.focus();
+                    }
+                }
+                
+                // Ctrl/Cmd + F: 고급 필터 토글
+                if ((e.ctrlKey || e.metaKey) && e.key === 'f') {
+                    e.preventDefault();
+                    toggleAdvancedFilters();
+                }
+                
+                // Ctrl/Cmd + E: 내보내기 (CSV)
+                if ((e.ctrlKey || e.metaKey) && e.key === 'e') {
+                    e.preventDefault();
+                    exportData('csv');
+                }
+                
+                // Ctrl/Cmd + A: 전체 선택 (일괄 선택 모드)
+                if ((e.ctrlKey || e.metaKey) && e.key === 'a') {
+                    e.preventDefault();
+                    const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+                    if (selectAllCheckbox) {
+                        selectAllCheckbox.checked = !selectAllCheckbox.checked;
+                        toggleSelectAll();
+                    }
+                }
+                
+                // ←/→ 키: 페이지네이션 (페이지네이션이 활성화된 경우)
+                if (e.key === 'ArrowLeft' && !e.ctrlKey && !e.metaKey) {
+                    const pagination = document.getElementById('pagination');
+                    if (pagination && pagination.style.display !== 'none') {
+                        e.preventDefault();
+                        goToPreviousPage();
+                    }
+                }
+                
+                if (e.key === 'ArrowRight' && !e.ctrlKey && !e.metaKey) {
+                    const pagination = document.getElementById('pagination');
+                    if (pagination && pagination.style.display !== 'none') {
+                        e.preventDefault();
+                        goToNextPage();
+                    }
+                }
+            });
+        }
+        
         // 초기화
         document.addEventListener('DOMContentLoaded', () => {
             initCharts();
+            updateSortDirectionUI(); // 정렬 UI 초기화
+            setupKeyboardShortcuts(); // 키보드 단축키 설정
             loadData();
             connectWebSocket();
             setInterval(loadData, 30000);
