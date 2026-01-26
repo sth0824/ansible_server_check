@@ -2847,8 +2847,9 @@
                     <button class="pagination-btn" id="lastPageBtn" onclick="goToPage(-1)" title="마지막 페이지">»</button>
                 </div>
                 <select class="pagination-select" id="itemsPerPageSelect" onchange="changeItemsPerPage()">
+                    <option value="5" selected>5개씩</option>
                     <option value="20">20개씩</option>
-                    <option value="50" selected>50개씩</option>
+                    <option value="50">50개씩</option>
                     <option value="100">100개씩</option>
                     <option value="0">전체</option>
                 </select>
@@ -4077,7 +4078,7 @@
         let currentSortDirection = 'desc'; // 'asc' or 'desc'
         let selectedItems = new Set(); // 선택된 항목 ID 저장
         let currentPage = 1;
-        let itemsPerPage = 50;
+        let itemsPerPage = 5;
         let paginatedData = [];
         let dateFilterStart = null;
         let dateFilterEnd = null;

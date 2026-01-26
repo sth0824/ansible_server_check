@@ -188,6 +188,22 @@
             margin-bottom: 24px;
             position: relative;
             overflow: hidden;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        
+        .header-left {
+            flex: 1;
+            min-width: 0;
+        }
+        
+        .header-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-shrink: 0;
         }
         
         .header::before {
@@ -811,8 +827,15 @@
 <body>
     <div class="dashboard-container">
         <div class="header">
-            <h1>Dashboard</h1>
-            <div class="header-subtitle">일일점검서버 모니터링 대시보드</div>
+            <div class="header-left">
+                <h1>Dashboard</h1>
+                <div class="header-subtitle">일일점검서버 모니터링 대시보드</div>
+            </div>
+            <div class="header-right">
+                <a href="/api/report" class="action-button primary" style="text-decoration: none; display: inline-block; color: inherit;">
+                    전체 결과 보기 →
+                </a>
+            </div>
         </div>
 
         <!-- 실행 요약 표시 (Total) -->
