@@ -1,0 +1,1872 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>HANDOVER.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="%EC%9D%B8%EC%88%98%EC%9D%B8%EA%B3%84-%EB%AC%B8%EC%84%9C--ansible-%EA%B8%B0%EB%B0%98-%EC%84%9C%EB%B2%84-%EC%A0%90%EA%B2%80-%EC%9E%90%EB%8F%99%ED%99%94-%EC%8B%9C%EC%8A%A4%ED%85%9C">인수인계 문서 — Ansible 기반 서버 점검 자동화 시스템</h1>
+<p><strong>문서 버전</strong>: 1.0<br>
+<strong>대상</strong>: 본 프로젝트를 인수하여 유지·보수·개발을 진행할 개발자<br>
+<strong>범위</strong>: 기능·코드 구조·환경 설정·배포·트러블슈팅</p>
+<hr>
+<h2 id="%EB%AA%A9%EC%B0%A8">목차</h2>
+<ol start="0">
+<li><a href="#0-tldr-30%EB%B6%84-%EC%98%A8%EB%B3%B4%EB%94%A9%EC%9A%B4%EC%98%81-%EC%B9%98%ED%8A%B8%EC%8B%9C%ED%8A%B8">TL;DR (30분 온보딩/운영 치트시트)</a></li>
+<li><a href="#1-%EA%B0%9C%EC%9A%94-%EB%B0%8F-%EB%AA%A9%EC%A0%81">개요 및 목적</a></li>
+<li><a href="#2-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9D%90%EB%A6%84">시스템 아키텍처 및 데이터 흐름</a></li>
+<li><a href="#3-api-%EC%84%9C%EB%B2%84-%EC%83%81%EC%84%B8">API 서버 상세</a></li>
+<li><a href="#4-%ED%9A%8C%EC%9B%90-%EB%B0%8F-%EA%B6%8C%ED%95%9C">회원 및 권한</a></li>
+<li><a href="#5-%EA%B4%80%EB%A6%AC%EC%9E%90-%EC%BD%98%EC%86%94-%EB%B0%8F-%EC%84%9C%EB%B2%84-%EA%B4%80%EB%A6%AC">관리자 콘솔 및 서버 관리</a></li>
+<li><a href="#6-%EC%A0%90%EA%B2%80-%EA%B2%B0%EA%B3%BC-%EC%88%98%EC%A7%91%EC%A1%B0%ED%9A%8C%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0">점검 결과 수집·조회·내보내기</a></li>
+<li><a href="#7-%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C-%EB%B0%8F-%EB%A6%AC%ED%8F%AC%ED%8A%B8">대시보드 및 리포트</a></li>
+<li><a href="#8-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95-%EB%B0%8F-%EC%8B%A4%ED%96%89">환경 설정 및 실행</a></li>
+<li><a href="#9-%EB%B0%B0%ED%8F%AC-%EC%A0%88%EC%B0%A8">배포 절차</a></li>
+<li><a href="#10-%ED%8A%B8%EB%9F%AC%EB%B8%94%EC%8A%88%ED%8C%85-%EB%B0%8F-faq">트러블슈팅 및 FAQ</a></li>
+<li><a href="#11-markdown--pdf-%EC%B6%9C%EB%A0%A5-%EA%B0%80%EC%9D%B4%EB%93%9C">Markdown → PDF 출력 가이드</a></li>
+<li><a href="#12-%ED%96%A5%ED%9B%84-%EB%A1%9C%EB%93%9C%EB%A7%B5%EA%B8%B0%EC%88%A0%EB%B6%80%EC%B1%84%EA%B0%9C%EC%84%A0-%EC%A0%9C%EC%95%88">향후 로드맵/기술부채/개선 제안</a></li>
+</ol>
+<ul>
+<li><a href="#%EB%B6%80%EB%A1%9D-a-api-%EB%9D%BC%EC%9A%B0%ED%8A%B8-%EB%B9%A0%EB%A5%B8-%EC%B0%B8%EC%A1%B0">부록 A. API 라우트 빠른 참조</a></li>
+<li><a href="#%EB%B6%80%EB%A1%9D-b-%ED%99%98%EA%B2%BD-%EB%B3%80%EC%88%98%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%B0%B8%EC%A1%B0">부록 B. 환경 변수·설정 파일 참조</a></li>
+<li><a href="#%EB%B6%80%EB%A1%9D-c-%EC%A3%BC%EC%9A%94-%ED%8C%8C%EC%9D%BC-%EA%B2%BD%EB%A1%9C-%EB%AA%A9%EB%A1%9D">부록 C. 주요 파일 경로 목록</a></li>
+</ul>
+<hr>
+<h2 id="0-tldr-30%EB%B6%84-%EC%98%A8%EB%B3%B4%EB%94%A9%EC%9A%B4%EC%98%81-%EC%B9%98%ED%8A%B8%EC%8B%9C%ED%8A%B8">0. TL;DR (30분 온보딩/운영 치트시트)</h2>
+<h3 id="01-%EC%9D%B4-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%EB%8A%94-%EB%AC%B4%EC%97%87%EC%9D%B8%EA%B0%80-%ED%95%9C-%EC%A4%84">0.1 이 프로젝트는 무엇인가 (한 줄)</h3>
+<ul>
+<li>Ansible로 OS/WAS/DB 점검 → 결과(JSON)를 FastAPI가 수집/저장(DB) → 웹 대시보드/리포트에서 통합 조회/내보내기(JSON/CSV) + 관리자 콘솔(회원/서버/점검항목 관리).</li>
+</ul>
+<h3 id="02-%EC%A7%80%EA%B8%88-%EB%8B%B9%EC%9E%A5-%EC%95%8C%EC%95%84%EC%95%BC-%ED%95%98%EB%8A%94-%EC%A0%91%EC%86%8D%EB%B0%B0%ED%8F%AC-%EC%A0%95%EB%B3%B4">0.2 “지금 당장” 알아야 하는 접속/배포 정보</h3>
+<blockquote>
+<p><strong>중요</strong>: 아래는 실운영 인수인계용으로 IP/포트/경로를 포함합니다.<br>
+단, <strong>토큰/비밀번호/개인키 내용은 문서에 절대 적지 않습니다.</strong></p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>값(예시)</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>사용자 접속(웹/API)</td>
+<td><code>http://115.85.181.103:8000</code></td>
+<td>브라우저가 접근하는 주소</td>
+</tr>
+<tr>
+<td>대시보드</td>
+<td><code>http://115.85.181.103:8000/api/dashboard</code></td>
+<td>메인 UI (로그인 필요)</td>
+</tr>
+<tr>
+<td>관리자 콘솔</td>
+<td><code>http://115.85.181.103:8000/api/admin</code></td>
+<td>Maintainer 이상</td>
+</tr>
+<tr>
+<td>배포 대상(SSH)</td>
+<td><code>root@27.96.129.114:4433</code></td>
+<td>배포·재시작이 수행되는 서버</td>
+</tr>
+<tr>
+<td>배포 경로</td>
+<td><code>/opt/ansible-monitoring</code></td>
+<td>원격에 sync되는 프로젝트 루트</td>
+</tr>
+<tr>
+<td>systemd 유닛</td>
+<td><code>ansible-api-server.service</code></td>
+<td>API 서버 프로세스 관리</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-30%EB%B6%84-%EC%98%A8%EB%B3%B4%EB%94%A9-%EC%B2%B4%ED%81%AC%EB%A6%AC%EC%8A%A4%ED%8A%B8-%EB%8B%A4%EC%9D%8C-%EB%8B%B4%EB%8B%B9%EC%9E%90%EC%9A%A9">0.3 30분 온보딩 체크리스트 (다음 담당자용)</h3>
+<ol>
+<li><strong>서비스 살아있는지 확인 (서버 내부)</strong></li>
+</ol>
+<pre class="hljs"><code><div>curl -s http://localhost:8000/api/health
+systemctl status ansible-api-server
+</div></code></pre>
+<ol start="2">
+<li><strong>외부 접속 확인 (로컬 PC)</strong></li>
+</ol>
+<pre class="hljs"><code><div>curl -s -o /dev/null -w <span class="hljs-string">"%{http_code}\n"</span> http://115.85.181.103:8000/api/health
+</div></code></pre>
+<ol start="3">
+<li><strong>관리자 로그인 준비</strong></li>
+</ol>
+<ul>
+<li><code>api_server/.env</code>의 <code>ADMIN_USERNAME/ADMIN_PASSWORD</code> 기준으로 최초 관리자 계정이 자동 생성됩니다(없을 때만).</li>
+<li><code>/login</code> → 로그인 후 <code>/api/admin</code> 접근.</li>
+</ul>
+<ol start="4">
+<li><strong>(필요 시) DB 스키마 최신화</strong><br>
+기존 배포본에서 관리자 페이지가 500이면(특히 role 컬럼/서버 테이블), 배포 서버에서:</li>
+</ol>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> /opt/ansible-monitoring/api_server
+./venv/bin/python3 migrate_add_role.py
+systemctl restart ansible-api-server
+</div></code></pre>
+<ol start="5">
+<li><strong>점검 1회 실행 후 대시보드 확인</strong></li>
+</ol>
+<ul>
+<li>(정적 인벤토리) <code>ansible-playbook -i hosts.ini ...</code></li>
+<li>(동적 인벤토리) 아래 0.5 참고.</li>
+</ul>
+<h3 id="04-%EC%9A%B4%EC%98%81-%EC%B9%98%ED%8A%B8%EC%8B%9C%ED%8A%B8-%EA%B0%80%EC%9E%A5-%EC%9E%90%EC%A3%BC-%EC%93%B0%EB%8A%94-%EB%AA%85%EB%A0%B9">0.4 운영 치트시트 (가장 자주 쓰는 명령)</h3>
+<pre class="hljs"><code><div><span class="hljs-comment"># 서비스 상태/재시작/로그</span>
+systemctl status ansible-api-server
+systemctl restart ansible-api-server
+journalctl -u ansible-api-server -n 80 --no-pager
+
+<span class="hljs-comment"># 헬스체크</span>
+curl -s http://localhost:8000/api/health
+
+<span class="hljs-comment"># SSH 접속(PEM 키 사용)</span>
+ssh -p 4433 -i /home/sth0824/.ssh/nimso2026.pem root@27.96.129.114
+</div></code></pre>
+<h3 id="05-%EA%B4%80%EB%A6%AC%EC%9E%90%EC%97%90%EC%84%9C-%EB%93%B1%EB%A1%9D%ED%95%9C-%EC%84%9C%EB%B2%84%EB%A1%9C-ansible-%EC%A0%90%EA%B2%80-%EC%8B%A4%ED%96%89-%EB%8F%99%EC%A0%81-inventory">0.5 “관리자에서 등록한 서버로” Ansible 점검 실행 (동적 inventory)</h3>
+<p>이 프로젝트는 <strong>관리자 콘솔에서 등록한 서버 목록을 API에서 동적 inventory로 제공</strong>하며, 이를 통해 <code>hosts.ini</code> 없이 점검을 실행할 수 있습니다.</p>
+<ul>
+<li>동적 inventory API: <code>GET /api/inventory</code></li>
+<li>실행 스크립트: <code>run_checks_from_api.sh</code> (API 키 기반, Cron/운영용)</li>
+</ul>
+<pre class="hljs"><code><div><span class="hljs-comment"># 예) 배포 서버에서</span>
+<span class="hljs-built_in">cd</span> /opt/ansible-monitoring
+INVENTORY_API_KEY=... ./run_checks_from_api.sh
+</div></code></pre>
+<h3 id="06-%EB%B3%B4%EC%95%88%EB%B9%84%EB%B0%80%EA%B0%92-%EC%9B%90%EC%B9%99-%EB%AC%B8%EC%84%9C%EB%A0%88%ED%8F%AC-%EA%B3%B5%ED%86%B5">0.6 보안/비밀값 원칙 (문서/레포 공통)</h3>
+<ul>
+<li><strong>절대 저장/공유 금지</strong>: GitHub 토큰(PAT), DB 비밀번호, PEM/개인키 내용, INVENTORY_API_KEY, ENCRYPTION_KEY(또는 ANSIBLE_SERVER_ENCRYPTION_KEY)</li>
+<li><code>.env</code>는 커밋하지 않으며(<code>.env.example</code>만 유지), 운영 서버에서는 권한을 제한합니다.</li>
+</ul>
+<h3 id="07-%EC%9A%A9%EC%96%B4%ED%91%9C%EA%B8%B0%ED%95%84%EC%88%98">0.7 용어/표기(필수)</h3>
+<table>
+<thead>
+<tr>
+<th>용어</th>
+<th>의미</th>
+<th>실제 값/예시</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>check_type</td>
+<td>점검 유형</td>
+<td><code>os</code>, <code>was</code>, <code>tomcat</code>, <code>mariadb</code>, <code>postgresql</code>, <code>cubrid</code></td>
+</tr>
+<tr>
+<td>status</td>
+<td>점검 상태</td>
+<td><code>success</code>, <code>warning</code>, <code>error</code></td>
+</tr>
+<tr>
+<td>results</td>
+<td>점검 상세 결과(JSON)</td>
+<td><code>{ &quot;cpu&quot;: {...}, &quot;memory&quot;: {...} }</code> 등</td>
+</tr>
+<tr>
+<td>SERVER_HOST</td>
+<td>배포(SSH) 대상</td>
+<td><code>27.96.129.114</code></td>
+</tr>
+<tr>
+<td>ACCESS_HOST</td>
+<td>사용자 접속 주소</td>
+<td><code>115.85.181.103</code></td>
+</tr>
+<tr>
+<td>check_enabled</td>
+<td>“점검 대상 여부”</td>
+<td><code>true</code>면 동적 inventory에 포함</td>
+</tr>
+</tbody>
+</table>
+<h2 id="1-%EA%B0%9C%EC%9A%94-%EB%B0%8F-%EB%AA%A9%EC%A0%81">1. 개요 및 목적</h2>
+<h3 id="11-%EB%AC%B8%EC%84%9C-%EB%AA%A9%EC%A0%81">1.1 문서 목적</h3>
+<p>본 문서는 <strong>Ansible 기반 서버 점검 자동화</strong> 프로젝트를 다음 담당자에게 인수인계하기 위한 기술 문서입니다. 인수인계 대상자는 이 문서를 통해 다음을 파악할 수 있어야 합니다.</p>
+<ul>
+<li><strong>기능 범위</strong>: 어떤 기능이 구현되어 있으며, 어디서 동작하는지</li>
+<li><strong>코드 구조</strong>: 진입점, 라우트, 인증, DB, 템플릿의 위치와 역할</li>
+<li><strong>운영·배포</strong>: 로컬 실행 방법, 배포 서버 구조, 배포 스크립트 사용법</li>
+<li><strong>장애 대응</strong>: 자주 발생하는 오류와 해결 절차</li>
+</ul>
+<p>문서에서 언급하는 경로는 <strong>프로젝트 루트</strong>(<code>ansible/</code>) 기준 상대 경로이며, 필요 시 <code>api_server/</code>, <code>scripts/</code> 등 하위 디렉터리를 명시합니다.</p>
+<h3 id="12-%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8-%ED%95%9C-%EC%A4%84-%EC%9A%94%EC%95%BD">1.2 프로젝트 한 줄 요약</h3>
+<p><strong>Ansible</strong>으로 OS / WAS(Tomcat) / DB(MariaDB, PostgreSQL, CUBRID) 점검을 수행하고, 그 결과를 <strong>FastAPI 기반 API 서버</strong>가 수집하여 <strong>DB에 저장</strong>한 뒤, <strong>웹 대시보드·리포트</strong>(테이블, 차트, 상세 보기, 실시간 반영)로 조회·내보내기할 수 있는 점검 자동화 시스템입니다.</p>
+<h3 id="13-%EC%A3%BC%EC%9A%94-%EC%82%B0%EC%B6%9C%EB%AC%BC">1.3 주요 산출물</h3>
+<table>
+<thead>
+<tr>
+<th>산출물</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>웹 대시보드</td>
+<td>로그인 후 KPI·필터·문제 테이블·차트·실시간 업데이트·점검 결과 내보내기(JSON/CSV)</td>
+</tr>
+<tr>
+<td>관리자 콘솔</td>
+<td>회원 목록·승인/반려/삭제/역할 변경, 서버(점검 대상) CRUD·점검 여부 토글</td>
+</tr>
+<tr>
+<td>점검 결과 수집 API</td>
+<td><code>POST /api/checks</code>로 Ansible에서 JSON 전송 → DB 저장, WebSocket으로 대시보드에 알림</td>
+</tr>
+<tr>
+<td>Ansible 플레이북·역할</td>
+<td>redhat_check(OS), tomcat_check(WAS), mariadb_check, postgresql_check, cubrid_check(DB), common/roles/api_sender(전송)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="14-%EA%B8%B0%EC%88%A0-%EC%8A%A4%ED%83%9D">1.4 기술 스택</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>기술</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>자동화</td>
+<td>Ansible 2.9+</td>
+</tr>
+<tr>
+<td>백엔드</td>
+<td>FastAPI (Python 3.8+)</td>
+</tr>
+<tr>
+<td>DB</td>
+<td>SQLite(기본·개발용) / PostgreSQL(권장·운영)</td>
+</tr>
+<tr>
+<td>프론트엔드</td>
+<td>HTML/CSS/JavaScript, Chart.js</td>
+</tr>
+<tr>
+<td>실시간</td>
+<td>WebSocket (새 점검 결과 시 대시보드 갱신 트리거)</td>
+</tr>
+<tr>
+<td>인증</td>
+<td>JWT(쿠키 저장), bcrypt 비밀번호 해시, 역할 기반 접근(admin/maintainer/operator/viewer)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="15-%EC%B0%B8%EA%B3%A0-%EB%AC%B8%EC%84%9C">1.5 참고 문서</h3>
+<ul>
+<li><strong>README.md</strong> (프로젝트 루트): 전체 개요, 빠른 시작, 플레이북·설정, 디렉터리 구조</li>
+<li><strong>TROUBLESHOOTING.md</strong> (프로젝트 루트): 연결 거부, 배포 후 확인, 관리자 500, 서비스 실패 시 조치</li>
+<li><strong>api_server/README.md</strong>: API 서버 전용 설명</li>
+<li><strong>api_server/docs/AUTH_STRENGTHEN_PLAN.md</strong>: 인증 강화 계획(비밀번호 정책, rate limit, JWT/HTTPS 등)</li>
+</ul>
+<hr>
+<h2 id="2-%EC%8B%9C%EC%8A%A4%ED%85%9C-%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98-%EB%B0%8F-%EB%8D%B0%EC%9D%B4%ED%84%B0-%ED%9D%90%EB%A6%84">2. 시스템 아키텍처 및 데이터 흐름</h2>
+<h3 id="21-%EC%A0%84%EC%B2%B4-%ED%8C%8C%EC%9D%B4%ED%94%84%EB%9D%BC%EC%9D%B8">2.1 전체 파이프라인</h3>
+<p>점검 결과가 Ansible에서 API 서버를 거쳐 DB에 저장되고, 웹에서 조회·표시되기까지의 흐름은 다음과 같습니다.</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+  participant Ansible
+  participant ApiSender
+  participant API
+  participant DB
+  participant WebSocket
+  participant Dashboard
+
+  Ansible->>ApiSender: playbook 실행 후 결과 수집
+  ApiSender->>API: POST /api/checks (JSON)
+  API->>DB: save_check_result
+  API->>WebSocket: broadcast new_check_result
+  WebSocket->>Dashboard: 클라이언트 갱신 트리거
+  Dashboard->>API: GET /api/checks 등
+  API->>DB: get_check_results
+  DB-->>API: 결과 목록
+  API-->>Dashboard: JSON 응답
+</div></code></pre>
+<p>컴포넌트 관점(“뭐가 어디서 돌아가나”)으로 다시 그리면 아래와 같습니다.</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+  subgraph controlPlane [ControlPlane(실행/운영)]
+    AdminUI[AdminConsole(/api/admin)]
+    DashboardUI[Dashboard(/api/dashboard)]
+    Scripts[DeployScripts+RunScripts]
+  end
+
+  subgraph automation [Automation(Ansible)]
+    Playbooks[Playbooks(redhat/tomcat/db)]
+    Sender[common/roles/api_sender]
+  end
+
+  subgraph apiServer [API_Server(FastAPI)]
+    API[main.py]
+    Auth[auth.py(JWT+Roles)]
+    DBLayer[database.py+models.py]
+    WS[/ws(WebSocket)/]
+    Templates[HTMLTemplates]
+  end
+
+  subgraph storage [Storage]
+    DB[(SQLite_or_PostgreSQL)]
+  end
+
+  Scripts -->|rsync+systemctl| API
+  Playbooks --> Sender -->|POST /api/checks| API
+  API --> DBLayer --> DB
+  API --> WS --> DashboardUI
+  DashboardUI -->|GET /api/checks| API
+  AdminUI -->|CRUD APIs| API
+  Templates --> DashboardUI
+</div></code></pre>
+<ol>
+<li><strong>Ansible playbook 실행</strong>: <code>ansible-playbook -i inventory redhat_check/redhat_check.yml</code> 등으로 대상 서버에서 점검 수행.</li>
+<li><strong>결과 수집·전송</strong>: 공통 역할 <code>common/roles/api_sender</code>가 점검 결과를 JSON으로 구성하여 API 서버의 <code>POST /api/checks</code>로 전송.</li>
+<li><strong>API 서버</strong>: FastAPI가 요청을 받아 <code>save_check_result()</code>로 DB에 저장하고, WebSocket에 <code>new_check_result</code> 이벤트를 브로드캐스트.</li>
+<li><strong>대시보드/리포트</strong>: 브라우저에서 <code>/api/dashboard</code> 등으로 접속해 <code>GET /api/checks</code>(및 유형별 data API)로 데이터를 조회하고, WebSocket으로 실시간 갱신 여부를 반영.</li>
+</ol>
+<h3 id="22-%EC%97%AD%ED%95%A0-%EA%B5%AC%EB%B6%84">2.2 역할 구분</h3>
+<table>
+<thead>
+<tr>
+<th>구분</th>
+<th>내용</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Ansible</strong></td>
+<td>redhat_check(OS), tomcat_check(WAS), mariadb_check, postgresql_check, cubrid_check(DB), common/roles/api_sender(API 전송)</td>
+</tr>
+<tr>
+<td><strong>API 서버</strong></td>
+<td>FastAPI 앱(main.py), 인증(auth.py), DB(database.py, models.py), HTML 템플릿(대시보드·리포트·관리자·로그인·회원가입·JSON 뷰어)</td>
+</tr>
+<tr>
+<td><strong>배포</strong></td>
+<td>로컬 PC에서 <code>deploy_current_branch.sh</code> 실행 → rsync/ssh로 배포 서버에 파일 전송 → systemd로 ansible-api-server 재시작</td>
+</tr>
+</tbody>
+</table>
+<h3 id="23-%EC%A0%91%EC%86%8D-%EC%A3%BC%EC%86%8C%EC%99%80-%EB%B0%B0%ED%8F%AC-%EC%A3%BC%EC%86%8C">2.3 접속 주소와 배포 주소</h3>
+<p>배포 스크립트(<code>deploy_current_branch.sh</code>)에서는 <strong>배포 대상(SSH)</strong> 과 <strong>사용자 접속 주소</strong> 를 구분해 두고 있습니다.</p>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>변수명</th>
+<th>예시 값</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>배포(SSH) 호스트</td>
+<td>SERVER_HOST</td>
+<td>27.96.129.114</td>
+<td>rsync·ssh로 배포가 수행되는 서버</td>
+</tr>
+<tr>
+<td>SSH 포트</td>
+<td>SERVER_PORT</td>
+<td>4433</td>
+<td>SSH 접속 시 사용 포트(네이버 클라우드 등에서 22 대신 사용하는 경우)</td>
+</tr>
+<tr>
+<td>SSH 사용자</td>
+<td>SERVER_USER</td>
+<td>root</td>
+<td>배포 서버 로그인 계정</td>
+</tr>
+<tr>
+<td>SSH 키</td>
+<td>SSH_KEY</td>
+<td>/home/sth0824/.ssh/nimso2026.pem</td>
+<td>PEM 키 파일 경로(로컬)</td>
+</tr>
+<tr>
+<td>사용자 접속 주소</td>
+<td>ACCESS_HOST</td>
+<td>115.85.181.103</td>
+<td>브라우저에서 접속하는 URL의 호스트</td>
+</tr>
+<tr>
+<td>API 포트</td>
+<td>ACCESS_PORT</td>
+<td>8000</td>
+<td>API·대시보드 서비스 포트</td>
+</tr>
+</tbody>
+</table>
+<p>SERVER_HOST와 ACCESS_HOST가 다르면(예: 서로 다른 IP), 방화벽·ACG에서 8000 포트 인바운드 허용이 접속 주소 쪽이 아니라 <strong>실제 API가 동작하는 배포 서버</strong>에 필요할 수 있으므로, TROUBLESHOOTING.md의 &quot;연결 거부&quot; 절을 참고하세요.</p>
+<p>배포 플로우(“어떻게 서버에 반영되나”)는 다음과 같습니다.</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+  LocalRepo[LocalRepo(/home/sth0824/ansible)]
+  DeployScript[deploy_current_branch.sh]
+  SSH[SSH(root@27.96.129.114:4433)]
+  RemoteDir[/opt/ansible-monitoring]
+  VenvPip[venv_pip_install(requirements.txt)]
+  Systemd[systemctl_restart(ansible-api-server)]
+  HealthLocal[curl_localhost:8000/api/health]
+  HealthPublic[curl_115.85.181.103:8000/api/health]
+
+  LocalRepo --> DeployScript --> SSH --> RemoteDir
+  RemoteDir --> VenvPip --> Systemd
+  Systemd --> HealthLocal --> HealthPublic
+</div></code></pre>
+<h3 id="24-%EB%94%94%EB%A0%89%ED%84%B0%EB%A6%AC-%EA%B5%AC%EC%A1%B0">2.4 디렉터리 구조</h3>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>역할</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>api_server/</strong></td>
+<td>FastAPI 애플리케이션, 인증, DB, HTML 템플릿, .env, requirements.txt, migrate_add_role.py</td>
+</tr>
+<tr>
+<td><strong>scripts/</strong></td>
+<td>ansible-api-server.service(systemd 유닛), auto_deploy_cron.sh 등</td>
+</tr>
+<tr>
+<td><strong>common/</strong></td>
+<td>Ansible 공통 역할(예: api_sender), README</td>
+</tr>
+<tr>
+<td><strong>redhat_check/</strong></td>
+<td>OS 점검 플레이북·역할</td>
+</tr>
+<tr>
+<td><strong>tomcat_check/</strong></td>
+<td>WAS(Tomcat) 점검 플레이북·역할</td>
+</tr>
+<tr>
+<td><strong>mariadb_check/</strong>, <strong>postgresql_check/</strong>, <strong>cubrid_check/</strong></td>
+<td>DB별 점검 플레이북·역할</td>
+</tr>
+<tr>
+<td><strong>config/</strong></td>
+<td>api_config.yml(API URL, 기본 checker 등), 인벤토리 관련</td>
+</tr>
+<tr>
+<td><strong>docs/</strong></td>
+<td>본 인수인계 문서(HANDOVER.md) 등</td>
+</tr>
+<tr>
+<td><strong>fix_postgresql_sequence.sh</strong></td>
+<td>check_results 등 PostgreSQL 시퀀스 정리(필요 시)</td>
+</tr>
+<tr>
+<td><strong>auto_check_navercloud.sh</strong>, <strong>run_navercloud_checks.sh</strong></td>
+<td>네이버 클라우드 점검 실행</td>
+</tr>
+<tr>
+<td><strong>install_ansible.sh</strong></td>
+<td>Ansible 설치</td>
+</tr>
+<tr>
+<td><strong>setup_server_auto_check.sh</strong></td>
+<td>서버 자동 점검 설정</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="3-api-%EC%84%9C%EB%B2%84-%EC%83%81%EC%84%B8">3. API 서버 상세</h2>
+<h3 id="31-%EC%A7%84%EC%9E%85%EC%A0%90-%EB%B0%8F-%EC%B4%88%EA%B8%B0%ED%99%94">3.1 진입점 및 초기화</h3>
+<ul>
+<li><strong>진입점</strong>: <code>api_server/main.py</code></li>
+<li><strong>앱 생성</strong>: FastAPI 인스턴스, lifespan으로 시작 시 <code>init_db()</code>, <code>ensure_admin_user()</code> 호출. DB 초기화 실패 시에도 프로세스는 기동하고 <code>/api/health</code>에서 DB 상태를 degraded로 반환.</li>
+<li><strong>CORS</strong>: allow_origins=<code>[&quot;*&quot;]</code>, allow_credentials=True (프로덕션에서는 특정 도메인으로 제한 권장).</li>
+<li><strong>WebSocket</strong>: <code>ConnectionManager</code>로 연결 목록 관리, 새 점검 결과 수신 시 <code>broadcast</code>로 모든 클라이언트에 전달.</li>
+</ul>
+<h3 id="32-%EB%9D%BC%EC%9A%B0%ED%8A%B8-%EC%9D%BC%EB%9E%8C">3.2 라우트 일람</h3>
+<p>아래 표는 Method, Path, 설명, 인증 요구, 비고를 정리한 것입니다. 인증: Public(비로그인), User(로그인 사용자), Maintainer(Maintainer 이상), Admin(Admin 전용).</p>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>설명</th>
+<th>인증</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/</td>
+<td>로그인 여부에 따라 /login 또는 /api/dashboard로 리다이렉트</td>
+<td>Cookie</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/login</td>
+<td>로그인 페이지(HTML)</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/register</td>
+<td>회원가입 페이지(HTML)</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/health</td>
+<td>서버·DB 상태 확인</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/register</td>
+<td>회원가입(승인 전 로그인 불가)</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/login</td>
+<td>로그인, 쿠키에 JWT 설정</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/logout</td>
+<td>로그아웃, 쿠키 제거</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/auth/me</td>
+<td>현재 사용자 정보</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin</td>
+<td>관리자 콘솔(HTML)</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin/users</td>
+<td>회원 목록</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/users/{id}/approve</td>
+<td>회원 승인</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/users/{id}/reject</td>
+<td>회원 거부(승인 해제)</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/api/admin/users/{id}</td>
+<td>회원 삭제</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>/api/admin/users/{id}/role</td>
+<td>회원 역할 변경</td>
+<td>Admin</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin/servers</td>
+<td>서버 목록</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/servers</td>
+<td>서버 추가</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin/servers/{id}</td>
+<td>서버 조회</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>PUT</td>
+<td>/api/admin/servers/{id}</td>
+<td>서버 수정</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/api/admin/servers/{id}</td>
+<td>서버 삭제</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>/api/admin/servers/{id}/check-enabled</td>
+<td>점검 여부 토글</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/servers/bulk-upload</td>
+<td>서버 접속 정보 엑셀 업로드(수정+신규)</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin/check-items</td>
+<td>점검 항목 목록(유형별)</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/check-items</td>
+<td>점검 항목 추가</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>/api/admin/check-items/{item_id}</td>
+<td>점검 항목 수정(활성/표시명/정렬)</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/api/admin/check-items/{item_id}</td>
+<td>점검 항목 삭제</td>
+<td>Maintainer</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/inventory</td>
+<td>Ansible 동적 inventory(JSON)</td>
+<td>Maintainer 또는 API Key</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/checks</td>
+<td>점검 결과 수집(Ansible → API)</td>
+<td>Public</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/checks</td>
+<td>점검 결과 목록 조회(필터·limit)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/checks/export</td>
+<td>점검 결과 내보내기(JSON/CSV, 필터·ids)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/dashboard</td>
+<td>대시보드(HTML), 미인증 시 로그인으로 리다이렉트</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/report</td>
+<td>통합 리포트(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/report-legacy</td>
+<td>기존 통합 리포트(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/json-viewer</td>
+<td>JSON 뷰어(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/db-checks/report</td>
+<td>DB 점검 리포트(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/db-checks/data</td>
+<td>DB 점검 데이터(JSON)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/os-checks/report</td>
+<td>OS 점검 리포트(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/os-checks/data</td>
+<td>OS 점검 데이터(JSON)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/was-checks/report</td>
+<td>WAS 점검 리포트(HTML)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/was-checks/data</td>
+<td>WAS 점검 데이터(JSON)</td>
+<td>User</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>/ws</td>
+<td>실시간 알림(새 점검 결과 등)</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<h3 id="33-%EC%9D%B8%EC%A6%9D-%EA%B5%AC%EC%A1%B0-authpy">3.3 인증 구조 (auth.py)</h3>
+<ul>
+<li><strong>JWT</strong>: 알고리즘 HS256, 만료 24시간, 시크릿은 환경변수 <code>JWT_SECRET_KEY</code>(없으면 코드 내 기본값).</li>
+<li><strong>쿠키</strong>: 이름 <code>session</code>, HttpOnly, SameSite=Lax, 로그인 성공 시 설정.</li>
+<li><strong>함수</strong>: <code>create_access_token(user_id, username, role, is_admin)</code>, <code>decode_access_token(token)</code>, <code>get_token_from_request(request)</code>.</li>
+<li><strong>의존성</strong>:
+<ul>
+<li><code>get_current_user</code>: 쿠키 JWT 검증 후 User 반환, 실패 시 401.</li>
+<li><code>get_current_admin</code>: role == admin 만 허용.</li>
+<li><code>get_current_maintainer</code>: admin 또는 maintainer.</li>
+<li><code>get_current_operator</code>: admin, maintainer, operator.</li>
+</ul>
+</li>
+<li><strong>역할 상수</strong>: ROLE_ADMIN, ROLE_MAINTAINER, ROLE_OPERATOR, ROLE_VIEWER. User 모델에 <code>role</code> 컬럼이 없을 경우 <code>is_admin</code>으로 admin/viewer 구분.</li>
+</ul>
+<h3 id="34-%EB%8D%B0%EC%9D%B4%ED%84%B0-%EB%AA%A8%EB%8D%B8-modelspy">3.4 데이터 모델 (models.py)</h3>
+<ul>
+<li><strong>User</strong>: id, username, email, password_hash, is_approved, is_admin, role, created_at. 테이블명 <code>users</code>. <code>to_dict()</code>에서 비밀번호 제외, role 반환.</li>
+<li><strong>CheckResult</strong>: id, check_type, hostname, check_time, checker, status, results(JSON), created_at. 테이블명 <code>check_results</code>. PostgreSQL 사용 시 시퀀스는 fix_postgresql_sequence.sh로 맞춰 두는 것이 좋음.</li>
+<li><strong>Server</strong>: id, name, ip, os_type, ssh_port, ssh_user, check_enabled, memo, created_at, updated_at. 테이블명 <code>servers</code>.</li>
+</ul>
+<h3 id="35-db-%EC%A0%91%EA%B7%BC-databasepy">3.5 DB 접근 (database.py)</h3>
+<ul>
+<li><strong>연결</strong>: <code>DATABASE_URL</code>(환경변수 또는 .env, 기본값 SQLite <code>api_server/check_results.db</code>). PostgreSQL 시 pool_pre_ping, pool_recycle 등 설정.</li>
+<li><strong>세션</strong>: <code>SessionLocal</code>, <code>init_db()</code>로 Base.metadata.create_all.</li>
+<li><strong>사용자</strong>: get_user_by_username, get_user_by_id, create_user, get_all_users, set_user_approved, delete_user, set_user_role.</li>
+<li><strong>서버</strong>: list_servers, get_server, create_server, update_server, delete_server, set_server_check_enabled.</li>
+<li><strong>점검 결과</strong>: save_check_result, get_check_results(check_type, hostname, checker, limit, created_after, created_before, ids).</li>
+<li><strong>초기화</strong>: ensure_admin_user() — .env의 ADMIN_USERNAME/ADMIN_PASSWORD로 최초 관리자 생성(없을 때만). migrate_add_role.py는 기존 DB에 users.role 컬럼 추가 및 is_admin 기반 백필용(1회 실행).</li>
+</ul>
+<h4 id="databasepy-%EC%A3%BC%EC%9A%94-%ED%95%A8%EC%88%98-%EC%8B%9C%EA%B7%B8%EB%8B%88%EC%B2%98-%EC%9A%94%EC%95%BD">database.py 주요 함수 시그니처 요약</h4>
+<table>
+<thead>
+<tr>
+<th>함수</th>
+<th>용도</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>init_db()</td>
+<td>Base.metadata.create_all로 테이블 생성</td>
+</tr>
+<tr>
+<td>check_db_connection()</td>
+<td>(bool, str) 연결 테스트</td>
+</tr>
+<tr>
+<td>save_check_result(check_type, hostname, check_time, checker, status, results)</td>
+<td>점검 결과 1건 저장</td>
+</tr>
+<tr>
+<td>get_check_results(check_type, hostname, checker, limit, created_after, created_before, ids)</td>
+<td>점검 결과 목록 조회, 최신순·limit</td>
+</tr>
+<tr>
+<td>get_user_by_username(username), get_user_by_id(user_id)</td>
+<td>사용자 조회</td>
+</tr>
+<tr>
+<td>create_user(username, password, email)</td>
+<td>회원가입, role=viewer, is_approved=False</td>
+</tr>
+<tr>
+<td>get_all_users(), set_user_approved(user_id, approved), delete_user(user_id), set_user_role(user_id, role)</td>
+<td>회원 관리</td>
+</tr>
+<tr>
+<td>list_servers(check_enabled), get_server(id), create_server(...), update_server(...), delete_server(id), set_server_check_enabled(id, enabled)</td>
+<td>서버 CRUD·점검 여부</td>
+</tr>
+<tr>
+<td>ensure_admin_user()</td>
+<td>ADMIN_USERNAME/ADMIN_PASSWORD로 최초 관리자 없으면 생성</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="4-%ED%9A%8C%EC%9B%90-%EB%B0%8F-%EA%B6%8C%ED%95%9C">4. 회원 및 권한</h2>
+<h3 id="41-%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85%EB%A1%9C%EA%B7%B8%EC%9D%B8-%ED%9D%90%EB%A6%84">4.1 회원가입·로그인 흐름</h3>
+<ol>
+<li>사용자가 <code>/register</code>에서 회원가입 폼 제출 → <code>POST /api/auth/register</code> → <code>create_user(username, password, email)</code>. 기본 role=viewer, is_approved=False.</li>
+<li>관리자(또는 Maintainer)가 <code>/api/admin</code> 회원 관리 탭에서 해당 사용자를 <strong>승인</strong> → <code>POST /api/admin/users/{id}/approve</code> → set_user_approved(id, True).</li>
+<li>승인된 사용자만 <code>/login</code>에서 로그인 가능. <code>POST /api/auth/login</code> → 비밀번호 검증, JWT 생성, 쿠키 설정.</li>
+</ol>
+<h3 id="42-%EC%97%AD%ED%95%A0-%EC%B2%B4%EA%B3%84">4.2 역할 체계</h3>
+<table>
+<thead>
+<tr>
+<th>역할</th>
+<th>할 수 있는 작업(요약)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>admin</td>
+<td>회원 목록·승인·반려·삭제·역할 변경, 서버 CRUD·점검 여부, 대시보드·리포트·관리자 콘솔 전체</td>
+</tr>
+<tr>
+<td>maintainer</td>
+<td>회원 목록·승인·반려, 서버 CRUD·점검 여부, 대시보드·리포트·관리자 콘솔(삭제·역할 변경 제외)</td>
+</tr>
+<tr>
+<td>operator</td>
+<td>대시보드·리포트·점검 조회·내보내기 등(관리자 콘솔·회원 관리 불가)</td>
+</tr>
+<tr>
+<td>viewer</td>
+<td>대시보드·리포트·점검 조회·내보내기 등(읽기 위주)</td>
+</tr>
+</tbody>
+</table>
+<p>관리자 콘솔 접근: Maintainer 이상. 회원 삭제·역할 변경은 Admin 전용. 서버 CRUD는 Maintainer 이상.</p>
+<h3 id="43-%EB%A7%88%EC%9D%B4%EA%B7%B8%EB%A0%88%EC%9D%B4%EC%85%98-migrateaddrolepy">4.3 마이그레이션 (migrate_add_role.py)</h3>
+<p>기존 DB에 <code>users.role</code> 컬럼이 없는 경우(과거 버전 배포본) 한 번 실행해야 합니다. 배포 서버에서:</p>
+<pre class="hljs"><code><div><span class="hljs-built_in">cd</span> /opt/ansible-monitoring/api_server
+./venv/bin/python3 migrate_add_role.py
+systemctl restart ansible-api-server
+</div></code></pre>
+<p>실행 후 관리자 페이지 500(회원 목록/서버 목록 실패)이 해결됩니다.</p>
+<hr>
+<h2 id="5-%EA%B4%80%EB%A6%AC%EC%9E%90-%EC%BD%98%EC%86%94-%EB%B0%8F-%EC%84%9C%EB%B2%84-%EA%B4%80%EB%A6%AC">5. 관리자 콘솔 및 서버 관리</h2>
+<h3 id="51-url-%EB%B0%8F-%EC%A0%91%EA%B7%BC">5.1 URL 및 접근</h3>
+<ul>
+<li><strong>URL</strong>: <code>/api/admin</code>. Maintainer 이상만 접근 가능(미권한 시 403).</li>
+<li><strong>기능</strong>: <strong>서버 관리</strong> 탭(점검 대상 서버 추가/수정/삭제, 점검 여부 토글), <strong>회원 관리</strong> 탭(목록, 승인, 반려, 역할 변경, 삭제(Admin만)).</li>
+</ul>
+<h3 id="52-ui-admintemplatehtml">5.2 UI (admin_template.html)</h3>
+<ul>
+<li>탭: <strong>서버 관리</strong> | <strong>회원 관리</strong> | <strong>점검 항목 관리</strong></li>
+<li>서버 관리:
+<ul>
+<li>테이블(호스트명, IP, OS, SSH 포트/사용자, 점검 여부, 메모)</li>
+<li>서버 추가/수정 모달(SSH 인증 방식: key_file/password, 키경로, 비밀번호(비우면 유지))</li>
+<li>행별 수정/삭제/점검 여부 토글</li>
+<li><strong>엑셀 일괄 업로드</strong>(수정 + 신규 등록): <code>.xlsx</code> 업로드로 서버/접속정보를 일괄 반영</li>
+</ul>
+</li>
+<li>회원 관리:
+<ul>
+<li>테이블(아이디, 이메일, 역할, 승인 상태, 가입일)</li>
+<li>승인/거부(=승인 해제) (Maintainer 이상)</li>
+<li>역할 변경/삭제 (Admin 전용)</li>
+</ul>
+</li>
+<li>점검 항목 관리:
+<ul>
+<li>유형별 results 세부 키를 추가/삭제하고 enabled를 토글</li>
+<li><strong>변경 즉시 신규 점검(POST /api/checks)에 반영</strong>: 비활성 항목은 저장되지 않음</li>
+</ul>
+</li>
+</ul>
+<h3 id="53-%EC%97%91%EC%85%80-%EC%97%85%EB%A1%9C%EB%93%9C%EC%84%9C%EB%B2%84-%EC%A0%91%EC%86%8D-%EC%A0%95%EB%B3%B4-%EC%83%81%EC%84%B8">5.3 엑셀 업로드(서버 접속 정보) 상세</h3>
+<ul>
+<li>API: <code>POST /api/admin/servers/bulk-upload</code> (Maintainer 이상)</li>
+<li>파일: <code>.xlsx</code> (openpyxl 사용)</li>
+<li><strong>컬럼 순서</strong>: 상관없음(헤더명 기반 매핑)</li>
+<li><strong>지원 헤더</strong>(한글/영문 혼용 가능):
+<ul>
+<li>필수 키(수정/조회용): <code>name</code>/<code>호스트명</code>, 또는 <code>ip</code></li>
+<li>선택(수정 시): <code>password</code>/<code>비밀번호</code>, <code>ssh_user</code>/<code>SSH사용자</code> (비우면 기존 유지)</li>
+<li>선택(신규 등록 시): <code>os_type</code>/<code>OS유형</code>, <code>ssh_port</code>/<code>SSH포트</code>, <code>memo</code>/<code>비고</code>, <code>ssh_auth_type</code>/<code>인증방식</code>, <code>ssh_key_path</code>/<code>키경로</code></li>
+</ul>
+</li>
+<li><strong>동작 규칙</strong>
+<ul>
+<li>(수정) name 우선 매칭 → 없으면 ip로 매칭 → 있으면 업데이트</li>
+<li>(신규 등록) 매칭 실패 + name과 ip 둘 다 있으면 신규 서버 생성</li>
+<li>(실패) name/ip 둘 다 비었거나, 신규 등록 요건(name+ip) 미충족 시 details에 실패 행 정보 반환</li>
+</ul>
+</li>
+</ul>
+<h3 id="54-%EC%A0%90%EA%B2%80-%ED%95%AD%EB%AA%A9-%EA%B4%80%EB%A6%ACcheckitem-%EC%83%81%EC%84%B8">5.4 점검 항목 관리(CheckItem) 상세</h3>
+<ul>
+<li>API: <code>GET/POST/PATCH/DELETE /api/admin/check-items</code></li>
+<li>모델: <code>api_server/models.py</code>의 <code>CheckItem</code> (check_type, item_key, display_name, enabled, sort_order)</li>
+<li>반영 위치: <code>POST /api/checks</code> 처리 시 <code>get_enabled_item_keys_for_type(check_type)</code> 결과가 있으면 <strong>enabled=true 항목만 results에 저장</strong>합니다.</li>
+</ul>
+<h3 id="53-%EC%84%9C%EB%B2%84-%EB%AA%A8%EB%8D%B8-%EB%B0%8F-api-%EB%8C%80%EC%9D%91">5.3 서버 모델 및 API 대응</h3>
+<table>
+<thead>
+<tr>
+<th>API</th>
+<th>DB 함수</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET /api/admin/servers</td>
+<td>list_servers()</td>
+</tr>
+<tr>
+<td>POST /api/admin/servers</td>
+<td>create_server()</td>
+</tr>
+<tr>
+<td>GET /api/admin/servers/{id}</td>
+<td>get_server()</td>
+</tr>
+<tr>
+<td>PUT /api/admin/servers/{id}</td>
+<td>update_server()</td>
+</tr>
+<tr>
+<td>DELETE /api/admin/servers/{id}</td>
+<td>delete_server()</td>
+</tr>
+<tr>
+<td>PATCH /api/admin/servers/{id}/check-enabled</td>
+<td>set_server_check_enabled()</td>
+</tr>
+</tbody>
+</table>
+<p>서버 필드: name, ip, os_type, ssh_port, ssh_user, check_enabled, memo.</p>
+<hr>
+<h2 id="6-%EC%A0%90%EA%B2%80-%EA%B2%B0%EA%B3%BC-%EC%88%98%EC%A7%91%EC%A1%B0%ED%9A%8C%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0">6. 점검 결과 수집·조회·내보내기</h2>
+<h3 id="61-%EC%88%98%EC%A7%91-post-apichecks">6.1 수집 (POST /api/checks)</h3>
+<ul>
+<li><strong>인증</strong>: 없음(Ansible에서 호출하므로).</li>
+<li><strong>요청 스키마</strong>: check_type, hostname, check_time, checker, status, results(JSON).</li>
+<li><strong>처리</strong>:
+<ul>
+<li>(1) <strong>점검 항목 설정 반영</strong>: 관리자에서 CheckItem을 설정한 경우, enabled=true 항목만 results에 남기고 저장합니다(불필요/민감 항목 수집 최소화 목적).</li>
+<li>(2) <code>save_check_result()</code>로 DB 저장</li>
+<li>(3) WebSocket으로 <code>new_check_result</code> 브로드캐스트</li>
+<li>Ansible 호환을 위해 인증 없이 받도록 유지(운영 상 위험을 줄이려면 IP 제한 또는 API Key 방식으로 강화 가능)</li>
+</ul>
+</li>
+</ul>
+<h3 id="62-%EC%A1%B0%ED%9A%8C-get-apichecks">6.2 조회 (GET /api/checks)</h3>
+<ul>
+<li><strong>인증</strong>: 로그인 사용자.</li>
+<li><strong>쿼리</strong>: check_type, hostname, checker, id(단건), limit. 내부적으로 get_check_results(..., created_after, created_before, ids) 사용 가능.</li>
+</ul>
+<h3 id="63-%EB%82%B4%EB%B3%B4%EB%82%B4%EA%B8%B0-get-apichecksexport">6.3 내보내기 (GET /api/checks/export)</h3>
+<ul>
+<li><strong>인증</strong>: 로그인 사용자.</li>
+<li><strong>쿼리</strong>: format=json(기본)|csv, limit, check_type, hostname, checker, created_after, created_before, ids(쉼표 구분 ID).</li>
+<li><strong>JSON</strong>: <code>{&quot;success&quot;, &quot;count&quot;, &quot;results&quot;}</code> 형태, Content-Disposition: attachment; filename=&quot;check_results.json&quot;.</li>
+<li><strong>CSV</strong>: 컬럼 id, check_type, hostname, check_time, checker, status, created_at, results(results는 JSON 문자열). Content-Disposition: attachment; filename=&quot;check_results.csv&quot;.</li>
+<li><strong>대시보드</strong>: &quot;내보내기&quot; 버튼 → 모달에서 현재 필터 기준 목록(최대 500건 표시), 체크박스로 선택·전체 선택, 형식(JSON/CSV), &quot;선택한 항목 내보내기&quot; / &quot;필터 결과 전체 내보내기&quot;. 선택한 항목은 ids=1,2,3 형태로 export API에 전달. 필터 전체는 현재 대시보드 필터(기간·유형·호스트·담당자)와 최대 건수로 created_after/created_before 등 쿼리 파라미터 구성 후 호출.</li>
+<li><strong>JSON 뷰어</strong>: 유형·limit·형식(JSON/CSV) 선택 후 &quot;내보내기&quot; 버튼으로 동일 export API 호출. credentials: 'include'로 쿠키 전송, blob 다운로드.</li>
+</ul>
+<hr>
+<h2 id="7-%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C-%EB%B0%8F-%EB%A6%AC%ED%8F%AC%ED%8A%B8">7. 대시보드 및 리포트</h2>
+<h3 id="71-%EB%8C%80%EC%8B%9C%EB%B3%B4%EB%93%9C-dashboardtemplatehtml">7.1 대시보드 (dashboard_template.html)</h3>
+<ul>
+<li><strong>서빙</strong>: GET /api/dashboard. 미인증 시 로그인 페이지로 리다이렉트.</li>
+<li><strong>구성</strong>: KPI 카드(전체 점검 건수, 오늘 점검, 정상 서버, 경고/에러 서버), 필터(기간(전체/오늘/7일/30일), 유형(OS/DB/WAS), 호스트명, 담당자, 자동 새로고침), 문제 테이블, 차트, 실시간(WebSocket), 내보내기 모달(선택·필터 전체·JSON/CSV). 필터 상태는 localStorage에 저장되어 유지됨.</li>
+<li><strong>데이터 로드</strong>: reloadDashboard() → fetchChecks(2000)로 GET /api/checks 호출 후 applyDashboardFilters()로 클라이언트 필터 적용, aggregate()로 KPI·문제 목록·차트 데이터 생성. WebSocket /ws 연결 시 type=new_check_result 메시지 수신하면 자동 새로고침(자동 새로고침 체크 시).</li>
+</ul>
+<h3 id="72-%EB%A6%AC%ED%8F%AC%ED%8A%B8-%ED%8E%98%EC%9D%B4%EC%A7%80">7.2 리포트 페이지</h3>
+<ul>
+<li><strong>DB</strong>: /api/db-checks/report(HTML), /api/db-checks/data(JSON). report_template.html.</li>
+<li><strong>OS</strong>: /api/os-checks/report, /api/os-checks/data. os_report_template.html.</li>
+<li><strong>WAS</strong>: /api/was-checks/report, /api/was-checks/data. was_report_template.html.</li>
+<li><strong>통합</strong>: /api/report(대시보드와 동일 또는 유사), /api/report-legacy(기존 통합). unified_report_template.html 등.</li>
+</ul>
+<h3 id="73-json-%EB%B7%B0%EC%96%B4-jsonviewerhtml">7.3 JSON 뷰어 (json_viewer.html)</h3>
+<ul>
+<li><strong>서빙</strong>: GET /api/json-viewer.</li>
+<li><strong>기능</strong>: 점검 유형(전체/DB/OS/WAS)·최대 개수·데이터 형식(포맷된/원본 JSON) 선택, &quot;데이터 불러오기&quot;, &quot;복사&quot;, &quot;내보내기&quot;(형식 JSON/CSV 선택). 내보내기는 getExportUrl()로 /api/checks/export에 format·limit·check_type 전달 후 blob 다운로드.</li>
+</ul>
+<h3 id="74-%EB%A1%9C%EA%B7%B8%EC%9D%B8%ED%9A%8C%EC%9B%90%EA%B0%80%EC%9E%85-%ED%85%9C%ED%94%8C%EB%A6%BF">7.4 로그인·회원가입 템플릿</h3>
+<ul>
+<li>login_template.html → /login. 로그인 폼, &quot;회원가입&quot; 링크.</li>
+<li>register_template.html → /register. 회원가입 폼(아이디, 비밀번호, 이메일).</li>
+</ul>
+<hr>
+<h2 id="8-%ED%99%98%EA%B2%BD-%EC%84%A4%EC%A0%95-%EB%B0%8F-%EC%8B%A4%ED%96%89">8. 환경 설정 및 실행</h2>
+<h3 id="81-apiserverenv">8.1 api_server/.env</h3>
+<ul>
+<li><strong>DATABASE_URL</strong>: DB 연결 문자열. 없으면 SQLite <code>api_server/check_results.db</code>. PostgreSQL 예: <code>postgresql://user:password@localhost:5432/dbname</code>.</li>
+<li><strong>ADMIN_USERNAME</strong>, <strong>ADMIN_PASSWORD</strong>: 최초 관리자 계정(ensure_admin_user에서 사용). 반드시 설정 후 첫 기동 시 관리자로 로그인해 다른 사용자 승인 권장.</li>
+<li><strong>JWT_SECRET_KEY</strong>: JWT 서명용. 프로덕션에서는 반드시 변경.</li>
+</ul>
+<p>참고: api_server/.env.example에 위 항목 예시가 있음.</p>
+<h3 id="82-%EB%A1%9C%EC%BB%AC-%EC%8B%A4%ED%96%89">8.2 로컬 실행</h3>
+<ol>
+<li><strong>가상환경 및 의존성</strong><pre class="hljs"><code><div><span class="hljs-built_in">cd</span> api_server
+python3 -m venv venv
+<span class="hljs-built_in">source</span> venv/bin/activate   <span class="hljs-comment"># Windows: venv\Scripts\activate</span>
+pip install -r requirements.txt
+</div></code></pre>
+</li>
+<li><strong>환경 변수</strong>: <code>api_server/.env</code>에 최소 DATABASE_URL(선택), ADMIN_USERNAME, ADMIN_PASSWORD, JWT_SECRET_KEY(권장) 설정. 없으면 SQLite와 코드 내 기본 시크릿 사용.</li>
+<li><strong>기동</strong><pre class="hljs"><code><div>./start_api_server.sh
+<span class="hljs-comment"># 또는 직접: venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000</span>
+</div></code></pre>
+</li>
+<li><strong>PostgreSQL 사용 시</strong>: 프로젝트 루트에서 start_db_server.sh로 DB 기동, stop_db_server.sh로 중지. DATABASE_URL을 postgresql://... 로 맞춘 뒤 API 서버 실행.</li>
+</ol>
+<h3 id="83-%EB%B0%B0%ED%8F%AC-%EC%84%9C%EB%B2%84-%EA%B5%AC%EC%A1%B0">8.3 배포 서버 구조</h3>
+<ul>
+<li><strong>경로</strong>: /opt/ansible-monitoring (REMOTE_DIR). 그 아래 api_server/, redhat_check/, mariadb_check/, postgresql_check/, tomcat_check/, common/, config/, logs/ 등. deploy 스크립트가 rsync로 동기화.</li>
+<li><strong>systemd</strong>: scripts/ansible-api-server.service.
+<ul>
+<li>WorkingDirectory=/opt/ansible-monitoring/api_server</li>
+<li>ExecStart=/opt/ansible-monitoring/api_server/venv/bin/uvicorn main:app --host 0.0.0.0 --port 8000</li>
+<li>Restart=always, RestartSec=5</li>
+<li>0.0.0.0으로 바인딩해 외부 접속 수신. 배포 시 /etc/systemd/system/에 복사 후 daemon-reload, enable, start/restart.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="9-%EB%B0%B0%ED%8F%AC-%EC%A0%88%EC%B0%A8">9. 배포 절차</h2>
+<h3 id="91-%EC%8A%A4%ED%81%AC%EB%A6%BD%ED%8A%B8-deploycurrentbranchsh">9.1 스크립트 (deploy_current_branch.sh)</h3>
+<ul>
+<li><strong>변수</strong>: SERVER_HOST, SERVER_PORT, SERVER_USER, SSH_KEY, REMOTE_DIR, ACCESS_HOST, ACCESS_PORT(위 2.3 참조). 수정 시 스크립트 상단에서 변경.</li>
+<li><strong>실행</strong>: 프로젝트 루트에서 <code>./deploy_current_branch.sh</code>. set -e 이므로 단계 실패 시 중단.</li>
+<li><strong>순서</strong>:
+<ol>
+<li>SSH 접속 테스트: <code>ssh -i &quot;$SSH_KEY&quot; -p &quot;$SERVER_PORT&quot; ... &quot;echo 'SSH 연결 성공'&quot;</code>. 실패 시 &quot;핫스팟 연결 확인&quot; 등 안내 후 종료.</li>
+<li>API 서버 파일 업로드: rsync로 ./api_server/ → $REMOTE_DIR/api_server/. venv, <strong>pycache</strong>, .git, check_results.db, *.log 제외.</li>
+<li>API 서버 의존성 설치: 원격에서 <code>cd $REMOTE_DIR/api_server &amp;&amp; (venv 있으면 pip install -r requirements.txt, 없으면 venv 생성 후 설치)</code>.</li>
+<li>Ansible 파일 업로드: redhat_check, mariadb_check, postgresql_check, tomcat_check, common, config, hosts.ini.server, ansible.cfg, auto_check_navercloud.sh, install_ansible.sh, scripts/ansible-api-server.service 등 rsync/scp. SSH 키도 원격 .ssh/에 복사.</li>
+<li>Ansible 설치 확인: 원격에서 ansible-playbook 없으면 install_ansible.sh 실행.</li>
+<li>systemd: ansible-api-server.service를 /etc/systemd/system/에 복사, daemon-reload, enable, restart. sleep 3 후 status 출력.</li>
+<li>배포 확인: sleep 5 후 localhost:8000/api/health, ACCESS_HOST:8000/api/health 각각 curl로 HTTP 코드 확인. 200이면 성공, 아니면 실패/방화벽 안내.</li>
+</ol>
+</li>
+</ul>
+<h3 id="92-%EC%B5%9C%EC%B4%88-%EB%B0%B0%ED%8F%AC-%EC%8B%9C">9.2 최초 배포 시</h3>
+<ul>
+<li>서버에 scripts/ansible-api-server.service 복사 후 <code>cp ... /etc/systemd/system/</code>, <code>systemctl daemon-reload</code>, <code>systemctl enable ansible-api-server</code>, <code>systemctl start ansible-api-server</code>.</li>
+<li>DB가 이미 있는 경우(기존 users 테이블에 role 없음): <code>cd /opt/ansible-monitoring/api_server &amp;&amp; ./venv/bin/python3 migrate_add_role.py</code> 실행 후 <code>systemctl restart ansible-api-server</code>.</li>
+</ul>
+<h3 id="93-pem-%ED%82%A4%EA%B3%84%EC%A0%95">9.3 PEM 키·계정</h3>
+<ul>
+<li>SSH 접속 예: <code>ssh -p 4433 -i /path/to/nimso2026.pem root@27.96.129.114</code>. 비밀번호 입력란에는 PEM 키 내용을 넣지 말고, <code>-i</code>로 키 파일을 지정해 접속합니다. 키 파일 권한(600) 및 보안 유지.</li>
+</ul>
+<hr>
+<h2 id="10-%ED%8A%B8%EB%9F%AC%EB%B8%94%EC%8A%88%ED%8C%85-%EB%B0%8F-faq">10. 트러블슈팅 및 FAQ</h2>
+<h3 id="101-%EC%97%B0%EA%B2%B0-%EA%B1%B0%EB%B6%80">10.1 연결 거부</h3>
+<ul>
+<li><strong>증상</strong>: 브라우저에서 접속 주소(예: 115.85.181.103:8000) 연결 거부.</li>
+<li><strong>확인</strong>: SERVER_HOST와 ACCESS_HOST가 같은 서버인지, 다른 서버인지 구분. 같은 서버면 방화벽/ACG에서 TCP 8000 인바운드 허용. API 서버 기동 여부: <code>systemctl status ansible-api-server</code>, <code>curl -s -o /dev/null -w &quot;%{http_code}&quot; http://localhost:8000/api/health</code> → 200 기대.</li>
+<li>자세한 단계: TROUBLESHOOTING.md &quot;연결 거부&quot; 절.</li>
+</ul>
+<h3 id="102-%EA%B4%80%EB%A6%AC%EC%9E%90-%ED%8E%98%EC%9D%B4%EC%A7%80-500">10.2 관리자 페이지 500</h3>
+<ul>
+<li><strong>증상</strong>: /api/admin 접속 시 500 또는 회원/서버 목록 실패.</li>
+<li><strong>원인</strong>: users.role 컬럼 없음 또는 servers 테이블 없음(스키마 미반영).</li>
+<li><strong>조치</strong>: migrate_add_role.py 실행, systemctl restart ansible-api-server. TROUBLESHOOTING.md &quot;관리자 페이지에서 500&quot; 절.</li>
+</ul>
+<h3 id="103-%EB%B0%B0%ED%8F%AC-%ED%9B%84-http-000">10.3 배포 후 HTTP 000</h3>
+<ul>
+<li><strong>증상</strong>: 배포 스크립트 마지막 확인에서 localhost 또는 ACCESS_HOST 응답이 000.</li>
+<li><strong>조치</strong>: 스크립트에서 health 확인 전 sleep 5초 적용됨. 서버에서 직접 <code>curl -s http://localhost:8000/api/health</code> 확인. 실패 시 <code>journalctl -u ansible-api-server -n 50 --no-pager</code>로 오류 확인.</li>
+</ul>
+<h3 id="104-db-%EC%97%B0%EA%B2%B0-%EC%8B%A4%ED%8C%A8">10.4 DB 연결 실패</h3>
+<ul>
+<li><strong>증상</strong>: API 기동 실패 또는 /api/health에서 db: error.</li>
+<li><strong>조치</strong>: DATABASE_URL 확인, PostgreSQL 사용 시 해당 서버에서 PostgreSQL 기동, psql로 접속 테스트. 필요 시 fix_postgresql_sequence.sh로 check_results 시퀀스 정리.</li>
+</ul>
+<h3 id="105-%EC%9E%90%EC%A3%BC-%EC%93%B0%EB%8A%94-%EB%AA%85%EB%A0%B9">10.5 자주 쓰는 명령</h3>
+<pre class="hljs"><code><div>systemctl status ansible-api-server
+systemctl restart ansible-api-server
+journalctl -u ansible-api-server -n 80 --no-pager
+curl -s http://localhost:8000/api/health
+</div></code></pre>
+<h3 id="106-faq">10.6 FAQ</h3>
+<ul>
+<li>
+<p><strong>Q: 회원가입은 어디서 하나요?</strong><br>
+A: <code>/register</code> 또는 로그인 페이지의 &quot;회원가입&quot; 링크. 가입 후 관리자 승인 전까지는 로그인 불가.</p>
+</li>
+<li>
+<p><strong>Q: 점검 결과가 안 올라와요.</strong><br>
+A: config/api_config.yml의 api_server.url(또는 urls)이 실제 API 서버 주소와 /api/checks 경로를 포함하는지 확인. Ansible playbook 실행 후 해당 URL로 POST가 나가는지 네트워크/로그 확인.</p>
+</li>
+<li>
+<p><strong>Q: 대시보드 주소로 들어가면 빈 화면이에요.</strong><br>
+A: 미인증이면 로그인 페이지로 리다이렉트됨. 로그인 후에도 빈 화면이면 브라우저 콘솔 오류·네트워크 탭 확인, /api/health·/api/checks 응답 확인.</p>
+</li>
+<li>
+<p><strong>Q: SSH 접속 시 password: 가 나와요. PEM 키를 어디에 넣나요?</strong><br>
+A: PEM 키는 비밀번호란에 넣지 않습니다. <code>ssh -p 4433 -i /경로/파일.pem root@SERVER_HOST</code> 처럼 <code>-i</code> 옵션으로 키 파일 경로를 지정해 접속합니다.</p>
+</li>
+<li>
+<p><strong>Q: 배포 후 확인에서 HTTP 000만 나와요.</strong><br>
+A: 재시작 직후라 서버가 아직 준비 안 됐을 수 있음. 배포 스크립트는 5초 대기 후 확인. 서버에 SSH 접속해 <code>curl -s http://localhost:8000/api/health</code> 로 직접 확인하고, 실패 시 journalctl로 오류 로그 확인.</p>
+</li>
+</ul>
+<hr>
+<h2 id="%EB%B6%80%EB%A1%9D-a-api-%EB%9D%BC%EC%9A%B0%ED%8A%B8-%EB%B9%A0%EB%A5%B8-%EC%B0%B8%EC%A1%B0">부록 A. API 라우트 빠른 참조</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Path</th>
+<th>인증</th>
+<th>요약</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/</td>
+<td>Cookie</td>
+<td>/login 또는 /api/dashboard 리다이렉트</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/login</td>
+<td>Public</td>
+<td>로그인 페이지</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/register</td>
+<td>Public</td>
+<td>회원가입 페이지</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/health</td>
+<td>Public</td>
+<td>상태·DB 확인</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/register</td>
+<td>Public</td>
+<td>회원가입</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/login</td>
+<td>Public</td>
+<td>로그인</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/auth/logout</td>
+<td>Public</td>
+<td>로그아웃</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/auth/me</td>
+<td>User</td>
+<td>현재 사용자</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/admin</td>
+<td>Maintainer</td>
+<td>관리자 콘솔 HTML</td>
+</tr>
+<tr>
+<td>GET/POST</td>
+<td>/api/admin/users, .../approve, .../reject</td>
+<td>Maintainer</td>
+<td>회원 목록·승인·반려</td>
+</tr>
+<tr>
+<td>DELETE</td>
+<td>/api/admin/users/{id}</td>
+<td>Admin</td>
+<td>회원 삭제</td>
+</tr>
+<tr>
+<td>PATCH</td>
+<td>/api/admin/users/{id}/role</td>
+<td>Admin</td>
+<td>역할 변경</td>
+</tr>
+<tr>
+<td>GET/POST/GET/PUT/DELETE/PATCH</td>
+<td>/api/admin/servers, .../{id}, .../check-enabled</td>
+<td>Maintainer</td>
+<td>서버 CRUD·점검 여부</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/admin/servers/bulk-upload</td>
+<td>Maintainer</td>
+<td>엑셀 업로드(수정+신규 등록)</td>
+</tr>
+<tr>
+<td>GET/POST/PATCH/DELETE</td>
+<td>/api/admin/check-items, .../{id}</td>
+<td>Maintainer</td>
+<td>점검 항목 관리</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/inventory</td>
+<td>Maintainer 또는 API Key</td>
+<td>Ansible 동적 inventory(JSON)</td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/checks</td>
+<td>Public</td>
+<td>점검 결과 수집</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/checks</td>
+<td>User</td>
+<td>점검 결과 목록</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/checks/export</td>
+<td>User</td>
+<td>점검 결과 내보내기(JSON/CSV)</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/dashboard, /api/report, /api/report-legacy, /api/json-viewer</td>
+<td>User</td>
+<td>대시보드·리포트·JSON 뷰어</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/db-checks/report, /api/db-checks/data</td>
+<td>User</td>
+<td>DB 리포트·데이터</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/os-checks/report, /api/os-checks/data</td>
+<td>User</td>
+<td>OS 리포트·데이터</td>
+</tr>
+<tr>
+<td>GET</td>
+<td>/api/was-checks/report, /api/was-checks/data</td>
+<td>User</td>
+<td>WAS 리포트·데이터</td>
+</tr>
+<tr>
+<td>WebSocket</td>
+<td>/ws</td>
+<td>—</td>
+<td>실시간 알림</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%EB%B6%80%EB%A1%9D-b-%ED%99%98%EA%B2%BD-%EB%B3%80%EC%88%98%EC%84%A4%EC%A0%95-%ED%8C%8C%EC%9D%BC-%EC%B0%B8%EC%A1%B0">부록 B. 환경 변수·설정 파일 참조</h2>
+<table>
+<thead>
+<tr>
+<th>항목</th>
+<th>파일/위치</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DATABASE_URL</td>
+<td>api_server/.env</td>
+<td>DB 연결 문자열. 없으면 sqlite:///api_server/check_results.db. PostgreSQL: postgresql://user:password@host:5432/dbname</td>
+</tr>
+<tr>
+<td>ADMIN_USERNAME</td>
+<td>api_server/.env</td>
+<td>최초 관리자 아이디. ensure_admin_user()에서 사용</td>
+</tr>
+<tr>
+<td>ADMIN_PASSWORD</td>
+<td>api_server/.env</td>
+<td>최초 관리자 비밀번호. 해시 후 저장</td>
+</tr>
+<tr>
+<td>JWT_SECRET_KEY</td>
+<td>api_server/.env</td>
+<td>JWT 서명 시크릿. 프로덕션에서 반드시 변경. 없으면 코드 내 기본값 사용</td>
+</tr>
+<tr>
+<td>ENCRYPTION_KEY / ANSIBLE_SERVER_ENCRYPTION_KEY</td>
+<td>api_server/.env (권장) 또는 환경변수</td>
+<td>서버 SSH 비밀번호를 암호화 저장할 때 사용(Fernet). 키가 없으면 비밀번호 저장/복호화 기능이 제한됩니다.</td>
+</tr>
+<tr>
+<td>INVENTORY_API_KEY</td>
+<td>api_server/.env (권장) 또는 환경변수</td>
+<td><code>GET /api/inventory</code>를 API Key로 호출할 때 사용(Cron/스크립트용). 절대 노출 금지.</td>
+</tr>
+<tr>
+<td>api_server.url / api_server.urls</td>
+<td>config/api_config.yml</td>
+<td>Ansible common/roles/api_sender가 점검 결과를 보낼 API 기본 URL(예: http://호스트:8000/api/checks 포함)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>.env.example</strong> (api_server/) 예시:</p>
+<ul>
+<li>DATABASE_URL(주석), ADMIN_USERNAME=admin, ADMIN_PASSWORD=changeme, JWT_SECRET_KEY(주석).</li>
+</ul>
+<hr>
+<h2 id="%EB%B6%80%EB%A1%9D-c-%EC%A3%BC%EC%9A%94-%ED%8C%8C%EC%9D%BC-%EA%B2%BD%EB%A1%9C-%EB%AA%A9%EB%A1%9D">부록 C. 주요 파일 경로 목록</h2>
+<table>
+<thead>
+<tr>
+<th>경로</th>
+<th>설명</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>deploy_current_branch.sh</td>
+<td>현재 브랜치 배포 스크립트</td>
+</tr>
+<tr>
+<td>start_api_server.sh, stop_api_server.sh</td>
+<td>API 서버 기동·중지</td>
+</tr>
+<tr>
+<td>start_db_server.sh, stop_db_server.sh, restart_db_server.sh</td>
+<td>DB 서버(PostgreSQL 등)</td>
+</tr>
+<tr>
+<td>TROUBLESHOOTING.md</td>
+<td>트러블슈팅</td>
+</tr>
+<tr>
+<td>README.md</td>
+<td>프로젝트 개요</td>
+</tr>
+<tr>
+<td>scripts/ansible-api-server.service</td>
+<td>systemd 유닛</td>
+</tr>
+<tr>
+<td>api_server/main.py</td>
+<td>FastAPI 앱·라우트</td>
+</tr>
+<tr>
+<td>api_server/auth.py</td>
+<td>JWT·역할 의존성</td>
+</tr>
+<tr>
+<td>api_server/database.py</td>
+<td>DB 연결·CRUD</td>
+</tr>
+<tr>
+<td>api_server/models.py</td>
+<td>User, CheckResult, Server 모델</td>
+</tr>
+<tr>
+<td>api_server/migrate_add_role.py</td>
+<td>users.role 마이그레이션</td>
+</tr>
+<tr>
+<td>api_server/.env, .env.example</td>
+<td>환경 변수</td>
+</tr>
+<tr>
+<td>api_server/dashboard_template.html</td>
+<td>대시보드</td>
+</tr>
+<tr>
+<td>api_server/admin_template.html</td>
+<td>관리자 콘솔</td>
+</tr>
+<tr>
+<td>api_server/login_template.html, register_template.html</td>
+<td>로그인·회원가입</td>
+</tr>
+<tr>
+<td>api_server/report_template.html, os_report_template.html, was_report_template.html</td>
+<td>DB/OS/WAS 리포트</td>
+</tr>
+<tr>
+<td>api_server/json_viewer.html</td>
+<td>JSON 뷰어</td>
+</tr>
+<tr>
+<td>api_server/requirements.txt</td>
+<td>Python 의존성</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="11-markdown-%E2%86%92-pdf-%EC%B6%9C%EB%A0%A5-%EA%B0%80%EC%9D%B4%EB%93%9C">11. Markdown → PDF 출력 가이드</h2>
+<h3 id="111-%EA%B0%80%EC%9E%A5-%EC%89%AC%EC%9A%B4-%EB%B0%A9%EB%B2%95%EA%B6%8C%EC%9E%A5-vscode%EC%97%90%EC%84%9C-%EB%AF%B8%EB%A6%AC%EB%B3%B4%EA%B8%B0-%E2%86%92-%EC%9D%B8%EC%87%84pdf">11.1 가장 쉬운 방법(권장): VSCode에서 미리보기 → 인쇄(PDF)</h3>
+<ol>
+<li>VSCode에서 <code>docs/HANDOVER.md</code> 열기</li>
+<li>우측 상단 <strong>미리보기(Preview)</strong> 열기(또는 <code>Ctrl+Shift+V</code>)</li>
+<li>미리보기 창에서 <strong>브라우저 인쇄</strong>(또는 <code>Ctrl+P</code>) → <strong>대상: PDF로 저장</strong></li>
+<li>여백/배경 그래픽/머리글·바닥글 옵션을 조정해 저장</li>
+</ol>
+<blockquote>
+<p>Mermaid 다이어그램은 VSCode 미리보기 환경에 따라 렌더링이 다를 수 있습니다. 미리보기에서 다이어그램이 깨지면 11.2 방법을 사용하세요.</p>
+</blockquote>
+<h3 id="112-cli%EB%A1%9C-pdf-%EB%A7%8C%EB%93%A4%EA%B8%B0%EC%84%A0%ED%83%9D">11.2 CLI로 PDF 만들기(선택)</h3>
+<p>운영 환경에 따라 아래 중 하나를 선택합니다.</p>
+<ul>
+<li><strong>방법 A: <code>md-to-pdf</code> (Node.js)</strong>
+<ul>
+<li>장점: 설치/사용이 단순, CSS 커스터마이즈 쉬움</li>
+<li>단점: Mermaid 렌더는 추가 설정이 필요할 수 있음</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>npm i -g md-to-pdf
+md-to-pdf /home/sth0824/ansible/docs/HANDOVER.md
+</div></code></pre>
+<ul>
+<li><strong>방법 B: <code>pandoc</code> + LaTeX 엔진</strong>
+<ul>
+<li>장점: 품질 좋은 PDF, 목차/스타일 제어 용이</li>
+<li>단점: LaTeX 설치 필요</li>
+</ul>
+</li>
+</ul>
+<pre class="hljs"><code><div>sudo apt-get update
+sudo apt-get install -y pandoc texlive-xetex
+pandoc /home/sth0824/ansible/docs/HANDOVER.md -o /home/sth0824/ansible/docs/HANDOVER.pdf --pdf-engine=xelatex
+</div></code></pre>
+<h3 id="113-pdf-%ED%92%88%EC%A7%88-%ED%8C%81%ED%8C%90%EA%B5%90-%EC%8A%A4%ED%83%80%EC%9D%BC">11.3 PDF 품질 팁(판교 스타일)</h3>
+<ul>
+<li>코드 블록은 너무 길면 “핵심만” 남기고 나머지는 파일 경로로 참조</li>
+<li>표는 페이지 너비를 넘지 않게 컬럼 수를 조정(특히 API 표)</li>
+<li>운영 IP/포트/경로는 포함하되, 비밀값은 항상 마스킹(예: <code>INVENTORY_API_KEY=***</code>)</li>
+</ul>
+<h2 id="12-%ED%96%A5%ED%9B%84-%EB%A1%9C%EB%93%9C%EB%A7%B5%EA%B8%B0%EC%88%A0%EB%B6%80%EC%B1%84%EA%B0%9C%EC%84%A0-%EC%A0%9C%EC%95%88">12. 향후 로드맵/기술부채/개선 제안</h2>
+<h3 id="121-%EB%B3%B4%EC%95%88%EC%9A%B0%EC%84%A0%EC%88%9C%EC%9C%84-%EB%86%92%EC%9D%8C">12.1 보안(우선순위 높음)</h3>
+<ul>
+<li><strong>HTTPS/TLS</strong>: 운영 환경에서 반드시 TLS 종단을 두기(리버스 프록시: Nginx/Caddy/LB). 쿠키 기반 JWT를 쓰므로 HTTPS 없이는 세션 탈취 리스크가 큼.</li>
+<li><strong>CORS 제한</strong>: 현재 <code>allow_origins=[&quot;*&quot;]</code> + <code>allow_credentials=True</code> 조합은 운영에 부적절. 프론트 도메인을 명시하고 credentials를 유지하거나, 내부망 전용이면 origins를 제한.</li>
+<li><strong>POST /api/checks 보호</strong>: 현재 Ansible 호환을 위해 Public. 운영에서는
+<ul>
+<li>(A) API Key 헤더(예: <code>X-API-Key</code>) 추가, 또는</li>
+<li>(B) 배포 서버/Ansible 실행 서버 IP allowlist,</li>
+<li>(C) 별도 내부망 엔드포인트 분리
+중 하나는 적용 권장.</li>
+</ul>
+</li>
+<li><strong>로그인/회원가입 강화</strong>: <code>api_server/docs/AUTH_STRENGTHEN_PLAN.md</code>의 1단계(입력검증/비번확인/토글) → 2단계(rate limit) 순으로 적용.</li>
+</ul>
+<h3 id="122-%EC%9A%B4%EC%98%81-%EC%95%88%EC%A0%95%EC%84%B1">12.2 운영 안정성</h3>
+<ul>
+<li><strong>로그 정책</strong>: systemd/journalctl만으로는 운영 추적이 어려우면 <code>uvicorn</code> 로그 파일 + logrotate 적용.</li>
+<li><strong>헬스체크/모니터링</strong>: <code>/api/health</code>를 외부 모니터링(업타임 체크)에 연동하고, DB degraded 알람을 분리.</li>
+<li><strong>DB 마이그레이션 체계화</strong>: 지금은 스크립트 기반(migrate_add_role.py 등). Alembic 도입을 검토하면 운영 DB 변경이 안전해짐.</li>
+</ul>
+<h3 id="123-%EC%A0%9C%ED%92%88-%EA%B8%B0%EB%8A%A5%EA%B4%80%EB%A6%AC%EC%9E%90%EB%8D%B0%EC%9D%B4%ED%84%B0">12.3 제품 기능(관리자/데이터)</h3>
+<ul>
+<li><strong>점검 항목 관리 고도화</strong>: 현재는 <code>results</code> 키 필터링(저장 시). 향후에는
+<ul>
+<li>점검 항목별 임계치(예: CPU&gt;80 warning),</li>
+<li>항목별 가시성(대시보드/리포트 노출 여부),</li>
+<li>버전 관리(적용 시점)
+를 설계할 수 있음.</li>
+</ul>
+</li>
+<li><strong>대시보드 집계 기준 통일</strong>: “누적” vs “최근 점검” 기준을 UI/문구에서 명확히 분리(최근 점검 기준 성공률 등).</li>
+<li><strong>내보내기(Export) 확장</strong>: CSV flatten, 다중 시트, 대용량 스트리밍, 서버측 필터링 강화.</li>
+</ul>
+<h3 id="124-cicd-%EC%84%A0%ED%83%9D">12.4 CI/CD (선택)</h3>
+<ul>
+<li>GitHub Actions의 workflow(<code>.github/workflows/*.yml</code>)는 <strong>자동 배포</strong>에 유용하지만, 토큰 권한/보안 정책에 따라 운영이 까다로울 수 있음.</li>
+<li>현 운영은 <code>deploy_current_branch.sh</code> 중심(SSH+rsync+systemd). 자동화가 필요하면
+<ul>
+<li>(A) Actions + 최소 권한 + 배포 전용 키/서버 계정,</li>
+<li>(B) 배포 서버에서 cron으로 git pull,</li>
+<li>(C) 내부 CI 서버
+중 하나로 체계화 권장.</li>
+</ul>
+</li>
+</ul>
+<p><em>문서 끝.</em></p>
+
+</body>
+</html>
